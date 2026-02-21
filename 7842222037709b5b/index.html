@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Outsider CEO Playbook — Pathos Labs</title>
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=satoshi@400,500,700&display=swap">
+<style>
+  :root {
+    --bg: #FAFBFC;
+    --text: #0F172A;
+    --text-secondary: #64748B;
+    --text-muted: #94A3B8;
+    --accent: #0D9488;
+    --accent-light: #F0FDFA;
+    --border: #E2E8F0;
+    --font-display: 'General Sans', system-ui, sans-serif;
+    --font-body: 'Satoshi', system-ui, sans-serif;
+    --font-mono: 'SF Mono', 'Fira Code', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .page {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: clamp(2rem, 6vh, 4rem) clamp(1.25rem, 4vw, 2rem);
+  }
+
+  /* Header */
+  .header {
+    margin-bottom: clamp(2rem, 5vh, 3.5rem);
+    padding-bottom: clamp(1.5rem, 3vh, 2.5rem);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .brand {
+    font-family: var(--font-display);
+    font-size: clamp(0.6rem, 1vw, 0.72rem);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: clamp(1rem, 2vh, 1.5rem);
+  }
+
+  .title {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: clamp(0.75rem, 1.5vh, 1rem);
+  }
+
+  .prepared-for {
+    font-family: var(--font-body);
+    font-size: clamp(0.85rem, 1.3vw, 0.95rem);
+    color: var(--text-secondary);
+  }
+
+  .prepared-for strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* Confidence badges */
+  .confidence {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: clamp(0.5rem, 0.8vw, 0.6rem);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 3px;
+    vertical-align: middle;
+  }
+  .confidence-high { color: #059669; background: #ECFDF5; }
+  .confidence-medium { color: #D97706; background: #FFFBEB; }
+  .confidence-low { color: #DC2626; background: #FEF2F2; }
+
+  /* Content sections */
+  .content h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    margin-top: clamp(2rem, 4vh, 3rem);
+    margin-bottom: clamp(0.75rem, 1.5vh, 1rem);
+  }
+
+  .content h3 {
+    font-family: var(--font-display);
+    font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+    font-weight: 600;
+    color: var(--text);
+    margin-top: clamp(1.5rem, 3vh, 2rem);
+    margin-bottom: clamp(0.5rem, 1vh, 0.75rem);
+  }
+
+  .content p {
+    font-size: clamp(0.88rem, 1.3vw, 0.98rem);
+    color: var(--text);
+    margin-bottom: clamp(0.75rem, 1.5vh, 1rem);
+    line-height: 1.65;
+  }
+
+  .content ul, .content ol {
+    font-size: clamp(0.88rem, 1.3vw, 0.98rem);
+    margin-bottom: clamp(0.75rem, 1.5vh, 1rem);
+    padding-left: 1.5rem;
+  }
+
+  .content li {
+    margin-bottom: 0.4rem;
+    line-height: 1.55;
+  }
+
+  .content blockquote {
+    border-left: 3px solid var(--accent);
+    padding: clamp(0.75rem, 1.5vh, 1rem) clamp(1rem, 2vw, 1.5rem);
+    margin: clamp(1rem, 2vh, 1.5rem) 0;
+    background: var(--accent-light);
+    border-radius: 0 6px 6px 0;
+  }
+
+  .content blockquote p {
+    color: var(--text-secondary);
+    font-style: italic;
+    margin-bottom: 0;
+  }
+
+  .content strong { font-weight: 600; }
+
+  .content a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .content a:hover { border-bottom-color: var(--accent); }
+
+  .content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: clamp(1rem, 2vh, 1.5rem) 0;
+    font-size: clamp(0.82rem, 1.2vw, 0.9rem);
+  }
+  .content th, .content td {
+    padding: 0.6rem 0.8rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .content th {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(0.7rem, 1vw, 0.78rem);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-secondary);
+  }
+
+  .content hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: clamp(2rem, 4vh, 3rem) 0;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: clamp(3rem, 6vh, 5rem);
+    padding-top: clamp(1.5rem, 3vh, 2rem);
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .footer p {
+    font-family: var(--font-mono);
+    font-size: clamp(0.55rem, 0.9vw, 0.68rem);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* Scroll reveal animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Print styles */
+  @media print {
+    body { background: white; }
+    .page { max-width: none; padding: 1rem; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="header">
+    <div class="brand">Pathos Labs</div>
+    <h1 class="title">The Outsider CEO Playbook</h1>
+    <p class="prepared-for">Prepared for <strong>Philippe Beaulieu</strong> · February 21, 2026</p>
+  </header>
+
+  <div class="content">
+<h2>A Communication Framework for New CEOs When the Founders Are Still in the Building</h2>
+<p>Prepared for Philippe Beaulieu</p>
+<p>Prepared by Pathos Labs · February 2026</p>
+<hr />
+<p>You were promoted to CEO of Mecademic four months ago. Two days later, you announced a $21M raise and a global expansion across three continents. Four founders are still on the leadership team. The organization is watching to see how you handle this.</p>
+<p>This is one of the most commonly mismanaged transitions in growth-stage companies. Not because the people involved are incompetent, but because the communication challenges are invisible until they become structural.</p>
+<h2>Why This Transition Is Harder Than It Looks</h2>
+<p>Recent research from Harvard Business Review found that founder CEO transitions carry two to three times the failure rate of other CEO transitions. [Confidence: High] McKinsey&rsquo;s analysis of 3,164 Series A companies found that even those with successful products have a greater than 80% chance of failure during scaling, with investors attributing 65% of portfolio failures to people and organizational issues rather than product or market problems. [Confidence: High]</p>
+<p>The risk is not conflict. It is ambiguity. When a new CEO leads but the founders remain, employees often do not know who to listen to. The founder continues making decisions in their old domain. The new CEO holds the title but not the full authority. This is not a personality problem. It is a communication architecture problem.</p>
+<p>Skygauge Robotics, another Canadian robotics company, went through this exact dynamic in December 2025. They hired Richard Shatilla as CEO to drive global commercial expansion while co-founder Maksym Korol transitioned to Chief Product Officer. Their stated approach was a &ldquo;planned succession that strengthens executive structure, allowing the founder to focus on what he does best.&rdquo; [Confidence: High]</p>
+<p>The word &ldquo;planned&rdquo; matters. Planned does not mean smooth. But it means deliberate, and deliberate transitions produce better outcomes than organic ones.</p>
+<h2>Three Communication Moves That Matter</h2>
+<h3>Move 1: Honor the Origin, Own the Future</h3>
+<p>The new CEO&rsquo;s job is not to rewrite the company&rsquo;s history. It is to write its next chapter. The language framework is specific:</p>
+<p>&ldquo;Jonathan and Ilian built something remarkable. The world&rsquo;s smallest, most precise industrial robot. My job is to make sure the world gets to use it.&rdquo;</p>
+<p>This sentence does three things simultaneously. It names the founders&rsquo; contribution without claiming it. It establishes the CEO&rsquo;s mandate without diminishing theirs. And it frames the CEO&rsquo;s role as amplification, not replacement.</p>
+<p>The trap is either over-crediting (which makes the CEO invisible) or under-crediting (which alienates the founding team). The right register is: &ldquo;They built the thing. I&rsquo;m building the reach.&rdquo;</p>
+<h3>Move 2: Define the Lanes, Publicly</h3>
+<p>At Mecademic, the natural lanes are visible: the founders own engineering, product, R&amp;D, and the precision that defines the brand. The CEO owns growth, global presence, governance, and commercial strategy. Your background makes this credible. Thirty-four years of taking technical companies global, from Zebra Technologies to Librestream to Coppernic. [Confidence: High]</p>
+<p>But visible is not the same as stated. The lanes need to be articulated explicitly, repeatedly, and in writing. In every all-hands. In every board update. In every new-hire onboarding deck. The moment someone has to guess who owns a decision, the ambiguity has already cost you.</p>
+<p>The Skygauge model is instructive: &ldquo;The founder focuses on what he does best.&rdquo; That is not a demotion. It is a liberation. But it only works if the CEO says it first and says it publicly.</p>
+<h3>Move 3: Build the Narrative Bridge for the Next 100 Hires</h3>
+<p>The people joining Mecademic in the US, Europe, and Asia-Pacific over the next 12 months will never have met the founders in the Montreal lab. They will never have seen the original Meca500 prototype. Their understanding of the company will come from you: the CEO&rsquo;s version of the story.</p>
+<p>This is not about marketing. It is about cultural coherence. You need a tight, emotionally honest narrative that answers three questions:</p>
+<ol>
+<li>Where did this company come from? (The founders, the research, the precision obsession)</li>
+<li>What changed? (The market caught up, automation demand accelerated, the company needed global reach)</li>
+<li>Where are we going? (Precision robotics as critical infrastructure for advanced manufacturing across 40+ countries)</li>
+</ol>
+<p>Ninety seconds. Three paragraphs. Repeatable across contexts. This becomes the company&rsquo;s internal operating narrative, the story every new hire hears in their first week.</p>
+<h2>The Timing Window</h2>
+<p>The first six to twelve months of a CEO transition set the tone for everything that follows. You are at month four. The funding announcement creates a public moment of attention. The next eight months of hiring across three continents are when the narrative either takes hold or fragments.</p>
+<p>Every new hire who joins without a clear understanding of the leadership structure and the company story becomes a vector for ambiguity. At 51 to 200 employees, the CEO can no longer communicate through hallway conversations. The shift from &ldquo;everyone knows what&rsquo;s happening&rdquo; to &ldquo;I need a communication system&rdquo; is one of the most common failure points at this stage. [Confidence: High]</p>
+<p>When you layer multi-geography onto this, from Montreal headquarters to US offices to European and Asian operations, the communication load multiplies. Your career demonstrates deep fluency in building channel partnerships across continents. Building internal cultural coherence across those same regions requires a different but related skill: the ability to transmit conviction without proximity.</p>
+<h2>One Thing to Do This Week</h2>
+<p>Write the &ldquo;company narrative as told by the CEO&rdquo; version. Three paragraphs. Where we came from. What changed. Where we are going. Share it with the founders first. Get their feedback, not their approval. Sharing first is a gesture of respect that costs nothing and earns everything. Then use that narrative in every all-hands, every new hire onboarding, and every investor update for the next six months.</p>
+<p>The version you write this week will not be perfect. It will evolve. But the act of writing it, of claiming the narrative without displacing the founders, is itself the first communication move that establishes your authority.</p>
+<p>The outsider CEO who waits for the narrative to develop organically is the outsider CEO who discovers, twelve months later, that the organization has three competing stories about who it is and where it is going. The one who writes the story first, with the founders&rsquo; fingerprints on it, is the one who leads.</p>
+  </div>
+
+  <footer class="footer">
+    <p>Prepared by Pathos Labs · February 21, 2026</p>
+  </footer>
+</div>
+
+<script>
+// Scroll-triggered reveal
+document.addEventListener('DOMContentLoaded', function() {
+  var sections = document.querySelectorAll('.content h2, .content h3, .content blockquote');
+  sections.forEach(function(el) { el.classList.add('reveal'); });
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+});
+</script>
+</body>
+</html>

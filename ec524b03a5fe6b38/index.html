@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One Story, Three Rooms — Pathos Labs</title>
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=satoshi@400,500,700&display=swap">
+<style>
+  :root {
+    --bg: #FAFBFC;
+    --text: #0F172A;
+    --text-secondary: #64748B;
+    --text-muted: #94A3B8;
+    --accent: #0D9488;
+    --accent-light: #F0FDFA;
+    --border: #E2E8F0;
+    --font-display: 'General Sans', system-ui, sans-serif;
+    --font-body: 'Satoshi', system-ui, sans-serif;
+    --font-mono: 'SF Mono', 'Fira Code', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .page {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: clamp(2rem, 6vh, 4rem) clamp(1.25rem, 4vw, 2rem);
+  }
+
+  /* Header */
+  .header {
+    margin-bottom: clamp(2rem, 5vh, 3.5rem);
+    padding-bottom: clamp(1.5rem, 3vh, 2.5rem);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .brand {
+    font-family: var(--font-display);
+    font-size: clamp(0.6rem, 1vw, 0.72rem);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: clamp(1rem, 2vh, 1.5rem);
+  }
+
+  .title {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: clamp(0.75rem, 1.5vh, 1rem);
+  }
+
+  .prepared-for {
+    font-family: var(--font-body);
+    font-size: clamp(0.85rem, 1.3vw, 0.95rem);
+    color: var(--text-secondary);
+  }
+
+  .prepared-for strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* Confidence badges */
+  .confidence {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: clamp(0.5rem, 0.8vw, 0.6rem);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 3px;
+    vertical-align: middle;
+  }
+  .confidence-high { color: #059669; background: #ECFDF5; }
+  .confidence-medium { color: #D97706; background: #FFFBEB; }
+  .confidence-low { color: #DC2626; background: #FEF2F2; }
+
+  /* Content sections */
+  .content h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    margin-top: clamp(2rem, 4vh, 3rem);
+    margin-bottom: clamp(0.75rem, 1.5vh, 1rem);
+  }
+
+  .content h3 {
+    font-family: var(--font-display);
+    font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+    font-weight: 600;
+    color: var(--text);
+    margin-top: clamp(1.5rem, 3vh, 2rem);
+    margin-bottom: clamp(0.5rem, 1vh, 0.75rem);
+  }
+
+  .content p {
+    font-size: clamp(0.88rem, 1.3vw, 0.98rem);
+    color: var(--text);
+    margin-bottom: clamp(0.75rem, 1.5vh, 1rem);
+    line-height: 1.65;
+  }
+
+  .content ul, .content ol {
+    font-size: clamp(0.88rem, 1.3vw, 0.98rem);
+    margin-bottom: clamp(0.75rem, 1.5vh, 1rem);
+    padding-left: 1.5rem;
+  }
+
+  .content li {
+    margin-bottom: 0.4rem;
+    line-height: 1.55;
+  }
+
+  .content blockquote {
+    border-left: 3px solid var(--accent);
+    padding: clamp(0.75rem, 1.5vh, 1rem) clamp(1rem, 2vw, 1.5rem);
+    margin: clamp(1rem, 2vh, 1.5rem) 0;
+    background: var(--accent-light);
+    border-radius: 0 6px 6px 0;
+  }
+
+  .content blockquote p {
+    color: var(--text-secondary);
+    font-style: italic;
+    margin-bottom: 0;
+  }
+
+  .content strong { font-weight: 600; }
+
+  .content a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .content a:hover { border-bottom-color: var(--accent); }
+
+  .content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: clamp(1rem, 2vh, 1.5rem) 0;
+    font-size: clamp(0.82rem, 1.2vw, 0.9rem);
+  }
+  .content th, .content td {
+    padding: 0.6rem 0.8rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .content th {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(0.7rem, 1vw, 0.78rem);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-secondary);
+  }
+
+  .content hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: clamp(2rem, 4vh, 3rem) 0;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: clamp(3rem, 6vh, 5rem);
+    padding-top: clamp(1.5rem, 3vh, 2rem);
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .footer p {
+    font-family: var(--font-mono);
+    font-size: clamp(0.55rem, 0.9vw, 0.68rem);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* Scroll reveal animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Print styles */
+  @media print {
+    body { background: white; }
+    .page { max-width: none; padding: 1rem; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="header">
+    <div class="brand">Pathos Labs</div>
+    <h1 class="title">One Story, Three Rooms</h1>
+    <p class="prepared-for">Prepared for <strong>Grant Gunnison</strong> · February 21, 2026</p>
+  </header>
+
+  <div class="content">
+<h2>A Communication Framework for Zero Homes&rsquo; Next Phase</h2>
+<p>Prepared for Grant Gunnison</p>
+<p>Prepared by Pathos Labs · February 2026</p>
+<hr />
+<p>You just raised $16.8 million. Revenue grew ten times in a year. You are in five states heading to more. You are doubling your team from 25 to 50. Every one of these facts is a communication challenge disguised as good news.</p>
+<p>The story that got you here was Grant&rsquo;s story. Your father&rsquo;s construction business. MIT. NASA. Coming back to build the tool the trades never had. That story is powerful because it is true and because you are the only person in the home electrification market who can tell it. But as Zero Homes scales, that story needs to do more than inspire. It needs to work differently in different rooms.</p>
+<h2>The Problem: Narrative Fragmentation at Scale</h2>
+<p>McKinsey&rsquo;s analysis of 3,164 Series A companies found that investors attribute 65% of portfolio failures to people and organizational issues, not product or market problems. Even companies with successful products have a greater than 80% chance of failure during scaling. [Confidence: High]</p>
+<p>The most common failure mode is not building the wrong product. It is telling the wrong story to the wrong audience at the wrong time. GoNarrative&rsquo;s research on Series A transitions found that &ldquo;the story that got you to Series A won&rsquo;t get you to Series B. The message that fired up early adopters might confuse the enterprise customers you now need.&rdquo; [Confidence: High]</p>
+<p>For Zero Homes, the challenge is specific: you serve three distinct audiences with three different decision-making frameworks, and the story needs to be coherent across all of them without being identical.</p>
+<h2>Room 1: Investors</h2>
+<p><strong>What they hear:</strong> Platform infrastructure. TAM penetration velocity. Unit economics. Competitive moat.</p>
+<p>Your lead investor Matt Eggers at Prelude Ventures already gave you the framing: &ldquo;the missing digital infrastructure for home upgrades.&rdquo; That is the investor narrative. It is about the machine, not the mission. [Confidence: High]</p>
+<p>In this room, the proof points are:</p>
+<ul>
+<li>Quote turnaround moving from one day to thirty minutes by end of 2026</li>
+<li>Revenue growing ten times year over year</li>
+<li>Contractor network expanding across five states</li>
+<li>Remote-first digital assessment as a structural cost advantage (no truck rolls for quoting)</li>
+</ul>
+<p>The investor does not need to hear about your father&rsquo;s construction business. The investor needs to see that the machine works and that it scales. The mission is the &ldquo;why you built it.&rdquo; The machine is the &ldquo;why I invested.&rdquo;</p>
+<h2>Room 2: Contractors</h2>
+<p><strong>What they hear:</strong> Reliability. Lead quality. Reduced overhead. Calendars filled.</p>
+<p>You said it yourself in your Canary Media interview: &ldquo;We get rid of a lot of the overhead. We don&rsquo;t charge them for leads. We fill their calendars.&rdquo; [Confidence: High]</p>
+<p>In this room, the proof points are:</p>
+<ul>
+<li>No lead fees (unlike competitor marketplaces)</li>
+<li>Automated design, sizing, and permitting preparation</li>
+<li>Validated system designs (DOE and ACCA certified)</li>
+<li>Reduced risk of callbacks from incorrect sizing</li>
+</ul>
+<p>The contractor does not care about your TAM or your unit economics. The contractor cares about one question: will this make my business easier or harder? Your family construction background is the trust credential in this room. It tells the contractor: I grew up watching my father deal with the same overhead you deal with. I built this because I understand the problem from the inside.</p>
+<p>The language in this room is: &ldquo;We do the part you hate so you can do the part you are great at.&rdquo;</p>
+<h2>Room 3: Homeowners</h2>
+<p><strong>What they hear:</strong> Simplicity. Trust. Savings. No hassle.</p>
+<p>In this room, the proof points are:</p>
+<ul>
+<li>Average savings of 20% compared to traditional contractors [Confidence: High]</li>
+<li>No in-home visit required for the initial assessment</li>
+<li>DOE and ACCA validated system designs</li>
+<li>Money-back guarantee on quality</li>
+</ul>
+<p>The homeowner does not care about the digital twin. The homeowner does not care about the contractor network. The homeowner cares that they can get a heat pump installed without taking a day off work, without worrying about whether the system is the right size, and without feeling like they are overpaying.</p>
+<p>The language in this room is the simplest of the three: &ldquo;You want to electrify. We make it easy.&rdquo;</p>
+<h2>The Connective Thread</h2>
+<p>The single narrative element that stays constant across all three rooms is this: Zero Homes eliminates friction.</p>
+<ul>
+<li>For investors, friction reduction is platform efficiency and unit economics</li>
+<li>For contractors, friction reduction is overhead elimination and calendar management</li>
+<li>For homeowners, friction reduction is simplicity and trust</li>
+</ul>
+<p>The word &ldquo;friction&rdquo; is the conceptual anchor. Everything else adapts. When you find yourself in a room unsure which version of the story to tell, return to friction. It works everywhere.</p>
+<h2>The Internal Story</h2>
+<p>As you double from 25 to 50 people and expand geographically, the founding narrative needs to be transmissible without you personally telling it.</p>
+<p>Three specific moves:</p>
+<p><strong>1. Write the origin story as an artifact.</strong> Not a marketing document. A two-paragraph story that every new hire reads in their first week. Your father&rsquo;s business. The overhead that was killing independent contractors. The realization that the technology existed to fix it. The decision to leave aerospace and build the fix. This story should make new hires understand not just what the company does but why it exists.</p>
+<p><strong>2. Codify the contractor-first principle.</strong> &ldquo;We don&rsquo;t charge contractors for leads. We fill their calendars.&rdquo; That is not a pricing decision. It is a values decision. It distinguishes Zero Homes from every other home services marketplace. Make it explicit as a company principle, not just a feature.</p>
+<p><strong>3. Let the mission carry without the missionary.</strong> Right now, the climate mission and the equity commitment come through because you are in the room saying them. At 50 people across multiple states, you will not be in every room. The mission needs to live in the onboarding deck, the weekly all-hands, and the way the product team talks about design decisions. Not as a poster on the wall. As the answer to &ldquo;why did we build it this way?&rdquo;</p>
+<p>Index Ventures&rsquo; analysis of 210 companies found that founders who succeed at the 25 to 50 person stage &ldquo;codify their culture into artifacts&rdquo; rather than relying on personal transmission. [Confidence: High]</p>
+<h2>The Opportunity</h2>
+<p>You have something most climate tech founders do not. You grew up in the trades, studied at MIT, worked at NASA, and then came back to build software for the people your father worked alongside. That is not a LinkedIn bio. That is a credibility bridge that connects every room in this framework.</p>
+<p>The technical founders in this space can talk to investors and engineers. The industry veterans can talk to contractors. You can talk to all three, and they will believe you, because your background makes the story undeniable.</p>
+<p>The challenge for the next twelve months is not whether the story is good. It is whether the story scales. The founder who can tell one story three ways, without losing the core, is the founder who builds something that lasts.</p>
+  </div>
+
+  <footer class="footer">
+    <p>Prepared by Pathos Labs · February 21, 2026</p>
+  </footer>
+</div>
+
+<script>
+// Scroll-triggered reveal
+document.addEventListener('DOMContentLoaded', function() {
+  var sections = document.querySelectorAll('.content h2, .content h3, .content blockquote');
+  sections.forEach(function(el) { el.classList.add('reveal'); });
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+});
+</script>
+</body>
+</html>
