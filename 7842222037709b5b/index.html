@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Outsider CEO Playbook — Pathos Labs</title>
+<title>The Outsider CEO Playbook</title>
 <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=satoshi@400,500,700&display=swap">
 <style>
 :root {
@@ -41,13 +41,9 @@ body { font-family: var(--font-body); background: var(--bg); color: var(--fg); o
     max-height: 100%; overflow: hidden;
 }
 
-/* Slide types */
 .slide--light { background: var(--bg); color: var(--fg); }
 .slide--dark { background: var(--bg-dark); color: var(--fg-light); }
-.slide--dark .muted { color: #94A3B8; }
-.slide--accent { background: var(--accent); color: #fff; }
 
-/* Typography */
 h1 { font-family: var(--font-display); font-size: var(--title-size); font-weight: 700; line-height: 1.15; letter-spacing: -0.03em; }
 h2 { font-family: var(--font-display); font-size: var(--h2-size); font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; }
 h3 { font-family: var(--font-display); font-size: var(--h3-size); font-weight: 600; line-height: 1.3; }
@@ -62,37 +58,32 @@ p, li { font-size: var(--body-size); line-height: 1.6; }
 }
 .slide--dark .eyebrow { color: var(--accent); }
 
-/* Big number */
 .big-stat {
     font-family: var(--font-display); font-size: clamp(3rem, 10vw, 8rem);
     font-weight: 700; line-height: 1; letter-spacing: -0.04em;
     color: var(--accent);
 }
-.slide--dark .big-stat { color: var(--accent); }
 
-/* Quote */
 .quote {
     font-family: var(--font-display); font-size: clamp(1.1rem, 2.5vw, 1.8rem);
     font-weight: 500; line-height: 1.4; font-style: italic;
     border-left: 3px solid var(--accent); padding-left: clamp(1rem, 2vw, 1.5rem);
 }
 
-/* Two column */
 .two-col {
     display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 4vw, 3rem);
     align-items: start;
 }
 @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
 
-/* Spacer */
 .gap { height: var(--content-gap); }
 .gap-lg { height: clamp(1.5rem, 3vh, 2.5rem); }
-
-/* Divider */
 .divider { width: 40px; height: 3px; background: var(--accent); border-radius: 2px; }
-.slide--dark .divider { background: var(--accent); }
 
-/* Nav dots */
+a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+a:hover { opacity: 0.8; }
+.slide--dark a { color: var(--accent); }
+
 .nav-dots {
     position: fixed; right: clamp(0.75rem, 2vw, 1.5rem); top: 50%;
     transform: translateY(-50%); z-index: 100;
@@ -104,25 +95,14 @@ p, li { font-size: var(--body-size); line-height: 1.6; }
 }
 .nav-dot.active { opacity: 1; background: var(--accent); transform: scale(1.4); }
 
-/* Progress */
 .progress-bar { position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); z-index: 1000; transform-origin: left; transform: scaleX(0); transition: transform 0.3s; }
 
-/* Animations */
 .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out); }
 .slide.visible .reveal { opacity: 1; transform: translateY(0); }
 .reveal:nth-child(2) { transition-delay: 0.1s; }
 .reveal:nth-child(3) { transition-delay: 0.2s; }
 .reveal:nth-child(4) { transition-delay: 0.3s; }
 .reveal:nth-child(5) { transition-delay: 0.4s; }
-
-/* Footer line */
-.slide-footer {
-    position: absolute; bottom: clamp(1rem, 2vh, 1.5rem);
-    left: var(--slide-padding); right: var(--slide-padding);
-    display: flex; justify-content: space-between; align-items: center;
-    font-size: var(--small-size); color: var(--fg-muted);
-}
-.slide--dark .slide-footer { color: #475569; }
 
 @media (max-height: 700px) { :root { --slide-padding: clamp(1rem, 3vw, 2.5rem); } }
 @media (max-height: 600px) { .nav-dots { display: none; } }
@@ -137,120 +117,108 @@ p, li { font-size: var(--body-size); line-height: 1.6; }
 <!-- Slide 1: Title -->
 <section class="slide slide--dark">
     <div class="slide-content">
-        <div class="eyebrow reveal">Pathos Labs</div>
         <h1 class="reveal">The Outsider<br>CEO Playbook</h1>
         <div class="gap"></div>
-        <p class="reveal" style="font-size: var(--h3-size); color: #94A3B8;">A framework for establishing authority<br>when the founders are still in the building</p>
+        <p class="reveal" style="font-size: var(--h3-size); color: #94A3B8; max-width: 50ch;">How to establish authority when the founders are still in the building — and the website still lists someone else as CEO.</p>
         <div class="gap-lg"></div>
-        <p class="reveal small muted">Prepared for <strong style="color: var(--fg-light);">Philippe Beaulieu</strong> · February 2026</p>
+        <p class="reveal small" style="color: #475569;">Prepared for Philippe Beaulieu · February 2026</p>
     </div>
 </section>
 
-<!-- Slide 2: Your Moment -->
+<!-- Slide 2: The Situation -->
 <section class="slide slide--light">
     <div class="slide-content">
-        <div class="eyebrow reveal">Your moment</div>
-        <h2 class="reveal">Four months as CEO.<br>Four founders still here.<br>$21M just raised.</h2>
+        <div class="eyebrow reveal">Where you are right now</div>
+        <h2 class="reveal">Four months into the CEO role,<br>with four founders still on the team.</h2>
         <div class="gap-lg"></div>
-        <p class="reveal muted" style="max-width: 50ch;">The Mecademic website still lists Jonathan Coulombe as CEO. That detail is not small. It is a signal of the transition that has not fully landed.</p>
+        <p class="reveal muted" style="max-width: 55ch;">Mecademic just announced a $21M raise, which is a strong signal of confidence from the board. But there's a smaller signal that matters just as much: the company website still lists Jonathan Coulombe as CEO.</p>
+        <div class="gap"></div>
+        <p class="reveal muted" style="max-width: 55ch;">That's not a website bug. It's a symptom of a transition that hasn't fully landed yet — and in these situations, the small signals are the ones that compound.</p>
     </div>
 </section>
 
 <!-- Slide 3: The Stat -->
 <section class="slide slide--dark">
     <div class="slide-content">
-        <div class="eyebrow reveal">Harvard Business Review, 2026</div>
+        <div class="eyebrow reveal"><a href="https://hbr.org/2026/01/leading-after-the-founder" target="_blank" style="color: var(--accent);">Harvard Business Review, January 2026</a></div>
         <div class="gap"></div>
-        <div class="big-stat reveal">2-3x</div>
+        <div class="big-stat reveal">2–3x</div>
         <div class="gap"></div>
-        <h2 class="reveal" style="color: var(--fg-light);">Founder-to-new-CEO transitions<br>fail at this rate vs. other transitions</h2>
+        <h2 class="reveal" style="color: var(--fg-light);">higher failure rate for founder-to-new-CEO transitions compared to other leadership handovers</h2>
         <div class="gap-lg"></div>
-        <p class="reveal" style="color: #94A3B8; max-width: 55ch;">The cause is almost never incompetence. It is ambiguity. Nobody is sure who is actually in charge.</p>
+        <p class="reveal" style="color: #94A3B8; max-width: 55ch;">The research is clear that the cause is almost never incompetence. It's ambiguity — nobody is quite sure who's actually making the calls, and the longer that ambiguity runs, the harder it is to unwind.</p>
     </div>
 </section>
 
 <!-- Slide 4: The Real Problem -->
 <section class="slide slide--light">
     <div class="slide-content">
-        <div class="eyebrow reveal">The pattern</div>
-        <h2 class="reveal">The risk is not conflict.<br>It is ambiguity.</h2>
+        <div class="eyebrow reveal">The pattern to watch for</div>
+        <h2 class="reveal">The risk isn't conflict between<br>you and the founders. It's drift.</h2>
         <div class="gap-lg"></div>
         <div class="two-col">
             <div class="reveal">
-                <h3>What happens</h3>
+                <h3>What typically happens</h3>
                 <div class="gap"></div>
-                <p class="muted">Founder keeps making calls in their old domain. New CEO holds the title but not the full room. People build habits around the confusion.</p>
+                <p class="muted">The founder keeps making decisions in their original domain — not out of ego, but out of habit. The new CEO holds the title but not the full room. Over time, people stop asking who decides and just route around the question entirely.</p>
             </div>
             <div class="reveal">
-                <h3>Why it compounds</h3>
+                <h3>Why it gets worse with time</h3>
                 <div class="gap"></div>
-                <p class="muted">Every week without clarity, the ambiguity gets harder to resolve. People stop asking who decides. They just route around the question.</p>
+                <p class="muted">Every week without explicit clarity, the ambiguity hardens into culture. New hires learn the informal power structure. By month eight or nine, what was a soft dynamic becomes an entrenched one that requires real political capital to change.</p>
             </div>
         </div>
     </div>
 </section>
 
 <!-- Slide 5: Move 1 -->
-<section class="slide slide--light">
+<section class="slide slide--dark">
     <div class="slide-content">
-        <div class="eyebrow reveal">Move 1</div>
-        <h2 class="reveal">Credit the past.<br>Claim the future.</h2>
+        <div class="eyebrow reveal">Move 1: Name it before anyone else does</div>
+        <h2 class="reveal" style="color: var(--fg-light);">Credit the past.<br>Claim the future.</h2>
         <div class="gap-lg"></div>
         <div class="quote reveal">"Jonathan and Ilian built the world's smallest, most precise industrial robot. My job is to make sure the world gets to use it."</div>
         <div class="gap-lg"></div>
-        <p class="reveal muted" style="max-width: 55ch;">This names their contribution without claiming it. Establishes your mandate without diminishing theirs. Frames the role as amplification, not replacement.</p>
+        <p class="reveal" style="color: #94A3B8; max-width: 55ch;">A sentence like that does a surprising amount of work. It acknowledges the founders' contribution without deferring to them. It claims the commercial mandate without diminishing the technical one. And it gives everyone in the company a clean, repeatable story about who does what.</p>
     </div>
 </section>
 
 <!-- Slide 6: Move 2 -->
-<section class="slide slide--dark">
+<section class="slide slide--light">
     <div class="slide-content">
-        <div class="eyebrow reveal">Move 2</div>
-        <h2 class="reveal" style="color: var(--fg-light);">State the lanes. Out loud.<br>In writing. Repeatedly.</h2>
+        <div class="eyebrow reveal">Move 2: Make the lanes explicit</div>
+        <h2 class="reveal">Say who owns what — out loud,<br>in writing, and more than once.</h2>
         <div class="gap-lg"></div>
         <div class="two-col">
             <div class="reveal">
-                <h3 style="color: var(--accent);">Founders own</h3>
+                <h3 class="accent">Founders own</h3>
                 <div class="gap"></div>
-                <p style="color: #CBD5E1;">Engineering. Product. R&D. The precision that defines the brand.</p>
+                <p>Engineering, product, and R&D — the precision that defines the Mecademic brand. This is where their expertise is irreplaceable, and where the company needs them most.</p>
             </div>
             <div class="reveal">
-                <h3 style="color: var(--accent);">CEO owns</h3>
+                <h3 class="accent">CEO owns</h3>
                 <div class="gap"></div>
-                <p style="color: #CBD5E1;">Growth. Global presence. Governance. Commercial strategy.</p>
+                <p>Growth, global expansion, governance, and commercial strategy — the work of turning a breakthrough product into a worldwide business. This is the mandate the board hired you for.</p>
             </div>
         </div>
         <div class="gap-lg"></div>
-        <p class="reveal small" style="color: #64748B;">Skygauge Robotics (Canadian, Dec 2025) used this framing: "planned succession that allows the founder to focus on what he does best." That language turns a power shift into a compliment.</p>
+        <p class="reveal small muted" style="max-width: 60ch;"><a href="https://www.globenewswire.com/news-release/2025/12/17/3206953/0/en/Skygauge-Robotics-Appoints-Tech-Veteran-Richard-Shatilla-as-CEO-to-Drive-Global-Commercial-Expansion.html" target="_blank">Skygauge Robotics</a>, another Canadian robotics company, went through this exact transition in December 2025. Their public framing was "planned succession that allows the founder to focus on what he does best." That language turns a power shift into a compliment — worth studying.</p>
     </div>
 </section>
 
 <!-- Slide 7: Move 3 -->
-<section class="slide slide--light">
+<section class="slide slide--dark">
     <div class="slide-content">
-        <div class="eyebrow reveal">Move 3</div>
-        <h2 class="reveal">The next 100 hires<br>will never meet the founders.</h2>
+        <div class="eyebrow reveal">Move 3: Write the origin story before it writes itself</div>
+        <h2 class="reveal" style="color: var(--fg-light);">The next 100 hires will never<br>meet the founders in person.</h2>
         <div class="gap-lg"></div>
-        <p class="reveal" style="max-width: 55ch;">The people joining in the US, Europe, and Asia-Pacific will know Mecademic through your version of the story. That version becomes the operating narrative whether you write it deliberately or not.</p>
+        <p class="reveal" style="color: #CBD5E1; max-width: 55ch;">The people joining Mecademic in the US, Europe, and Asia-Pacific will know the company through your version of the story. That version becomes the operating narrative whether you write it deliberately or not — so you should write it deliberately.</p>
         <div class="gap-lg"></div>
-        <p class="reveal muted" style="max-width: 55ch;">Three paragraphs. Where we came from. What changed. Where we are going. Ninety seconds. Repeatable across every context.</p>
-    </div>
-</section>
-
-<!-- Slide 8: CTA -->
-<section class="slide slide--accent">
-    <div class="slide-content">
-        <h2 class="reveal" style="color: #fff;">Write it this week.</h2>
+        <p class="reveal" style="color: #94A3B8; max-width: 55ch;">Three paragraphs: where Mecademic came from, what changed, and where it's going. Show it to the founders first — not for approval, but for fingerprints. Then use it in every all-hands and every onboarding for the next six months.</p>
         <div class="gap-lg"></div>
-        <p class="reveal" style="color: rgba(255,255,255,0.85); max-width: 50ch; font-size: var(--h3-size); line-height: 1.5;">Share it with the founders first. Get their feedback, not their approval. Then use it in every all-hands for six months.</p>
-        <div class="gap-lg"></div>
-        <div class="divider reveal" style="background: rgba(255,255,255,0.4);"></div>
+        <div class="divider reveal"></div>
         <div class="gap"></div>
-        <p class="reveal small" style="color: rgba(255,255,255,0.6);">The CEO who writes the story first is the one who leads.<br>The one who waits discovers, a year later, that three competing versions have taken root.</p>
-    </div>
-    <div class="slide-footer" style="color: rgba(255,255,255,0.4);">
-        <span>Pathos Labs</span>
-        <span>February 2026</span>
+        <p class="reveal small" style="color: #475569;">The CEO who writes the story first is the one who leads. The one who waits discovers, a year later, that three competing versions have taken root.</p>
     </div>
 </section>
 

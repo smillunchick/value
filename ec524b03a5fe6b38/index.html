@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>One Story, Three Rooms — Pathos Labs</title>
+<title>One Story, Three Rooms</title>
 <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=satoshi@400,500,700&display=swap">
 <style>
 :root {
@@ -42,8 +42,8 @@ p, li { font-size: var(--body-size); line-height: 1.6; }
 .small { font-size: var(--small-size); }
 .eyebrow { font-family: var(--font-display); font-size: var(--small-size); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: clamp(0.5rem, 1.5vh, 1rem); }
 .slide--dark .eyebrow { color: var(--accent); }
+.slide--accent .eyebrow { color: rgba(255,255,255,0.6); }
 .big-stat { font-family: var(--font-display); font-size: clamp(3rem, 10vw, 8rem); font-weight: 700; line-height: 1; letter-spacing: -0.04em; color: var(--accent); }
-.quote { font-family: var(--font-display); font-size: clamp(1.1rem, 2.5vw, 1.8rem); font-weight: 500; line-height: 1.4; font-style: italic; border-left: 3px solid var(--accent); padding-left: clamp(1rem, 2vw, 1.5rem); }
 .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: clamp(1rem, 2vw, 2rem); align-items: start; }
 @media (max-width: 700px) { .three-col { grid-template-columns: 1fr; } }
 .gap { height: var(--content-gap); }
@@ -56,6 +56,11 @@ p, li { font-size: var(--body-size); line-height: 1.6; }
 }
 .slide--dark .room-card { background: rgba(13, 148, 136, 0.1); }
 
+a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+a:hover { opacity: 0.8; }
+.slide--dark a { color: var(--accent); }
+.slide--accent a { color: rgba(255,255,255,0.9); }
+
 .nav-dots { position: fixed; right: clamp(0.75rem, 2vw, 1.5rem); top: 50%; transform: translateY(-50%); z-index: 100; display: flex; flex-direction: column; gap: 8px; }
 .nav-dot { width: 8px; height: 8px; border-radius: 50%; border: none; cursor: pointer; background: var(--fg-muted); opacity: 0.3; transition: all 0.3s; }
 .nav-dot.active { opacity: 1; background: var(--accent); transform: scale(1.4); }
@@ -66,8 +71,6 @@ p, li { font-size: var(--body-size); line-height: 1.6; }
 .reveal:nth-child(3) { transition-delay: 0.2s; }
 .reveal:nth-child(4) { transition-delay: 0.3s; }
 .reveal:nth-child(5) { transition-delay: 0.4s; }
-.slide-footer { position: absolute; bottom: clamp(1rem, 2vh, 1.5rem); left: var(--slide-padding); right: var(--slide-padding); display: flex; justify-content: space-between; font-size: var(--small-size); color: var(--fg-muted); }
-.slide--dark .slide-footer { color: #475569; }
 @media (max-height: 700px) { :root { --slide-padding: clamp(1rem, 3vw, 2.5rem); } }
 @media (max-height: 600px) { .nav-dots { display: none; } }
 @media (max-height: 500px) { :root { --slide-padding: clamp(0.5rem, 2vw, 1.5rem); } }
@@ -81,37 +84,36 @@ p, li { font-size: var(--body-size); line-height: 1.6; }
 <!-- Slide 1: Title -->
 <section class="slide slide--dark">
     <div class="slide-content">
-        <div class="eyebrow reveal">Pathos Labs</div>
         <h1 class="reveal">One Story,<br>Three Rooms</h1>
         <div class="gap"></div>
-        <p class="reveal" style="font-size: var(--h3-size); color: #94A3B8;">A communication framework for<br>Zero Homes' next phase</p>
+        <p class="reveal" style="font-size: var(--h3-size); color: #94A3B8; max-width: 50ch;">Zero Homes is growing fast — $16.8M raised, five states, team doubling. The story that got you here needs to work differently in different rooms now.</p>
         <div class="gap-lg"></div>
-        <p class="reveal small" style="color: #475569;">Prepared for <strong style="color: var(--fg-light);">Grant Gunnison</strong> · February 2026</p>
+        <p class="reveal small" style="color: #475569;">Prepared for Grant Gunnison · February 2026</p>
     </div>
 </section>
 
-<!-- Slide 2: The Moment -->
+<!-- Slide 2: The Situation -->
 <section class="slide slide--light">
     <div class="slide-content">
-        <div class="eyebrow reveal">Your moment</div>
-        <h2 class="reveal">$16.8M raised. 10x revenue.<br>Five states. Team doubling.</h2>
+        <div class="eyebrow reveal">Your origin story is powerful</div>
+        <h2 class="reveal">You grew up in your father's construction<br>business, went to MIT and NASA, then<br>came back to build for the trades.</h2>
         <div class="gap-lg"></div>
-        <p class="reveal muted" style="max-width: 55ch;">Every one of these facts is a communication challenge disguised as good news. The story that got you here was your story — your father's construction business, MIT, NASA, coming back to build the tool the trades never had.</p>
+        <p class="reveal muted" style="max-width: 55ch;">That's a credibility bridge nobody else in the home electrification market can claim. But there's a pattern that shows up at your stage: the story that worked for the first $16M starts to fragment the moment you're telling it to three very different audiences at the same time.</p>
         <div class="gap"></div>
-        <p class="reveal muted" style="max-width: 55ch;">That story is powerful. But it needs to work differently in different rooms now.</p>
+        <p class="reveal muted" style="max-width: 55ch;">Your lead investor Matt Eggers at Prelude described Zero Homes as "the missing digital infrastructure for home upgrades." That's the right framing for his room — but it's completely wrong for a contractor in Colorado who just wants to know if you'll fill his calendar.</p>
     </div>
 </section>
 
-<!-- Slide 3: The Problem -->
+<!-- Slide 3: The Stat -->
 <section class="slide slide--dark">
     <div class="slide-content">
-        <div class="eyebrow reveal">McKinsey, 2024 · 3,164 companies</div>
+        <div class="eyebrow reveal"><a href="https://www.mckinsey.com/capabilities/people-and-organizational-performance/our-insights/from-start-up-to-centaur-leadership-lessons-on-scaling" target="_blank" style="color: var(--accent);">McKinsey, 2024 · 3,164 companies with Series A funding</a></div>
         <div class="gap"></div>
         <div class="big-stat reveal">65%</div>
         <div class="gap"></div>
         <h2 class="reveal" style="color: var(--fg-light);">of portfolio failures attributed to<br>people and organizational issues</h2>
         <div class="gap-lg"></div>
-        <p class="reveal" style="color: #94A3B8; max-width: 50ch;">Not product. Not market. The most common failure mode is telling the wrong story to the wrong audience at the wrong time.</p>
+        <p class="reveal" style="color: #94A3B8; max-width: 55ch;">Not product problems. Not market problems. The most common failure mode at your stage is telling the wrong version of the story to the wrong audience at the wrong time — and not realizing it because the transitions feel natural when you're the one in the room.</p>
     </div>
 </section>
 
@@ -124,24 +126,21 @@ p, li { font-size: var(--body-size); line-height: 1.6; }
             <div class="room-card reveal">
                 <h3 class="accent">Investors</h3>
                 <div class="gap"></div>
-                <p class="small muted" style="margin-bottom: clamp(0.3rem, 0.5vh, 0.5rem);">What they hear</p>
-                <p>Platform infrastructure. TAM penetration. Unit economics. Competitive moat.</p>
+                <p>They hear platform infrastructure, TAM penetration, and unit economics. Your quote turnaround dropping from a full day to 30 minutes is the kind of friction metric that tells this story.</p>
                 <div class="gap"></div>
                 <p class="small muted" style="font-style: italic;">"The missing digital infrastructure for home upgrades" — Matt Eggers, Prelude</p>
             </div>
             <div class="room-card reveal">
                 <h3 class="accent">Contractors</h3>
                 <div class="gap"></div>
-                <p class="small muted" style="margin-bottom: clamp(0.3rem, 0.5vh, 0.5rem);">What they hear</p>
-                <p>Reliability. Lead quality. No fees. Calendars filled. Overhead gone.</p>
+                <p>They hear reliability, lead quality, and overhead gone. No fees, calendars filled, DOE/ACCA-certified sizing that handles the permitting headaches they're used to doing themselves.</p>
                 <div class="gap"></div>
                 <p class="small muted" style="font-style: italic;">"We do the part you hate so you can do the part you're great at"</p>
             </div>
             <div class="room-card reveal">
                 <h3 class="accent">Homeowners</h3>
                 <div class="gap"></div>
-                <p class="small muted" style="margin-bottom: clamp(0.3rem, 0.5vh, 0.5rem);">What they hear</p>
-                <p>Simplicity. Trust. 20% savings. No hassle. No day off work.</p>
+                <p>They hear simplicity and trust. No in-home visit needed, money-back guarantee, 20% average savings. They want a heat pump installed without taking a day off work.</p>
                 <div class="gap"></div>
                 <p class="small muted" style="font-style: italic;">"You want to electrify. We make it easy."</p>
             </div>
@@ -152,11 +151,11 @@ p, li { font-size: var(--body-size); line-height: 1.6; }
 <!-- Slide 5: The Anchor -->
 <section class="slide slide--accent">
     <div class="slide-content">
-        <div class="eyebrow reveal" style="color: rgba(255,255,255,0.6);">The connective thread</div>
+        <div class="eyebrow reveal">The connective thread</div>
         <div class="gap"></div>
         <h1 class="reveal" style="color: #fff;">Friction.</h1>
         <div class="gap-lg"></div>
-        <p class="reveal" style="color: rgba(255,255,255,0.85); font-size: var(--h3-size); max-width: 50ch; line-height: 1.5;">The word that stays constant across all three rooms. When you are unsure which version of the story to tell, return to friction. It works everywhere.</p>
+        <p class="reveal" style="color: rgba(255,255,255,0.85); font-size: var(--h3-size); max-width: 50ch; line-height: 1.5;">This is the single word that works in every room. For investors, friction reduction means unit economics. For contractors, it means overhead eliminated. For homeowners, it means simplicity. When you're unsure which version of the story to tell, return to friction. It anchors all three.</p>
     </div>
 </section>
 
@@ -169,23 +168,17 @@ p, li { font-size: var(--body-size); line-height: 1.6; }
             <div class="reveal">
                 <h3 style="color: var(--accent);">Investors</h3>
                 <div class="gap"></div>
-                <p style="color: #CBD5E1;">Friction reduction = platform efficiency and unit economics</p>
-                <div class="gap"></div>
-                <p class="small" style="color: #64748B;">Quote speed: 1 day → 30 min. No truck rolls for quoting. Remote-first cost advantage.</p>
+                <p style="color: #CBD5E1;">Friction reduction as platform efficiency — quote speed dropping from a day to 30 minutes, no truck rolls for quoting, a remote-first cost advantage that competitors with field teams can't match.</p>
             </div>
             <div class="reveal">
                 <h3 style="color: var(--accent);">Contractors</h3>
                 <div class="gap"></div>
-                <p style="color: #CBD5E1;">Friction reduction = overhead elimination and calendar management</p>
-                <div class="gap"></div>
-                <p class="small" style="color: #64748B;">No lead fees. Automated design and permitting. DOE/ACCA certified sizing.</p>
+                <p style="color: #CBD5E1;">Friction reduction as overhead elimination — no lead generation fees, automated system design and permitting, and a certified sizing process that removes the technical guesswork from their plate entirely.</p>
             </div>
             <div class="reveal">
                 <h3 style="color: var(--accent);">Homeowners</h3>
                 <div class="gap"></div>
-                <p style="color: #CBD5E1;">Friction reduction = simplicity and trust</p>
-                <div class="gap"></div>
-                <p class="small" style="color: #64748B;">No in-home visit needed. Money-back guarantee. 20% average savings.</p>
+                <p style="color: #CBD5E1;">Friction reduction as simplicity and trust — no in-home visit needed to get a quote, a money-back guarantee that removes the risk, and 20% average savings compared to going direct.</p>
             </div>
         </div>
     </div>
@@ -194,30 +187,16 @@ p, li { font-size: var(--body-size); line-height: 1.6; }
 <!-- Slide 7: The Internal Challenge -->
 <section class="slide slide--light">
     <div class="slide-content">
-        <div class="eyebrow reveal">25 → 50 people</div>
+        <div class="eyebrow reveal">25 people → 50 people, across multiple states</div>
         <h2 class="reveal">The mission needs to carry<br>without the missionary.</h2>
         <div class="gap-lg"></div>
-        <p class="reveal" style="max-width: 55ch;">Right now the origin story comes through because you are in the room telling it. At 50 people across multiple states, you will not be in every room.</p>
+        <p class="reveal" style="max-width: 55ch;">Right now, the origin story comes through because you're in the room telling it. At 50 people across five states, you won't be in every room — and the new hires in Colorado or Texas will learn the company's purpose from whatever version reaches them first.</p>
         <div class="gap-lg"></div>
-        <p class="reveal muted" style="max-width: 55ch;">Write it down. Two paragraphs. Your father's business, the overhead killing contractors, the decision to leave aerospace. Put it in the onboarding deck. Not as a poster — as the answer to "why did we build it this way?"</p>
-    </div>
-</section>
-
-<!-- Slide 8: CTA -->
-<section class="slide slide--dark">
-    <div class="slide-content">
-        <div class="eyebrow reveal">Your edge</div>
-        <h2 class="reveal" style="color: var(--fg-light);">You grew up in the trades, studied at MIT, worked at NASA, and came back to build software for the people your father worked alongside.</h2>
-        <div class="gap-lg"></div>
-        <p class="reveal" style="color: #94A3B8; max-width: 55ch;">That is a credibility bridge that connects every room in this framework. Nobody else in the home electrification market can tell that story.</p>
+        <p class="reveal muted" style="max-width: 55ch;">Write it down. Two paragraphs: your father's business, the overhead killing independent contractors, the decision to leave aerospace and come back. Put it in the onboarding deck — not as a poster on the wall, but as the answer to "why did we build it this way?"</p>
         <div class="gap-lg"></div>
         <div class="divider reveal"></div>
         <div class="gap"></div>
-        <p class="reveal small" style="color: #475569;">The challenge is not whether the story is good. It is whether the story scales.</p>
-    </div>
-    <div class="slide-footer">
-        <span>Pathos Labs</span>
-        <span>February 2026</span>
+        <p class="reveal small muted">The founders who get this transition right codify the culture before they need to. The ones who wait discover too late that the story has drifted into three different versions nobody agreed on.</p>
     </div>
 </section>
 

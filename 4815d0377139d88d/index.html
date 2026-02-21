@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Narrative Shift — Pathos Labs</title>
+<title>The Narrative Shift</title>
 <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=satoshi@400,500,700&display=swap">
 <style>
 :root {
@@ -32,7 +32,6 @@ body { font-family: var(--font-body); background: var(--bg); color: var(--fg); o
 .slide-content { flex: 1; display: flex; flex-direction: column; justify-content: center; max-height: 100%; overflow: hidden; }
 .slide--light { background: var(--bg); color: var(--fg); }
 .slide--dark { background: var(--bg-dark); color: var(--fg-light); }
-.slide--accent { background: var(--accent); color: #fff; }
 h1 { font-family: var(--font-display); font-size: var(--title-size); font-weight: 700; line-height: 1.15; letter-spacing: -0.03em; }
 h2 { font-family: var(--font-display); font-size: var(--h2-size); font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; }
 h3 { font-family: var(--font-display); font-size: var(--h3-size); font-weight: 600; line-height: 1.3; }
@@ -44,20 +43,22 @@ p, li { font-size: var(--body-size); line-height: 1.6; }
 .slide--dark .eyebrow { color: var(--accent); }
 .big-stat { font-family: var(--font-display); font-size: clamp(3rem, 10vw, 8rem); font-weight: 700; line-height: 1; letter-spacing: -0.04em; color: var(--accent); }
 .quote { font-family: var(--font-display); font-size: clamp(1.1rem, 2.5vw, 1.8rem); font-weight: 500; line-height: 1.4; font-style: italic; border-left: 3px solid var(--accent); padding-left: clamp(1rem, 2vw, 1.5rem); }
-.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 4vw, 3rem); align-items: start; }
 .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: clamp(1rem, 2vw, 2rem); align-items: start; }
-@media (max-width: 700px) { .two-col, .three-col { grid-template-columns: 1fr; } }
+@media (max-width: 700px) { .three-col { grid-template-columns: 1fr; } }
 .gap { height: var(--content-gap); }
 .gap-lg { height: clamp(1.5rem, 3vh, 2.5rem); }
 .divider { width: 40px; height: 3px; background: var(--accent); border-radius: 2px; }
 
-/* Translation card */
 .translate-card {
     background: var(--accent-light); border-radius: 8px;
     padding: clamp(1rem, 2vw, 1.5rem); border-left: 3px solid var(--accent);
 }
 .slide--dark .translate-card { background: rgba(37, 99, 235, 0.12); }
 .translate-arrow { font-size: clamp(1rem, 2vw, 1.5rem); color: var(--accent); text-align: center; }
+
+a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+a:hover { opacity: 0.8; }
+.slide--dark a { color: var(--accent); }
 
 .nav-dots { position: fixed; right: clamp(0.75rem, 2vw, 1.5rem); top: 50%; transform: translateY(-50%); z-index: 100; display: flex; flex-direction: column; gap: 8px; }
 .nav-dot { width: 8px; height: 8px; border-radius: 50%; border: none; cursor: pointer; background: var(--fg-muted); opacity: 0.3; transition: all 0.3s; }
@@ -69,8 +70,6 @@ p, li { font-size: var(--body-size); line-height: 1.6; }
 .reveal:nth-child(3) { transition-delay: 0.2s; }
 .reveal:nth-child(4) { transition-delay: 0.3s; }
 .reveal:nth-child(5) { transition-delay: 0.4s; }
-.slide-footer { position: absolute; bottom: clamp(1rem, 2vh, 1.5rem); left: var(--slide-padding); right: var(--slide-padding); display: flex; justify-content: space-between; font-size: var(--small-size); color: var(--fg-muted); }
-.slide--dark .slide-footer { color: #475569; }
 @media (max-height: 700px) { :root { --slide-padding: clamp(1rem, 3vw, 2.5rem); } }
 @media (max-height: 600px) { .nav-dots { display: none; } }
 @media (max-height: 500px) { :root { --slide-padding: clamp(0.5rem, 2vw, 1.5rem); } }
@@ -84,12 +83,11 @@ p, li { font-size: var(--body-size); line-height: 1.6; }
 <!-- Slide 1: Title -->
 <section class="slide slide--dark">
     <div class="slide-content">
-        <div class="eyebrow reveal">Pathos Labs</div>
         <h1 class="reveal">The Narrative<br>Shift</h1>
         <div class="gap"></div>
-        <p class="reveal" style="font-size: var(--h3-size); color: #94A3B8;">How "AI that never breaks" needs to land<br>in three enterprise rooms</p>
+        <p class="reveal" style="font-size: var(--h3-size); color: #94A3B8; max-width: 50ch;">Portkey's "AI that never breaks" promise is exactly right — but it needs to land differently in the three enterprise rooms that matter most.</p>
         <div class="gap-lg"></div>
-        <p class="reveal small" style="color: #475569;">Prepared for <strong style="color: var(--fg-light);">Rohit Agarwal</strong> · February 2026</p>
+        <p class="reveal small" style="color: #475569;">Prepared for Rohit Agarwal · February 2026</p>
     </div>
 </section>
 
@@ -100,28 +98,28 @@ p, li { font-size: var(--body-size); line-height: 1.6; }
         <div class="gap"></div>
         <div class="quote reveal">"Engineering gets reliability.<br>Finance gets accountability.<br>Leadership gets answers."</div>
         <div class="gap-lg"></div>
-        <p class="reveal muted" style="max-width: 50ch;">That instinct is exactly right. It is also the beginning of a harder conversation, not the end of one.</p>
+        <p class="reveal muted" style="max-width: 55ch;">That instinct is exactly right — you already know Portkey needs to speak different languages to different buyers. But turning that instinct into a repeatable narrative is where most developer-tool companies stumble on their way upmarket.</p>
     </div>
 </section>
 
-<!-- Slide 3: The Shift -->
+<!-- Slide 3: The Stat -->
 <section class="slide slide--dark">
     <div class="slide-content">
-        <div class="eyebrow reveal">Mayfield CXO Network, January 2026</div>
+        <div class="eyebrow reveal"><a href="https://www.mayfield.com/the-agentic-enterprise-in-2026/" target="_blank" style="color: var(--accent);">Mayfield CXO Network Survey, January 2026</a></div>
         <div class="gap"></div>
         <div class="big-stat reveal">46%</div>
         <div class="gap"></div>
         <h2 class="reveal" style="color: var(--fg-light);">of enterprise AI buying decisions<br>now come from business leaders</h2>
         <div class="gap-lg"></div>
-        <p class="reveal" style="color: #94A3B8;">Not CIOs. Not CTOs. The people writing the checks do not evaluate AI gateways on latency benchmarks.</p>
+        <p class="reveal" style="color: #94A3B8; max-width: 55ch;">Not CIOs. Not CTOs. For the first time, line-of-business leaders are the largest decision-maker group — and they aren't evaluating AI gateways on latency benchmarks. They're evaluating on whether someone can tell them where the money is going.</p>
     </div>
 </section>
 
-<!-- Slide 4: The Translation -->
+<!-- Slide 4: The Translation Problem -->
 <section class="slide slide--light">
     <div class="slide-content">
         <div class="eyebrow reveal">The translation problem</div>
-        <h2 class="reveal">Same fact.<br>Completely different reaction.</h2>
+        <h2 class="reveal">Same fact about Portkey.<br>Completely different reactions.</h2>
         <div class="gap-lg"></div>
         <div class="reveal">
             <p class="muted small" style="margin-bottom: clamp(0.3rem, 0.5vh, 0.5rem);">What you say now</p>
@@ -131,8 +129,8 @@ p, li { font-size: var(--body-size); line-height: 1.6; }
         <div class="translate-arrow reveal">&#8595;</div>
         <div class="gap"></div>
         <div class="translate-card reveal">
-            <p class="small muted" style="margin-bottom: clamp(0.3rem, 0.5vh, 0.5rem);">What the CFO needs to hear</p>
-            <p style="font-size: var(--h3-size);"><strong>$180M in annualized AI spend</strong> under active governance, attributed to every team and use case</p>
+            <p class="small muted" style="margin-bottom: clamp(0.3rem, 0.5vh, 0.5rem);">What a CFO needs to hear instead</p>
+            <p style="font-size: var(--h3-size);"><strong>$180M in annualized AI spend</strong> under active governance — every dollar attributed to a team, a model, and a use case</p>
         </div>
     </div>
 </section>
@@ -145,78 +143,65 @@ p, li { font-size: var(--body-size); line-height: 1.6; }
         <div class="three-col">
             <div class="reveal">
                 <h3 style="color: var(--accent);">Engineering</h3>
-                <p class="small" style="color: #64748B; margin-bottom: clamp(0.3rem, 0.5vh, 0.5rem);">You own this room</p>
+                <p class="small" style="color: #64748B; margin-bottom: clamp(0.3rem, 0.5vh, 0.5rem);">You already own this room</p>
                 <div class="gap"></div>
-                <p style="color: #CBD5E1;">Latency. Uptime. DX. 99.9999% reliability. "AI that never breaks."</p>
+                <p style="color: #CBD5E1;">Latency, uptime, developer experience. 99.9999% reliability. 24,000 organizations trust Portkey because it never breaks. This is real — and it's the foundation everything else builds on.</p>
             </div>
             <div class="reveal">
                 <h3 style="color: var(--accent);">Finance</h3>
                 <p class="small" style="color: #64748B; margin-bottom: clamp(0.3rem, 0.5vh, 0.5rem);">They write the check</p>
                 <div class="gap"></div>
-                <p style="color: #CBD5E1;">Cost attribution. Budget predictability. 86% track cost reduction as primary metric.</p>
+                <p style="color: #CBD5E1;">Cost attribution and budget predictability. <a href="https://www.mayfield.com/enterprise-ai-trillion-dollar-moment/" target="_blank" style="color: var(--accent);">86% of enterprise buyers</a> track cost reduction as their primary AI metric. They need to see where every dollar goes.</p>
             </div>
             <div class="reveal">
                 <h3 style="color: var(--accent);">Compliance</h3>
                 <p class="small" style="color: #64748B; margin-bottom: clamp(0.3rem, 0.5vh, 0.5rem);">They can kill the deal</p>
                 <div class="gap"></div>
-                <p style="color: #CBD5E1;">Audit trails. Policy enforcement. 84% say security is mandatory before approval.</p>
+                <p style="color: #CBD5E1;">Audit trails and policy enforcement. <a href="https://www.mayfield.com/enterprise-ai-trillion-dollar-moment/" target="_blank" style="color: var(--accent);">84% of CXOs</a> say integrated security and compliance are non-negotiable before they'll approve any AI tool.</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Slide 6: One Metric, Three Rooms -->
+<!-- Slide 6: One Metric, Three Framings -->
 <section class="slide slide--light">
     <div class="slide-content">
-        <div class="eyebrow reveal">One metric, three framings</div>
+        <div class="eyebrow reveal">Same number, three stories</div>
         <h2 class="reveal" style="margin-bottom: clamp(1rem, 2vh, 1.5rem);">120 million daily requests</h2>
         <div class="reveal">
             <div class="translate-card" style="margin-bottom: clamp(0.5rem, 1vh, 0.75rem);">
-                <p class="small accent" style="margin-bottom: 0.25rem;"><strong>Engineering</strong></p>
-                <p>"Battle-tested at scale most AI infrastructure never reaches. Zero downtime."</p>
+                <p class="small accent" style="margin-bottom: 0.25rem;"><strong>To engineering</strong></p>
+                <p>"Battle-tested at a scale most AI infrastructure never reaches. Zero unplanned downtime across 120 million daily requests."</p>
             </div>
         </div>
         <div class="reveal">
             <div class="translate-card" style="margin-bottom: clamp(0.5rem, 1vh, 0.75rem);">
-                <p class="small accent" style="margin-bottom: 0.25rem;"><strong>Finance</strong></p>
-                <p>"120M AI decisions per day under active cost management. Every request tracked and within budget."</p>
+                <p class="small accent" style="margin-bottom: 0.25rem;"><strong>To finance</strong></p>
+                <p>"120 million AI decisions per day under active cost management — every request tracked, attributed, and within budget before it runs."</p>
             </div>
         </div>
         <div class="reveal">
             <div class="translate-card">
-                <p class="small accent" style="margin-bottom: 0.25rem;"><strong>Compliance</strong></p>
-                <p>"120M auditable decisions per day. Every request logged, every policy enforced in real time."</p>
+                <p class="small accent" style="margin-bottom: 0.25rem;"><strong>To compliance</strong></p>
+                <p>"120 million auditable decisions per day with full traceability — every request logged, every policy enforced in real time."</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Slide 7: Competitive Window -->
+<!-- Slide 7: The Competitive Window -->
 <section class="slide slide--dark">
     <div class="slide-content">
-        <div class="eyebrow reveal">The window</div>
-        <h2 class="reveal" style="color: var(--fg-light);">TrueFoundry already frames Portkey as "application-scoped, not organization-wide."</h2>
+        <div class="eyebrow reveal">The window that's open right now</div>
+        <h2 class="reveal" style="color: var(--fg-light); max-width: 55ch;"><a href="https://www.truefoundry.com/blog/a-definitive-guide-to-ai-gateways-in-2026-competitive-landscape-comparison" target="_blank" style="color: var(--fg-light); text-decoration: underline;">TrueFoundry is already framing Portkey</a> as "application-scoped, not organization-wide."</h2>
         <div class="gap-lg"></div>
-        <p class="reveal" style="color: #94A3B8; max-width: 55ch;">That is dangerous not because it is true, but because it could become true in the market's perception if left unanswered.</p>
+        <p class="reveal" style="color: #94A3B8; max-width: 55ch;">That characterization isn't accurate today — but it could become true in the market's perception if it goes unanswered. This is the real danger of staying in the engineering room too long.</p>
         <div class="gap-lg"></div>
-        <p class="reveal" style="color: #CBD5E1; max-width: 55ch;"><strong>"Governance for agentic AI"</strong> is a category nobody has defined yet. The company that defines it gets to decide whether Portkey is a feature or the whole story.</p>
-    </div>
-</section>
-
-<!-- Slide 8: CTA -->
-<section class="slide slide--accent">
-    <div class="slide-content">
-        <h2 class="reveal" style="color: #fff;">The conviction stays.<br>The vocabulary shifts.</h2>
+        <p class="reveal" style="color: #CBD5E1; max-width: 55ch;">You said your priority is <strong>governance for agentic AI</strong>. Nobody owns that category yet. The company that defines what "AI governance platform" means gets to decide whether competitors are features or alternatives.</p>
         <div class="gap-lg"></div>
-        <p class="reveal" style="color: rgba(255,255,255,0.85); max-width: 50ch; font-size: var(--h3-size); line-height: 1.5;">You wrote "AI that never breaks." That is not a developer tagline. That is a promise. The work is making sure the CFO and the CISO hear it as the same promise the engineering team does.</p>
-        <div class="gap-lg"></div>
-        <div class="divider reveal" style="background: rgba(255,255,255,0.4);"></div>
+        <div class="divider reveal"></div>
         <div class="gap"></div>
-        <p class="reveal small" style="color: rgba(255,255,255,0.5);">Right now, they cannot. The translation is the work.</p>
-    </div>
-    <div class="slide-footer" style="color: rgba(255,255,255,0.4);">
-        <span>Pathos Labs</span>
-        <span>February 2026</span>
+        <p class="reveal small" style="color: #475569;">The conviction that built something 24,000 organizations rely on doesn't need to change. The vocabulary does — because the CFO and the CISO need to hear "AI that never breaks" as the same promise the engineering team does.</p>
     </div>
 </section>
 
