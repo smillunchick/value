@@ -6,262 +6,252 @@
 <title>The Narrative Shift — Pathos Labs</title>
 <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=satoshi@400,500,700&display=swap">
 <style>
-  :root {
+:root {
     --bg: #FAFBFC;
-    --text: #0F172A;
-    --text-secondary: #64748B;
-    --text-muted: #94A3B8;
-    --accent: #0D9488;
-    --accent-light: #F0FDFA;
-    --border: #E2E8F0;
+    --bg-dark: #0F172A;
+    --fg: #0F172A;
+    --fg-light: #E2E8F0;
+    --fg-muted: #64748B;
+    --accent: #2563EB;
+    --accent-light: rgba(37, 99, 235, 0.08);
     --font-display: 'General Sans', system-ui, sans-serif;
     --font-body: 'Satoshi', system-ui, sans-serif;
-    --font-mono: 'SF Mono', 'Fira Code', monospace;
-  }
+    --title-size: clamp(1.8rem, 5vw, 3.5rem);
+    --h2-size: clamp(1.4rem, 3.5vw, 2.5rem);
+    --h3-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    --body-size: clamp(0.85rem, 1.5vw, 1.125rem);
+    --small-size: clamp(0.65rem, 1vw, 0.8rem);
+    --slide-padding: clamp(2rem, 5vw, 5rem);
+    --content-gap: clamp(0.75rem, 2vw, 2rem);
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-snap-type: y mandatory; scroll-behavior: smooth; height: 100%; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--fg); overflow-x: hidden; height: 100%; -webkit-font-smoothing: antialiased; }
+.slide { width: 100vw; height: 100vh; height: 100dvh; overflow: hidden; scroll-snap-align: start; display: flex; flex-direction: column; position: relative; padding: var(--slide-padding); }
+.slide-content { flex: 1; display: flex; flex-direction: column; justify-content: center; max-height: 100%; overflow: hidden; }
+.slide--light { background: var(--bg); color: var(--fg); }
+.slide--dark { background: var(--bg-dark); color: var(--fg-light); }
+.slide--accent { background: var(--accent); color: #fff; }
+h1 { font-family: var(--font-display); font-size: var(--title-size); font-weight: 700; line-height: 1.15; letter-spacing: -0.03em; }
+h2 { font-family: var(--font-display); font-size: var(--h2-size); font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; }
+h3 { font-family: var(--font-display); font-size: var(--h3-size); font-weight: 600; line-height: 1.3; }
+p, li { font-size: var(--body-size); line-height: 1.6; }
+.muted { color: var(--fg-muted); }
+.accent { color: var(--accent); }
+.small { font-size: var(--small-size); }
+.eyebrow { font-family: var(--font-display); font-size: var(--small-size); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: clamp(0.5rem, 1.5vh, 1rem); }
+.slide--dark .eyebrow { color: var(--accent); }
+.big-stat { font-family: var(--font-display); font-size: clamp(3rem, 10vw, 8rem); font-weight: 700; line-height: 1; letter-spacing: -0.04em; color: var(--accent); }
+.quote { font-family: var(--font-display); font-size: clamp(1.1rem, 2.5vw, 1.8rem); font-weight: 500; line-height: 1.4; font-style: italic; border-left: 3px solid var(--accent); padding-left: clamp(1rem, 2vw, 1.5rem); }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 4vw, 3rem); align-items: start; }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: clamp(1rem, 2vw, 2rem); align-items: start; }
+@media (max-width: 700px) { .two-col, .three-col { grid-template-columns: 1fr; } }
+.gap { height: var(--content-gap); }
+.gap-lg { height: clamp(1.5rem, 3vh, 2.5rem); }
+.divider { width: 40px; height: 3px; background: var(--accent); border-radius: 2px; }
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* Translation card */
+.translate-card {
+    background: var(--accent-light); border-radius: 8px;
+    padding: clamp(1rem, 2vw, 1.5rem); border-left: 3px solid var(--accent);
+}
+.slide--dark .translate-card { background: rgba(37, 99, 235, 0.12); }
+.translate-arrow { font-size: clamp(1rem, 2vw, 1.5rem); color: var(--accent); text-align: center; }
 
-  body {
-    font-family: var(--font-body);
-    color: var(--text);
-    background: var(--bg);
-    line-height: 1.65;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  .page {
-    max-width: 680px;
-    margin: 0 auto;
-    padding: clamp(2rem, 6vh, 4rem) clamp(1.25rem, 4vw, 2rem);
-  }
-
-  /* Header */
-  .header {
-    margin-bottom: clamp(2rem, 5vh, 3.5rem);
-    padding-bottom: clamp(1.5rem, 3vh, 2.5rem);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .brand {
-    font-family: var(--font-display);
-    font-size: clamp(0.6rem, 1vw, 0.72rem);
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: clamp(1rem, 2vh, 1.5rem);
-  }
-
-  .title {
-    font-family: var(--font-display);
-    font-size: clamp(1.5rem, 4vw, 2.25rem);
-    font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-    color: var(--text);
-    margin-bottom: clamp(0.75rem, 1.5vh, 1rem);
-  }
-
-  .prepared-for {
-    font-family: var(--font-body);
-    font-size: clamp(0.85rem, 1.3vw, 0.95rem);
-    color: var(--text-secondary);
-  }
-
-  .prepared-for strong {
-    color: var(--text);
-    font-weight: 500;
-  }
-
-  /* Confidence badges */
-  .confidence {
-    display: inline-block;
-    font-family: var(--font-mono);
-    font-size: clamp(0.5rem, 0.8vw, 0.6rem);
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 2px 6px;
-    border-radius: 3px;
-    vertical-align: middle;
-  }
-  .confidence-high { color: #059669; background: #ECFDF5; }
-  .confidence-medium { color: #D97706; background: #FFFBEB; }
-  .confidence-low { color: #DC2626; background: #FEF2F2; }
-
-  /* Content sections */
-  .content h2 {
-    font-family: var(--font-display);
-    font-size: clamp(1.1rem, 2vw, 1.35rem);
-    font-weight: 600;
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-    color: var(--text);
-    margin-top: clamp(2rem, 4vh, 3rem);
-    margin-bottom: clamp(0.75rem, 1.5vh, 1rem);
-  }
-
-  .content h3 {
-    font-family: var(--font-display);
-    font-size: clamp(0.95rem, 1.5vw, 1.1rem);
-    font-weight: 600;
-    color: var(--text);
-    margin-top: clamp(1.5rem, 3vh, 2rem);
-    margin-bottom: clamp(0.5rem, 1vh, 0.75rem);
-  }
-
-  .content p {
-    font-size: clamp(0.88rem, 1.3vw, 0.98rem);
-    color: var(--text);
-    margin-bottom: clamp(0.75rem, 1.5vh, 1rem);
-    line-height: 1.65;
-  }
-
-  .content ul, .content ol {
-    font-size: clamp(0.88rem, 1.3vw, 0.98rem);
-    margin-bottom: clamp(0.75rem, 1.5vh, 1rem);
-    padding-left: 1.5rem;
-  }
-
-  .content li {
-    margin-bottom: 0.4rem;
-    line-height: 1.55;
-  }
-
-  .content blockquote {
-    border-left: 3px solid var(--accent);
-    padding: clamp(0.75rem, 1.5vh, 1rem) clamp(1rem, 2vw, 1.5rem);
-    margin: clamp(1rem, 2vh, 1.5rem) 0;
-    background: var(--accent-light);
-    border-radius: 0 6px 6px 0;
-  }
-
-  .content blockquote p {
-    color: var(--text-secondary);
-    font-style: italic;
-    margin-bottom: 0;
-  }
-
-  .content strong { font-weight: 600; }
-
-  .content a {
-    color: var(--accent);
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.2s;
-  }
-  .content a:hover { border-bottom-color: var(--accent); }
-
-  .content table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: clamp(1rem, 2vh, 1.5rem) 0;
-    font-size: clamp(0.82rem, 1.2vw, 0.9rem);
-  }
-  .content th, .content td {
-    padding: 0.6rem 0.8rem;
-    text-align: left;
-    border-bottom: 1px solid var(--border);
-  }
-  .content th {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: clamp(0.7rem, 1vw, 0.78rem);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--text-secondary);
-  }
-
-  .content hr {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: clamp(2rem, 4vh, 3rem) 0;
-  }
-
-  /* Footer */
-  .footer {
-    margin-top: clamp(3rem, 6vh, 5rem);
-    padding-top: clamp(1.5rem, 3vh, 2rem);
-    border-top: 1px solid var(--border);
-    text-align: center;
-  }
-
-  .footer p {
-    font-family: var(--font-mono);
-    font-size: clamp(0.55rem, 0.9vw, 0.68rem);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
-
-  /* Scroll reveal animation */
-  .reveal {
-    opacity: 0;
-    transform: translateY(12px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Print styles */
-  @media print {
-    body { background: white; }
-    .page { max-width: none; padding: 1rem; }
-    .reveal { opacity: 1; transform: none; }
-  }
+.nav-dots { position: fixed; right: clamp(0.75rem, 2vw, 1.5rem); top: 50%; transform: translateY(-50%); z-index: 100; display: flex; flex-direction: column; gap: 8px; }
+.nav-dot { width: 8px; height: 8px; border-radius: 50%; border: none; cursor: pointer; background: var(--fg-muted); opacity: 0.3; transition: all 0.3s; }
+.nav-dot.active { opacity: 1; background: var(--accent); transform: scale(1.4); }
+.progress-bar { position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); z-index: 1000; transform-origin: left; transform: scaleX(0); transition: transform 0.3s; }
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out); }
+.slide.visible .reveal { opacity: 1; transform: translateY(0); }
+.reveal:nth-child(2) { transition-delay: 0.1s; }
+.reveal:nth-child(3) { transition-delay: 0.2s; }
+.reveal:nth-child(4) { transition-delay: 0.3s; }
+.reveal:nth-child(5) { transition-delay: 0.4s; }
+.slide-footer { position: absolute; bottom: clamp(1rem, 2vh, 1.5rem); left: var(--slide-padding); right: var(--slide-padding); display: flex; justify-content: space-between; font-size: var(--small-size); color: var(--fg-muted); }
+.slide--dark .slide-footer { color: #475569; }
+@media (max-height: 700px) { :root { --slide-padding: clamp(1rem, 3vw, 2.5rem); } }
+@media (max-height: 600px) { .nav-dots { display: none; } }
+@media (max-height: 500px) { :root { --slide-padding: clamp(0.5rem, 2vw, 1.5rem); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.2s !important; } html { scroll-behavior: auto; } }
 </style>
 </head>
 <body>
-<div class="page">
-  <header class="header">
-    <div class="brand">Pathos Labs</div>
-    <h1 class="title">The Narrative Shift</h1>
-    <p class="prepared-for">Prepared for <strong>Rohit Agarwal</strong> · February 21, 2026</p>
-  </header>
+<div class="progress-bar"></div>
+<nav class="nav-dots"></nav>
 
-  <div class="content">
-<p>Your Series A announcement has one line that I keep coming back to: &ldquo;Engineering gets reliability. Finance gets accountability. Leadership gets answers.&rdquo;</p>
-<p>You already know what is coming. The question is whether you have time to get ahead of it.</p>
-<hr />
-<p>Portkey won 24,000 developer organizations by being the thing that never breaks. That is a real achievement and it is the reason Elevation Capital wrote the check. But the next phase of the company requires you to win rooms full of people who do not know what a token is and do not care.</p>
-<p>A January 2026 survey of 266 CIOs and CTOs found that 46 percent of enterprise AI buying decisions now come from business leaders, not technical teams. Eighty-six percent of them track cost reduction as their primary metric. They are not evaluating AI gateways on latency benchmarks. They are evaluating on whether someone can tell them where the money is going.</p>
-<p>This is the part that breaks for developer-tool companies moving upmarket. The product keeps working. The narrative stops working. The language that makes engineers trust you is the same language that makes a CFO&rsquo;s eyes glaze over. Not because it is wrong, but because it answers a question they are not asking.</p>
-<hr />
-<p>Here is a specific example. You process 500 billion tokens daily. That number is deeply meaningful to a VP of Engineering. It is a meaningless number to the person who approves the purchase order.</p>
-<p>The same fact, reframed: &ldquo;We manage an estimated $180 million in annualized AI spend and can show you exactly where every dollar goes across every model, every team, and every use case.&rdquo;</p>
-<p>Same truth. Completely different reaction. The first version says &ldquo;we are big.&rdquo; The second version says &ldquo;your budget is visible.&rdquo;</p>
-<p>The compliance version is different again. &ldquo;Every AI decision your organization makes, across every model and every team, is logged with a full audit trail and enforced against your policies in real time.&rdquo; Eighty-four percent of enterprise CXOs say integrated security and compliance are mandatory before they will approve an AI tool. That is the room that can kill a deal the engineering team already loves.</p>
-<hr />
-<p>There is also a competitive angle worth naming. TrueFoundry published a comparison in January that frames Portkey as &ldquo;application-scoped, not organization-wide.&rdquo; That characterization is not true today, but it could become true in the market&rsquo;s perception if you do not define the category first. You said your priority is governance for agentic AI. Nobody owns that category yet. The company that defines what &ldquo;AI governance platform&rdquo; means gets to decide whether Portkey is a feature or the whole story.</p>
-<hr />
-<p>None of this requires you to become a different person. The conviction that built something 24,000 organizations rely on is the same conviction that will land in enterprise rooms. The vocabulary just has to shift. You wrote &ldquo;AI that never breaks.&rdquo; That is not a developer tagline. That is a promise. The work is making sure the CFO and the CISO hear it as the same promise the engineering team does.</p>
-  </div>
+<!-- Slide 1: Title -->
+<section class="slide slide--dark">
+    <div class="slide-content">
+        <div class="eyebrow reveal">Pathos Labs</div>
+        <h1 class="reveal">The Narrative<br>Shift</h1>
+        <div class="gap"></div>
+        <p class="reveal" style="font-size: var(--h3-size); color: #94A3B8;">How "AI that never breaks" needs to land<br>in three enterprise rooms</p>
+        <div class="gap-lg"></div>
+        <p class="reveal small" style="color: #475569;">Prepared for <strong style="color: var(--fg-light);">Rohit Agarwal</strong> · February 2026</p>
+    </div>
+</section>
 
-  <footer class="footer">
-    <p>Prepared by Pathos Labs · February 21, 2026</p>
-  </footer>
-</div>
+<!-- Slide 2: The Line -->
+<section class="slide slide--light">
+    <div class="slide-content">
+        <div class="eyebrow reveal">From your Series A announcement</div>
+        <div class="gap"></div>
+        <div class="quote reveal">"Engineering gets reliability.<br>Finance gets accountability.<br>Leadership gets answers."</div>
+        <div class="gap-lg"></div>
+        <p class="reveal muted" style="max-width: 50ch;">That instinct is exactly right. It is also the beginning of a harder conversation, not the end of one.</p>
+    </div>
+</section>
+
+<!-- Slide 3: The Shift -->
+<section class="slide slide--dark">
+    <div class="slide-content">
+        <div class="eyebrow reveal">Mayfield CXO Network, January 2026</div>
+        <div class="gap"></div>
+        <div class="big-stat reveal">46%</div>
+        <div class="gap"></div>
+        <h2 class="reveal" style="color: var(--fg-light);">of enterprise AI buying decisions<br>now come from business leaders</h2>
+        <div class="gap-lg"></div>
+        <p class="reveal" style="color: #94A3B8;">Not CIOs. Not CTOs. The people writing the checks do not evaluate AI gateways on latency benchmarks.</p>
+    </div>
+</section>
+
+<!-- Slide 4: The Translation -->
+<section class="slide slide--light">
+    <div class="slide-content">
+        <div class="eyebrow reveal">The translation problem</div>
+        <h2 class="reveal">Same fact.<br>Completely different reaction.</h2>
+        <div class="gap-lg"></div>
+        <div class="reveal">
+            <p class="muted small" style="margin-bottom: clamp(0.3rem, 0.5vh, 0.5rem);">What you say now</p>
+            <p style="font-size: var(--h3-size);"><strong>500 billion tokens processed daily</strong></p>
+        </div>
+        <div class="gap"></div>
+        <div class="translate-arrow reveal">&#8595;</div>
+        <div class="gap"></div>
+        <div class="translate-card reveal">
+            <p class="small muted" style="margin-bottom: clamp(0.3rem, 0.5vh, 0.5rem);">What the CFO needs to hear</p>
+            <p style="font-size: var(--h3-size);"><strong>$180M in annualized AI spend</strong> under active governance, attributed to every team and use case</p>
+        </div>
+    </div>
+</section>
+
+<!-- Slide 5: Three Rooms -->
+<section class="slide slide--dark">
+    <div class="slide-content">
+        <div class="eyebrow reveal">Three rooms, one product</div>
+        <div class="gap"></div>
+        <div class="three-col">
+            <div class="reveal">
+                <h3 style="color: var(--accent);">Engineering</h3>
+                <p class="small" style="color: #64748B; margin-bottom: clamp(0.3rem, 0.5vh, 0.5rem);">You own this room</p>
+                <div class="gap"></div>
+                <p style="color: #CBD5E1;">Latency. Uptime. DX. 99.9999% reliability. "AI that never breaks."</p>
+            </div>
+            <div class="reveal">
+                <h3 style="color: var(--accent);">Finance</h3>
+                <p class="small" style="color: #64748B; margin-bottom: clamp(0.3rem, 0.5vh, 0.5rem);">They write the check</p>
+                <div class="gap"></div>
+                <p style="color: #CBD5E1;">Cost attribution. Budget predictability. 86% track cost reduction as primary metric.</p>
+            </div>
+            <div class="reveal">
+                <h3 style="color: var(--accent);">Compliance</h3>
+                <p class="small" style="color: #64748B; margin-bottom: clamp(0.3rem, 0.5vh, 0.5rem);">They can kill the deal</p>
+                <div class="gap"></div>
+                <p style="color: #CBD5E1;">Audit trails. Policy enforcement. 84% say security is mandatory before approval.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Slide 6: One Metric, Three Rooms -->
+<section class="slide slide--light">
+    <div class="slide-content">
+        <div class="eyebrow reveal">One metric, three framings</div>
+        <h2 class="reveal" style="margin-bottom: clamp(1rem, 2vh, 1.5rem);">120 million daily requests</h2>
+        <div class="reveal">
+            <div class="translate-card" style="margin-bottom: clamp(0.5rem, 1vh, 0.75rem);">
+                <p class="small accent" style="margin-bottom: 0.25rem;"><strong>Engineering</strong></p>
+                <p>"Battle-tested at scale most AI infrastructure never reaches. Zero downtime."</p>
+            </div>
+        </div>
+        <div class="reveal">
+            <div class="translate-card" style="margin-bottom: clamp(0.5rem, 1vh, 0.75rem);">
+                <p class="small accent" style="margin-bottom: 0.25rem;"><strong>Finance</strong></p>
+                <p>"120M AI decisions per day under active cost management. Every request tracked and within budget."</p>
+            </div>
+        </div>
+        <div class="reveal">
+            <div class="translate-card">
+                <p class="small accent" style="margin-bottom: 0.25rem;"><strong>Compliance</strong></p>
+                <p>"120M auditable decisions per day. Every request logged, every policy enforced in real time."</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Slide 7: Competitive Window -->
+<section class="slide slide--dark">
+    <div class="slide-content">
+        <div class="eyebrow reveal">The window</div>
+        <h2 class="reveal" style="color: var(--fg-light);">TrueFoundry already frames Portkey as "application-scoped, not organization-wide."</h2>
+        <div class="gap-lg"></div>
+        <p class="reveal" style="color: #94A3B8; max-width: 55ch;">That is dangerous not because it is true, but because it could become true in the market's perception if left unanswered.</p>
+        <div class="gap-lg"></div>
+        <p class="reveal" style="color: #CBD5E1; max-width: 55ch;"><strong>"Governance for agentic AI"</strong> is a category nobody has defined yet. The company that defines it gets to decide whether Portkey is a feature or the whole story.</p>
+    </div>
+</section>
+
+<!-- Slide 8: CTA -->
+<section class="slide slide--accent">
+    <div class="slide-content">
+        <h2 class="reveal" style="color: #fff;">The conviction stays.<br>The vocabulary shifts.</h2>
+        <div class="gap-lg"></div>
+        <p class="reveal" style="color: rgba(255,255,255,0.85); max-width: 50ch; font-size: var(--h3-size); line-height: 1.5;">You wrote "AI that never breaks." That is not a developer tagline. That is a promise. The work is making sure the CFO and the CISO hear it as the same promise the engineering team does.</p>
+        <div class="gap-lg"></div>
+        <div class="divider reveal" style="background: rgba(255,255,255,0.4);"></div>
+        <div class="gap"></div>
+        <p class="reveal small" style="color: rgba(255,255,255,0.5);">Right now, they cannot. The translation is the work.</p>
+    </div>
+    <div class="slide-footer" style="color: rgba(255,255,255,0.4);">
+        <span>Pathos Labs</span>
+        <span>February 2026</span>
+    </div>
+</section>
 
 <script>
-// Scroll-triggered reveal
-document.addEventListener('DOMContentLoaded', function() {
-  var sections = document.querySelectorAll('.content h2, .content h3, .content blockquote');
-  sections.forEach(function(el) { el.classList.add('reveal'); });
-
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-  document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
-});
+class SlidePresentation {
+    constructor() {
+        this.slides = [...document.querySelectorAll('.slide')];
+        this.currentIndex = 0;
+        this.isNavigating = false;
+        this.touchStartY = 0;
+        this.buildNavDots();
+        this.observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    if (!this.isNavigating) { const idx = this.slides.indexOf(entry.target); if (idx !== -1) this.currentIndex = idx; }
+                    this.updateProgress(); this.updateNavDots();
+                }
+            });
+        }, { threshold: 0.5 });
+        this.slides.forEach(s => this.observer.observe(s));
+        this.bindKeyboard(); this.bindTouch(); this.bindWheel();
+        this.slides[0]?.classList.add('visible'); this.updateProgress();
+    }
+    buildNavDots() { const nav = document.querySelector('.nav-dots'); if (!nav) return; this.slides.forEach((_, i) => { const d = document.createElement('button'); d.className = 'nav-dot'; d.addEventListener('click', () => this.goToSlide(i)); nav.appendChild(d); }); }
+    goToSlide(i) { if (i < 0 || i >= this.slides.length) return; this.currentIndex = i; this.isNavigating = true; this.slides[i].scrollIntoView({ behavior: 'smooth' }); this.updateProgress(); this.updateNavDots(); setTimeout(() => { this.isNavigating = false; }, 800); }
+    next() { this.goToSlide(this.currentIndex + 1); }
+    prev() { this.goToSlide(this.currentIndex - 1); }
+    bindKeyboard() { document.addEventListener('keydown', (e) => { if (this.isNavigating) return; switch(e.key) { case 'ArrowDown': case 'ArrowRight': case ' ': case 'PageDown': e.preventDefault(); this.next(); break; case 'ArrowUp': case 'ArrowLeft': case 'PageUp': e.preventDefault(); this.prev(); break; case 'Home': e.preventDefault(); this.goToSlide(0); break; case 'End': e.preventDefault(); this.goToSlide(this.slides.length - 1); break; } }); }
+    bindTouch() { document.addEventListener('touchstart', (e) => { this.touchStartY = e.touches[0].clientY; }, { passive: true }); document.addEventListener('touchend', (e) => { const d = this.touchStartY - e.changedTouches[0].clientY; if (Math.abs(d) > 50) { d > 0 ? this.next() : this.prev(); } }, { passive: true }); }
+    bindWheel() { let t; document.addEventListener('wheel', (e) => { if (this.isNavigating) return; clearTimeout(t); t = setTimeout(() => { e.deltaY > 30 ? this.next() : e.deltaY < -30 ? this.prev() : null; }, 50); }, { passive: true }); }
+    updateProgress() { const b = document.querySelector('.progress-bar'); if (b) b.style.transform = `scaleX(${this.slides.length > 1 ? this.currentIndex / (this.slides.length - 1) : 0})`; }
+    updateNavDots() { document.querySelectorAll('.nav-dot').forEach((d, i) => d.classList.toggle('active', i === this.currentIndex)); }
+}
+document.addEventListener('DOMContentLoaded', () => new SlidePresentation());
 </script>
 </body>
 </html>
