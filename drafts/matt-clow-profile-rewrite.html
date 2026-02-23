@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matt — LinkedIn Profile Rewrite</title>
+<meta name="author" content="Sam Millunchick">
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=satoshi@400,400i,500,700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --font-display: 'General Sans', system-ui, sans-serif;
+    --font-body: 'Satoshi', system-ui, sans-serif;
+    font-optical-sizing: auto;
+    --text-xs: clamp(0.7rem, 0.65rem + 0.2vw, 0.8rem);
+    --text-sm: clamp(0.8rem, 0.75rem + 0.25vw, 0.9rem);
+    --text-base: clamp(1rem, 0.9rem + 0.3vw, 1.125rem);
+    --text-lg: clamp(1.125rem, 1rem + 0.4vw, 1.25rem);
+    --text-xl: clamp(1.25rem, 1rem + 0.8vw, 1.75rem);
+    --text-2xl: clamp(1.5rem, 1.1rem + 1.2vw, 2.25rem);
+    --text-3xl: clamp(1.75rem, 1.2rem + 1.8vw, 3rem);
+    --leading-tight: 1.2;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.7;
+    --measure: 65ch;
+    font-variant-ligatures: common-ligatures;
+    color-scheme: light dark;
+    --bg: light-dark(#fafbfc, #0f172a);
+    --bg-raised: light-dark(#ffffff, #1e293b);
+    --bg-inset: light-dark(#f1f5f9, #0b1120);
+    --fg: light-dark(#1a1a2e, #e2e8f0);
+    --fg-muted: light-dark(#64748b, #94a3b8);
+    --fg-faint: light-dark(#94a3b8, #475569);
+    --accent: light-dark(#7c3aed, #a78bfa);
+    --accent-muted: light-dark(rgba(124,58,237,0.08), rgba(167,139,250,0.1));
+    --border: light-dark(#e2e8f0, #1e293b);
+    --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem;
+    --space-4: 1rem; --space-6: 1.5rem; --space-8: 2rem;
+    --space-12: 3rem; --space-16: 4rem; --space-24: 6rem;
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.15s !important;
+        scroll-behavior: auto !important;
+    }
+}
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Progress */
+.progress-bar {
+    position: fixed; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--accent); transform-origin: left; transform: scaleX(0); z-index: 100;
+}
+@supports (animation-timeline: scroll()) {
+    .progress-bar { animation: grow linear; animation-timeline: scroll(); }
+    @keyframes grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: var(--font-body); font-size: var(--text-base);
+    line-height: var(--leading-relaxed); color: var(--fg);
+    background: var(--bg); text-align: left;
+}
+
+/* Layout */
+.doc-grid {
+    display: grid; grid-template-columns: 1fr min(var(--measure), calc(100% - 2rem)) 1fr;
+    padding: var(--space-8) var(--space-4) var(--space-24);
+}
+.doc-grid > * { grid-column: 2; }
+
+/* Nav */
+.section-nav {
+    position: fixed; left: var(--space-8); top: var(--space-12);
+    width: 200px; font-size: var(--text-sm); font-family: var(--font-display);
+}
+.section-nav a {
+    display: block; padding: var(--space-1) var(--space-3);
+    color: var(--fg-muted); text-decoration: none;
+    border-left: 2px solid transparent; transition: all 0.15s;
+    line-height: var(--leading-normal);
+}
+.section-nav a.active, .section-nav a:hover {
+    color: var(--accent); border-left-color: var(--accent);
+}
+.nav-mobile {
+    display: none; position: sticky; top: 0; z-index: 50;
+    background: var(--bg); border-bottom: 1px solid var(--border);
+    padding: var(--space-2) var(--space-4); overflow-x: auto; white-space: nowrap;
+}
+.nav-mobile a {
+    display: inline-block; padding: var(--space-1) var(--space-3);
+    font-size: var(--text-sm); color: var(--fg-muted); text-decoration: none;
+    font-family: var(--font-display);
+}
+.nav-mobile a.active { color: var(--accent); }
+
+/* Typography */
+h1, h2, h3, h4 { font-family: var(--font-display); line-height: var(--leading-tight); }
+h1 { font-size: var(--text-3xl); margin-bottom: var(--space-6); }
+h2 { font-size: var(--text-2xl); margin-top: var(--space-16); margin-bottom: var(--space-6); }
+h3 { font-size: var(--text-xl); margin-top: var(--space-8); margin-bottom: var(--space-4); }
+p { margin-bottom: var(--space-4); }
+ul, ol { margin-bottom: var(--space-4); padding-left: var(--space-6); }
+li { margin-bottom: var(--space-2); }
+strong { font-weight: 600; }
+em { font-style: italic; }
+
+/* Opening letter */
+.letter {
+    font-size: var(--text-lg); color: var(--fg-muted);
+    border-left: 3px solid var(--accent); padding-left: var(--space-6);
+    margin-bottom: var(--space-12);
+}
+.letter p:last-child { margin-bottom: 0; }
+
+/* Divider */
+.section-divider {
+    border: none; border-top: 2px solid var(--accent);
+    margin-top: var(--space-16); margin-bottom: var(--space-6);
+    opacity: 0.3;
+}
+
+/* Headline options */
+.headline-options {
+    display: flex; flex-direction: column; gap: var(--space-4);
+    margin: var(--space-6) 0;
+}
+.headline-option {
+    background: var(--bg-raised); border: 1px solid var(--border);
+    border-radius: 8px; padding: var(--space-4) var(--space-6);
+    transition: border-color 0.15s;
+}
+.headline-option:hover { border-color: var(--accent); }
+.headline-option .option-label {
+    font-family: var(--font-display); font-size: var(--text-xs);
+    font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--accent); margin-bottom: var(--space-2);
+}
+.headline-option .option-text {
+    font-family: var(--font-display); font-size: var(--text-lg);
+    font-weight: 600; line-height: var(--leading-tight);
+}
+
+/* Copyable */
+.copyable {
+    position: relative; background: var(--bg-inset);
+    border: 1px solid var(--border); border-radius: 6px;
+    padding: var(--space-6); margin: var(--space-6) 0;
+}
+.copyable .copy-btn {
+    position: absolute; top: var(--space-3); right: var(--space-3);
+    background: var(--bg-raised); border: 1px solid var(--border);
+    border-radius: 4px; padding: var(--space-1) var(--space-3);
+    font-size: var(--text-xs); cursor: pointer; color: var(--fg-muted);
+    font-family: var(--font-display); font-weight: 500;
+    transition: color 0.15s;
+}
+.copyable .copy-btn:hover { color: var(--accent); }
+.copyable p:last-child { margin-bottom: 0; }
+
+/* Skill cards */
+.skill-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-4); margin: var(--space-6) 0;
+}
+.skill-card {
+    background: var(--bg-raised); border: 1px solid var(--border);
+    border-radius: 8px; padding: var(--space-6);
+    border-top: 3px solid var(--accent);
+}
+.skill-card h4 { margin-top: 0; font-size: var(--text-base); margin-bottom: var(--space-2); }
+.skill-card p { font-size: var(--text-sm); color: var(--fg-muted); margin-bottom: 0; }
+
+/* Insight callout */
+.insight {
+    background: var(--accent-muted); border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0; padding: var(--space-6);
+    margin: var(--space-8) 0;
+}
+.insight p:last-child { margin-bottom: 0; }
+
+/* Numbered list */
+.prep-list {
+    counter-reset: prep; list-style: none; padding-left: 0;
+    margin: var(--space-6) 0;
+}
+.prep-list li {
+    counter-increment: prep; display: flex; gap: var(--space-4);
+    padding: var(--space-4) 0; border-bottom: 1px solid var(--border);
+}
+.prep-list li:last-child { border-bottom: none; }
+.prep-list li::before {
+    content: counter(prep); font-family: var(--font-display);
+    font-weight: 700; font-size: var(--text-xl); color: var(--accent);
+    min-width: 2rem; flex-shrink: 0;
+}
+
+/* Author */
+.author-footer {
+    margin-top: var(--space-24); padding-top: var(--space-12);
+    border-top: 1px solid var(--border);
+    display: flex; gap: var(--space-6); align-items: center;
+}
+.author-footer img {
+    width: 72px; height: 72px; border-radius: 50%;
+    object-fit: cover; flex-shrink: 0;
+}
+.author-info p { font-size: var(--text-sm); color: var(--fg-muted); margin-bottom: var(--space-1); }
+.author-info a { color: var(--accent); text-decoration: none; }
+.author-info a:hover { text-decoration: underline; }
+.author-info .name { font-family: var(--font-display); font-weight: 600; font-size: var(--text-base); color: var(--fg); margin-bottom: var(--space-1); }
+
+@media (max-width: 600px) {
+    .author-footer { flex-direction: column; text-align: center; }
+    .skill-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 1200px) {
+    .section-nav { display: none; }
+    .nav-mobile { display: block; }
+}
+@media (min-width: 1201px) {
+    .nav-mobile { display: none; }
+}
+
+.doc-section:not(:first-of-type) { content-visibility: auto; contain-intrinsic-size: auto 600px; }
+</style>
+</head>
+<body>
+<div class="progress-bar" role="progressbar" aria-label="Reading progress"></div>
+
+<nav class="nav-mobile" aria-label="Sections">
+    <a href="#rewrite">Profile Rewrite</a>
+    <a href="#positioning">Positioning</a>
+    <a href="#brightlight">Brightlight</a>
+    <a href="#conversations">Conversations</a>
+</nav>
+
+<nav class="section-nav" aria-label="Sections">
+    <a href="#rewrite">Profile Rewrite</a>
+    <a href="#positioning">Positioning</a>
+    <a href="#brightlight">Brightlight</a>
+    <a href="#conversations">Conversations</a>
+</nav>
+
+<main class="doc-grid">
+    <header>
+        <h1>Matt — here's what I see.</h1>
+        <div class="letter">
+            <p>I went through your posts, your profile, and the way you talk about your work. What follows is a draft rewrite of your LinkedIn headline and About section, plus some positioning thinking I couldn't keep to myself.</p>
+            <p>Take what's useful. Ignore what isn't. None of this is prescriptive — it's one read on who you are professionally, based on what you've put out there.</p>
+        </div>
+    </header>
+
+    <!-- SECTION 1: The Rewrite -->
+    <section class="doc-section" id="rewrite">
+        <h2>LinkedIn Profile Rewrite</h2>
+
+        <h3>Headline — Three Directions</h3>
+        <p>Your current headline reads like it was written by your employer. These are written by you.</p>
+
+        <div class="headline-options">
+            <div class="headline-option">
+                <div class="option-label">Option A — Grounded</div>
+                <div class="option-text">Enterprise Strategy &amp; Digital Transformation · Atlantic Canada · Building what lasts</div>
+            </div>
+            <div class="headline-option">
+                <div class="option-label">Option B — Honest</div>
+                <div class="option-text">12 years turning complex B2B relationships into long-term growth — now figuring out what's next</div>
+            </div>
+            <div class="headline-option">
+                <div class="option-label">Option C — If Brightlight is active</div>
+                <div class="option-text">Enterprise Strategy → Health-Tech AI · Helping organisations navigate complexity through trust, not templates</div>
+            </div>
+        </div>
+
+        <h3>About Section</h3>
+        <p>Your current About is corporate copy about transformation services. Your posts are specific, personal, and have a point of view. This closes that gap.</p>
+
+        <div class="copyable" id="about-copy">
+            <button class="copy-btn" onclick="copyBlock('about-copy')">Copy</button>
+            <p>I spent 12 years at TELUS building things that don't show up in org charts — trust with enterprise clients, judgment about when to push and when to wait, the patience to do the hard parts well even when nobody's watching.</p>
+            <p>Most of that work happened behind the scenes. Navigating complexity. Sitting with ambiguity long enough to find the real problem before jumping to solutions. Working across teams that didn't naturally talk to each other and making something coherent out of it.</p>
+            <p>I started in corporate sales at Air Canada, moved into enterprise strategy at TELUS Business, and spent over a decade learning how large organisations actually change — not how consultants say they should, but how they do when someone earns enough trust to be in the room when the real conversations happen.</p>
+            <p>What I'm good at: complex B2B relationships where the sales cycle is long and the stakes are high. Digital transformation that starts with people, not platforms. Building in regions — specifically Atlantic Canada — where the playbook isn't written yet and you have to figure it out as you go.</p>
+            <p>I left TELUS recently. Not because something went wrong — because something felt right about choosing the harder path while the choosing is still mine.</p>
+            <p>I'm taking time now to be deliberate about what's next. If you're building something in Atlantic Canada — or anywhere that values judgment over jargon and trust over transactions — I'd like to hear about it.</p>
+        </div>
+    </section>
+
+    <!-- SECTION 2: Positioning -->
+    <hr class="section-divider">
+    <section class="doc-section" id="positioning">
+        <h2>What your experience actually translates to</h2>
+
+        <p>You spent 12 years inside one of Canada's largest telcos helping enterprise clients navigate digital transformation — not the pitch-deck version, the real version. The version where you sit across from a CTO who's been burned by three previous vendors, and you earn the right to be the person they call when it actually matters.</p>
+
+        <p>You managed complex B2B relationships where the sales cycle was measured in years, not quarters. You built specifically in Atlantic Canada, which means you did all of this without the density, the talent pool, or the playbook that Toronto and Vancouver take for granted.</p>
+
+        <p>Here's what that makes you unusually good at:</p>
+
+        <div class="skill-grid">
+            <div class="skill-card">
+                <h4>Complex Stakeholder Navigation</h4>
+                <p>You know how to sit in a room with six people who want different things and find the version of the deal that actually holds.</p>
+            </div>
+            <div class="skill-card">
+                <h4>Trust-Based Business Development</h4>
+                <p>The actual thing — where a client calls you instead of issuing an RFP because they trust your judgment more than a process.</p>
+            </div>
+            <div class="skill-card">
+                <h4>Regional Market Building</h4>
+                <p>You understand what it takes to build in a market where you can't just hire from competitors and the ecosystem is still forming.</p>
+            </div>
+            <div class="skill-card">
+                <h4>Translating Institutional Complexity</h4>
+                <p>Large organisations change because someone earns enough credibility to push, enough patience to wait, and enough judgment to know which battles matter. That's what you did for 12 years.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: Brightlight -->
+    <hr class="section-divider">
+    <section class="doc-section" id="brightlight">
+        <h2>The story you're not telling</h2>
+
+        <p>Your Brightlight Health post from last year got 204 reactions and 62 comments. For a niche healthcare AI announcement, that's striking. You wrote about it in first person plural — which reads like someone with a real stake, not someone resharing.</p>
+
+        <div class="insight">
+            <p>Health systems across Canada — especially Atlantic Canada — are under enormous pressure to digitise. AI in healthcare is the hottest investment category in the country. But the bottleneck isn't technology. It's adoption. And adoption in healthcare means navigating exactly the kind of complex, trust-based, multi-stakeholder environment you spent 12 years mastering at TELUS.</p>
+        </div>
+
+        <p>The combination — enterprise digital transformation + healthcare AI involvement + deep Atlantic Canada market knowledge — is genuinely rare. Plenty of people understand health-tech. Plenty understand enterprise sales. Very few understand both <em>and</em> are rooted in a region actively building its innovation ecosystem.</p>
+
+        <p><strong>Right now, that combination is invisible on your profile.</strong> Your Brightlight connection is buried. Your TELUS experience reads as telecom, not as "I know how large organisations actually adopt new technology." The most interesting professional story you have is the one you're not telling.</p>
+    </section>
+
+    <!-- SECTION 4: Conversations -->
+    <hr class="section-divider">
+    <section class="doc-section" id="conversations">
+        <h2>The "what are you doing next?" conversations</h2>
+
+        <p>For 12 years you walked into rooms as TELUS. The brand preceded you. Now you're walking into rooms as Matt Clow. The credibility has to be personal from the first sentence.</p>
+
+        <p>You know this shift from football — a QB who moves from a system offense to a new team doesn't forget how to read defenses. But the timing is different. The internal rhythm has to recalibrate.</p>
+
+        <p>A few things worth keeping in mind:</p>
+
+        <ol class="prep-list">
+            <li><strong>Know your one sentence.</strong> Something like: <em>"I spent 12 years doing enterprise strategy at TELUS, mostly in Atlantic Canada, and I just left to figure out where I can do the most interesting version of that work independently."</em> That's enough. It's honest and it invites the next question.</li>
+            <li><strong>Lead with curiosity, not credentials.</strong> Your 12 years shows in the quality of your questions, not in how you describe your resume. The people worth talking to will notice.</li>
+            <li><strong>Name the transition honestly.</strong> "I left deliberately, because it was time" is more compelling than any polished narrative. People trust someone who chose difficulty over comfort.</li>
+            <li><strong>Watch the pull to undersell.</strong> Your "I'm far from being a technical expert" instinct was appropriate inside TELUS where you represented the brand. On your own, it reads as hedging. Your judgment and experience are the product now.</li>
+        </ol>
+    </section>
+
+    <!-- Author -->
+    <footer class="author-footer">
+        <img src="sam-headshot.png" alt="Sam Millunchick" width="72" height="72">
+        <div class="author-info">
+            <div class="name">Sam Millunchick</div>
+            <p>Executive Coach · High-Stakes Communication</p>
+            <p><a href="https://pathoslabs.co">pathoslabs.co</a></p>
+        </div>
+    </footer>
+</main>
+
+<script>
+function copyBlock(id) {
+    const el = document.getElementById(id);
+    const btn = el.querySelector('.copy-btn');
+    const text = el.innerText.replace('Copy', '').trim();
+    navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy', 1500);
+    });
+}
+
+if (!CSS.supports('animation-timeline', 'scroll()')) {
+    const bar = document.querySelector('.progress-bar');
+    window.addEventListener('scroll', () => {
+        const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+        bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+    }, { passive: true });
+}
+
+const sections = document.querySelectorAll('.doc-section');
+const navLinks = document.querySelectorAll('.section-nav a, .nav-mobile a');
+const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+            navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
+        }
+    });
+}, { rootMargin: '-20% 0px -60% 0px' });
+sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
