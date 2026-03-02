@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Translation Layer</title>
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=satoshi@400,500,700&display=swap">
+<style>
+:root {
+    --bg: #FAFBFC;
+    --bg-dark: #0F172A;
+    --fg: #0F172A;
+    --fg-light: #E2E8F0;
+    --fg-muted: #64748B;
+    --accent: #DC2626;
+    --accent-light: rgba(220, 38, 38, 0.08);
+    --font-display: 'General Sans', system-ui, sans-serif;
+    --font-body: 'Satoshi', system-ui, sans-serif;
+    --title-size: clamp(1.8rem, 5vw, 3.5rem);
+    --h2-size: clamp(1.4rem, 3.5vw, 2.5rem);
+    --h3-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    --body-size: clamp(0.85rem, 1.5vw, 1.125rem);
+    --small-size: clamp(0.65rem, 1vw, 0.8rem);
+    --slide-padding: clamp(2rem, 5vw, 5rem);
+    --content-gap: clamp(0.75rem, 2vw, 2rem);
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-snap-type: y mandatory; scroll-behavior: smooth; height: 100%; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--fg); overflow-x: hidden; height: 100%; -webkit-font-smoothing: antialiased; }
+
+.slide {
+    width: 100vw; height: 100vh; height: 100dvh;
+    overflow: hidden; scroll-snap-align: start;
+    display: flex; flex-direction: column;
+    position: relative; padding: var(--slide-padding);
+}
+.slide-content {
+    flex: 1; display: flex; flex-direction: column; justify-content: center;
+    max-height: 100%; overflow: hidden;
+}
+
+.slide--light { background: var(--bg); color: var(--fg); }
+.slide--dark { background: var(--bg-dark); color: var(--fg-light); }
+
+h1 { font-family: var(--font-display); font-size: var(--title-size); font-weight: 700; line-height: 1.15; letter-spacing: -0.03em; }
+h2 { font-family: var(--font-display); font-size: var(--h2-size); font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; }
+h3 { font-family: var(--font-display); font-size: var(--h3-size); font-weight: 600; line-height: 1.3; }
+p, li { font-size: var(--body-size); line-height: 1.6; }
+.muted { color: var(--fg-muted); }
+.accent { color: var(--accent); }
+.small { font-size: var(--small-size); }
+.eyebrow {
+    font-family: var(--font-display); font-size: var(--small-size);
+    font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: clamp(0.5rem, 1.5vh, 1rem);
+}
+.slide--dark .eyebrow { color: var(--accent); }
+
+.big-stat {
+    font-family: var(--font-display); font-size: clamp(3rem, 10vw, 8rem);
+    font-weight: 700; line-height: 1; letter-spacing: -0.04em;
+    color: var(--accent);
+}
+
+.quote {
+    font-family: var(--font-display); font-size: clamp(1.1rem, 2.5vw, 1.8rem);
+    font-weight: 500; line-height: 1.4; font-style: italic;
+    border-left: 3px solid var(--accent); padding-left: clamp(1rem, 2vw, 1.5rem);
+}
+
+.three-col {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: clamp(1rem, 2vw, 2rem);
+    align-items: start;
+}
+@media (max-width: 700px) { .three-col { grid-template-columns: 1fr; } }
+
+.room-card {
+    background: var(--accent-light); border-radius: 8px;
+    padding: clamp(0.75rem, 1.5vw, 1.25rem); border-left: 3px solid var(--accent);
+}
+.slide--dark .room-card { background: rgba(220, 38, 38, 0.1); }
+
+.gap { height: var(--content-gap); }
+.gap-lg { height: clamp(1.5rem, 3vh, 2.5rem); }
+.gap-sm { height: clamp(0.4rem, 1vh, 0.75rem); }
+.divider { width: 40px; height: 3px; background: var(--accent); border-radius: 2px; }
+
+a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+a:hover { opacity: 0.8; }
+.slide--dark a { color: var(--accent); }
+
+.nav-dots {
+    position: fixed; right: clamp(0.75rem, 2vw, 1.5rem); top: 50%;
+    transform: translateY(-50%); z-index: 100;
+    display: flex; flex-direction: column; gap: 8px;
+}
+.nav-dot {
+    width: 8px; height: 8px; border-radius: 50%; border: none; cursor: pointer;
+    background: var(--fg-muted); opacity: 0.3; transition: all 0.3s;
+}
+.nav-dot.active { opacity: 1; background: var(--accent); transform: scale(1.4); }
+
+.progress-bar { position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); z-index: 1000; transform-origin: left; transform: scaleX(0); transition: transform 0.3s; width: 100%; }
+
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out); }
+.slide.visible .reveal { opacity: 1; transform: translateY(0); }
+.reveal:nth-child(2) { transition-delay: 0.1s; }
+.reveal:nth-child(3) { transition-delay: 0.2s; }
+.reveal:nth-child(4) { transition-delay: 0.3s; }
+.reveal:nth-child(5) { transition-delay: 0.4s; }
+.reveal:nth-child(6) { transition-delay: 0.5s; }
+.reveal:nth-child(7) { transition-delay: 0.6s; }
+
+@media (max-height: 700px) { :root { --slide-padding: clamp(1rem, 3vw, 2.5rem); } }
+@media (max-height: 600px) { .nav-dots { display: none; } }
+@media (max-height: 500px) { :root { --slide-padding: clamp(0.5rem, 2vw, 1.5rem); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.2s !important; } html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<div class="progress-bar"></div>
+<nav class="nav-dots"></nav>
+
+<!-- Slide 1: Title -->
+<section class="slide slide--dark">
+    <div class="slide-content">
+        <h1 class="reveal">The Translation<br>Layer</h1>
+        <div class="gap"></div>
+        <p class="reveal" style="font-size: var(--h3-size); color: #94A3B8; max-width: 52ch;">You've built two companies past the billion-dollar mark. Defense asks for something your playbook doesn't cover.</p>
+        <div class="gap-lg"></div>
+        <p class="reveal small" style="color: #475569;">Prepared for Gary Steele &middot; March 2026</p>
+    </div>
+</section>
+
+<!-- Slide 2: What Translates -->
+<section class="slide slide--light">
+    <div class="slide-content">
+        <div class="eyebrow reveal">What translates perfectly</div>
+        <h2 class="reveal">Three things from your enterprise<br>playbook that defense actually needs.</h2>
+        <div class="gap-lg"></div>
+        <div class="three-col">
+            <div class="reveal">
+                <h3 class="accent">Customer obsession</h3>
+                <div class="gap-sm"></div>
+                <p class="muted">Your <a href="https://www.splunk.com/en_us/blog/leadership/gary-steele-ceo-message.html" target="_blank">100-customers-in-100-days approach</a> at Splunk works in defense. The military values leaders who listen before they build. The difference: in enterprise, customers buy quarterly. In defense, buying cycles are measured in years, and the customer who funds the program may not be the operator who uses the product.</p>
+            </div>
+            <div class="reveal">
+                <h3 class="accent">Platform thinking</h3>
+                <div class="gap-sm"></div>
+                <p class="muted"><a href="https://shield.ai/hivemind/" target="_blank">Hivemind</a> as a licensable software layer across airframes is pure enterprise software strategy applied to defense hardware. This is genuinely differentiated. Nobody else in defense tech is thinking like a platform company — and that instinct is worth protecting.</p>
+            </div>
+            <div class="reveal">
+                <h3 class="accent">Operational scaling</h3>
+                <div class="gap-sm"></div>
+                <p class="muted">Getting from <a href="https://www.reuters.com/business/aerospace-defense/shield-ai-raises-funding-that-values-drone-maker-56-bln-2025-01-09/" target="_blank">$300M toward $1B revenue</a> requires the same discipline in defense as it does in enterprise: the right executive team, repeatable processes, and careful cash management. You've done this twice. The muscle memory is real.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Slide 3: The Stat -->
+<section class="slide slide--dark">
+    <div class="slide-content">
+        <div class="eyebrow reveal">The growth trajectory</div>
+        <div class="gap"></div>
+        <div class="big-stat reveal">3</div>
+        <div class="gap"></div>
+        <h2 class="reveal" style="color: var(--fg-light);">defense companies in the last 20 years have hit $1B revenue on a startup trajectory</h2>
+        <div class="gap-lg"></div>
+        <p class="reveal" style="color: #94A3B8; max-width: 55ch;"><a href="https://www.palantir.com/newsroom/" target="_blank" style="color: var(--accent);">Palantir</a>, <a href="https://www.anduril.com/" target="_blank" style="color: var(--accent);">Anduril</a>, and <a href="https://www.spacex.com/" target="_blank" style="color: var(--accent);">SpaceX's government division</a>. Shield AI's target is 70&ndash;100% annual growth to reach that mark by fiscal 2028. What those three had in common: a CEO who could speak both languages &mdash; software velocity and strategic deterrence.</p>
+    </div>
+</section>
+
+<!-- Slide 4: What Doesn't Translate -->
+<section class="slide slide--light">
+    <div class="slide-content">
+        <div class="eyebrow reveal">What doesn't translate</div>
+        <h2 class="reveal">Three places where enterprise<br>instincts will mislead you.</h2>
+        <div class="gap-lg"></div>
+        <div class="three-col">
+            <div class="reveal">
+                <h3 class="accent">Credibility currency</h3>
+                <div class="gap-sm"></div>
+                <p class="muted">In enterprise, credibility comes from revenue growth and customer logos. In defense, it comes from mission understanding and relationships with senior military leadership. The Hill, the Pentagon, and the combatant commands need to see someone who understands <em>why</em> autonomy matters for national security &mdash; not just how it works technically.</p>
+            </div>
+            <div class="reveal">
+                <h3 class="accent">The ethics question</h3>
+                <div class="gap-sm"></div>
+                <p class="muted">You <a href="https://fortune.com/2024/12/09/shield-ai-ceo-gary-steele-autonomous-drones-defense/" target="_blank">told Fortune</a> Shield AI "literally spends no time talking about the politics of particular missions." In enterprise software, that's fine. In defense, the autonomous weapons conversation is coming whether you engage or not. The CEOs who shape it proactively control their narrative. The ones who stay silent let critics write it for them.</p>
+            </div>
+            <div class="reveal">
+                <h3 class="accent">The founder dynamic</h3>
+                <div class="gap-sm"></div>
+                <p class="muted">In enterprise software, the hired CEO replaces the founder cleanly. In defense tech, the founder's vision is the company's identity. <a href="https://shield.ai/about/" target="_blank">Ryan and Brandon Tseng</a> built Shield AI's culture, military relationships, and technical vision. A tripartite leadership structure requires relational sophistication that no amount of operational excellence provides.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Slide 5: The Three Who Did It -->
+<section class="slide slide--dark">
+    <div class="slide-content">
+        <div class="eyebrow reveal">The CEOs who translated successfully</div>
+        <div class="gap"></div>
+        <div class="three-col">
+            <div class="reveal">
+                <div class="room-card">
+                    <h3 style="color: var(--accent); margin-bottom: clamp(0.3rem, 0.5vh, 0.5rem);">Alex Karp</h3>
+                    <p class="small" style="color: #64748B; margin-bottom: clamp(0.3rem, 0.5vh, 0.5rem);">Palantir</p>
+                    <p style="color: #CBD5E1;">Philosopher-CEO who built credibility by articulating a <a href="https://www.palantir.com/newsroom/letters/a-new-chapter-for-american-defense/" target="_blank" style="color: var(--accent);">moral framework for AI in defense</a>. His willingness to engage the ethics debate on his own terms turned Palantir from controversial to essential.</p>
+                </div>
+            </div>
+            <div class="reveal">
+                <div class="room-card">
+                    <h3 style="color: var(--accent); margin-bottom: clamp(0.3rem, 0.5vh, 0.5rem);">Palmer Luckey</h3>
+                    <p class="small" style="color: #64748B; margin-bottom: clamp(0.3rem, 0.5vh, 0.5rem);">Anduril</p>
+                    <p style="color: #CBD5E1;">Consumer tech founder who became defense's most visible advocate by <a href="https://www.anduril.com/article/autonomous-systems-and-the-future-of-national-defense/" target="_blank" style="color: var(--accent);">embracing the mission conversation</a> publicly. His willingness to be provocative created both a recruiting magnet and an investor narrative.</p>
+                </div>
+            </div>
+            <div class="reveal">
+                <div class="room-card">
+                    <h3 style="color: var(--accent); margin-bottom: clamp(0.3rem, 0.5vh, 0.5rem);">Gwynne Shotwell</h3>
+                    <p class="small" style="color: #64748B; margin-bottom: clamp(0.3rem, 0.5vh, 0.5rem);">SpaceX</p>
+                    <p style="color: #CBD5E1;">The president who bridges Musk's vision with government procurement reality. She <a href="https://www.spacex.com/updates/" target="_blank" style="color: var(--accent);">learned to speak Pentagon</a> while maintaining Silicon Valley speed. The common thread across all three: they built a public identity that earned defense-sector trust.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Slide 6: The Hivemind Narrative Opportunity -->
+<section class="slide slide--light">
+    <div class="slide-content">
+        <div class="eyebrow reveal">The narrative opportunity</div>
+        <h2 class="reveal">Hivemind on the CCA is the proof point.<br>The story around it isn't there yet.</h2>
+        <div class="gap-lg"></div>
+        <p class="reveal muted" style="max-width: 58ch;">Shield AI's <a href="https://shield.ai/shield-ai-named-mission-autonomy-software-provider-for-collaborative-combat-aircraft/" target="_blank">February 2026 CCA contract</a> &mdash; Hivemind running on Anduril's YFQ-44A &mdash; is the kind of milestone that validates the entire platform strategy. But the announcement reads like a press release: "Shield AI is proud to be named a mission autonomy provider."</p>
+        <div class="gap"></div>
+        <p class="reveal muted" style="max-width: 58ch;">Compare that to how Palantir or Anduril would frame the same win &mdash; with a strategic vision about what autonomous combat aviation means for deterrence, for pilot safety, for the future of air superiority. The technology speaks for itself. What's missing is a narrative that connects it to a vision of what American defense should look like in 2030.</p>
+        <div class="gap"></div>
+        <p class="reveal muted" style="max-width: 58ch;">You have the operational credibility. The missing piece is a strategic voice that belongs to the CEO &mdash; not the comms team, not the co-founders. That narrative doesn't come from press releases. It comes from the person the board hired to take Shield AI from a defense startup to a defense institution.</p>
+    </div>
+</section>
+
+<!-- Slide 7: Attribution -->
+<section class="slide slide--dark">
+    <div class="slide-content" style="align-items: center; text-align: center;">
+        <div class="divider reveal" style="margin: 0 auto;"></div>
+        <div class="gap-lg"></div>
+        <h2 class="reveal" style="color: var(--fg-light);">Pathos Labs</h2>
+        <div class="gap"></div>
+        <p class="reveal" style="color: #94A3B8; max-width: 45ch;">Executive coaching for founders, CEOs, and senior leaders navigating high-stakes transitions.</p>
+        <div class="gap-lg"></div>
+        <p class="reveal small" style="color: #475569;">Sam Millunchick &middot; <a href="https://www.linkedin.com/in/smillunchick/" target="_blank">linkedin.com/in/smillunchick</a></p>
+    </div>
+</section>
+
+<script>
+class SlidePresentation {
+    constructor() {
+        this.slides = [...document.querySelectorAll('.slide')];
+        this.currentIndex = 0;
+        this.isNavigating = false;
+        this.touchStartY = 0;
+        this.buildNavDots();
+        this.observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    if (!this.isNavigating) {
+                        const idx = this.slides.indexOf(entry.target);
+                        if (idx !== -1) this.currentIndex = idx;
+                    }
+                    this.updateProgress();
+                    this.updateNavDots();
+                }
+            });
+        }, { threshold: 0.5 });
+        this.slides.forEach(s => this.observer.observe(s));
+        this.bindKeyboard();
+        this.bindTouch();
+        this.bindWheel();
+        this.slides[0]?.classList.add('visible');
+        this.updateProgress();
+    }
+    buildNavDots() {
+        const nav = document.querySelector('.nav-dots');
+        if (!nav) return;
+        this.slides.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.className = 'nav-dot';
+            dot.addEventListener('click', () => this.goToSlide(i));
+            nav.appendChild(dot);
+        });
+    }
+    goToSlide(index) {
+        if (index < 0 || index >= this.slides.length) return;
+        this.currentIndex = index;
+        this.isNavigating = true;
+        this.slides[index].scrollIntoView({ behavior: 'smooth' });
+        this.updateProgress();
+        this.updateNavDots();
+        setTimeout(() => { this.isNavigating = false; }, 800);
+    }
+    next() { this.goToSlide(this.currentIndex + 1); }
+    prev() { this.goToSlide(this.currentIndex - 1); }
+    bindKeyboard() {
+        document.addEventListener('keydown', (e) => {
+            if (this.isNavigating) return;
+            switch(e.key) {
+                case 'ArrowDown': case 'ArrowRight': case ' ': case 'PageDown': e.preventDefault(); this.next(); break;
+                case 'ArrowUp': case 'ArrowLeft': case 'PageUp': e.preventDefault(); this.prev(); break;
+                case 'Home': e.preventDefault(); this.goToSlide(0); break;
+                case 'End': e.preventDefault(); this.goToSlide(this.slides.length - 1); break;
+            }
+        });
+    }
+    bindTouch() {
+        document.addEventListener('touchstart', (e) => { this.touchStartY = e.touches[0].clientY; }, { passive: true });
+        document.addEventListener('touchend', (e) => { const d = this.touchStartY - e.changedTouches[0].clientY; if (Math.abs(d) > 50) { d > 0 ? this.next() : this.prev(); } }, { passive: true });
+    }
+    bindWheel() {
+        let t; document.addEventListener('wheel', (e) => { if (this.isNavigating) return; clearTimeout(t); t = setTimeout(() => { e.deltaY > 30 ? this.next() : e.deltaY < -30 ? this.prev() : null; }, 50); }, { passive: true });
+    }
+    updateProgress() {
+        const bar = document.querySelector('.progress-bar');
+        if (bar) bar.style.transform = `scaleX(${this.slides.length > 1 ? this.currentIndex / (this.slides.length - 1) : 0})`;
+    }
+    updateNavDots() {
+        document.querySelectorAll('.nav-dot').forEach((d, i) => d.classList.toggle('active', i === this.currentIndex));
+    }
+}
+document.addEventListener('DOMContentLoaded', () => new SlidePresentation());
+</script>
+</body>
+</html>
