@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beyond the Backlash — Pathos Labs</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=General+Sans:wght@400;500;600;700&family=Satoshi:wght@400;500;700&display=swap');
+
+  :root {
+    --accent: #0D9488;
+    --accent-light: #CCFBF1;
+    --accent-dark: #065F53;
+    --bg: #FAFAF9;
+    --bg-alt: #F5F5F4;
+    --text: #1C1917;
+    --text-muted: #57534E;
+    --text-light: #A8A29E;
+    --white: #FFFFFF;
+    --slide-height: 100vh;
+    --slide-height: 100dvh;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
+  body {
+    font-family: 'Satoshi', 'General Sans', -apple-system, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .slide {
+    min-height: var(--slide-height);
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .slide-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* Staggered reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal:nth-child(2) { transition-delay: 0.1s; }
+  .reveal:nth-child(3) { transition-delay: 0.2s; }
+  .reveal:nth-child(4) { transition-delay: 0.3s; }
+  .reveal:nth-child(5) { transition-delay: 0.4s; }
+  .reveal:nth-child(6) { transition-delay: 0.5s; }
+  .reveal:nth-child(7) { transition-delay: 0.6s; }
+
+  /* Slide 1: Title */
+  .slide--title {
+    background: var(--accent-dark);
+    color: var(--white);
+  }
+  .slide--title .tag {
+    font-family: 'General Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    margin-bottom: 1.5rem;
+  }
+  .slide--title h1 {
+    font-family: 'General Sans', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+    max-width: 700px;
+  }
+  .slide--title .subtitle {
+    font-size: 1.125rem;
+    color: rgba(255,255,255,0.75);
+    max-width: 560px;
+    line-height: 1.7;
+  }
+  .slide--title .meta {
+    margin-top: 3rem;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.45);
+  }
+
+  /* Slide 2+: Content */
+  .slide--content { background: var(--bg); }
+  .slide--alt { background: var(--bg-alt); }
+  .slide--dark { background: var(--text); color: var(--white); }
+  .slide--accent { background: var(--accent); color: var(--white); }
+
+  .slide h2 {
+    font-family: 'General Sans', sans-serif;
+    font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 1.5rem;
+    max-width: 700px;
+  }
+
+  .slide--dark h2, .slide--accent h2 { color: var(--white); }
+
+  .slide p {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 640px;
+    margin-bottom: 1rem;
+    line-height: 1.75;
+  }
+  .slide--dark p { color: rgba(255,255,255,0.7); }
+  .slide--accent p { color: rgba(255,255,255,0.85); }
+
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .stat-card {
+    padding: 1.5rem;
+    border-radius: 12px;
+    background: var(--white);
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .slide--dark .stat-card {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.1);
+  }
+  .stat-card .num {
+    font-family: 'General Sans', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1.1;
+  }
+  .slide--dark .stat-card .num { color: var(--accent-light); }
+  .stat-card .label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 0.35rem;
+    line-height: 1.4;
+  }
+  .slide--dark .stat-card .label { color: rgba(255,255,255,0.55); }
+
+  .case-study {
+    padding: 1.5rem;
+    border-left: 3px solid var(--accent);
+    margin: 1.25rem 0;
+    background: var(--white);
+    border-radius: 0 10px 10px 0;
+  }
+  .case-study strong {
+    font-family: 'General Sans', sans-serif;
+    font-weight: 600;
+    color: var(--text);
+    display: block;
+    margin-bottom: 0.35rem;
+    font-size: 0.95rem;
+  }
+  .case-study p {
+    font-size: 0.9rem;
+    margin-bottom: 0;
+    color: var(--text-muted);
+  }
+
+  .source {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    margin-top: 1.5rem;
+  }
+  .source a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .source a:hover { text-decoration: underline; }
+  .slide--dark .source { color: rgba(255,255,255,0.35); }
+  .slide--dark .source a { color: var(--accent-light); }
+  .slide--accent .source { color: rgba(255,255,255,0.45); }
+  .slide--accent .source a { color: rgba(255,255,255,0.7); }
+
+  .pull-quote {
+    font-family: 'General Sans', sans-serif;
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    font-weight: 500;
+    line-height: 1.5;
+    max-width: 640px;
+    margin: 1rem 0;
+    color: var(--text);
+  }
+  .slide--accent .pull-quote { color: var(--white); }
+
+  /* Slide 7: Attribution */
+  .slide--final {
+    background: var(--bg-alt);
+    text-align: center;
+  }
+  .slide--final .logo {
+    font-family: 'General Sans', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-dark);
+    letter-spacing: -0.02em;
+  }
+  .slide--final .tagline {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+  }
+  .slide--final a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .slide--final a:hover { text-decoration: underline; }
+  .slide--final .sam-info {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+
+  /* Progress dots */
+  .progress {
+    position: fixed;
+    right: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 100;
+  }
+  .progress .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.15);
+    transition: background 0.3s, transform 0.3s;
+  }
+  .progress .dot.active {
+    background: var(--accent);
+    transform: scale(1.5);
+  }
+
+  @media (max-width: 640px) {
+    .slide { padding: 2rem 1.25rem; }
+    .stat-row { grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .stat-card .num { font-size: 1.5rem; }
+    .progress { right: 0.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="progress" id="progress"></nav>
+
+<!-- Slide 1: Title -->
+<section class="slide slide--title" data-slide="0">
+  <div class="slide-inner">
+    <div class="tag reveal">Strategic Brief</div>
+    <h1 class="reveal">Beyond the Backlash: Why Disability Inclusion Is Structurally Different</h1>
+    <p class="subtitle reveal">One in five companies have cut their DEI programs. But the data tells a more interesting story about where the money is actually going, and why disability-focused platforms are positioned to grow through the shift.</p>
+    <div class="meta reveal">Prepared for Keely Cat-Wells · March 2026</div>
+  </div>
+</section>
+
+<!-- Slide 2: The Real Numbers -->
+<section class="slide slide--content" data-slide="1">
+  <div class="slide-inner">
+    <h2 class="reveal">The DEI retreat is real, but it is not total</h2>
+    <p class="reveal">The 2025 data shows a more segmented picture than the headlines suggest. About 20% of companies fully eliminated DEI programs after the political shift. But the majority did not. 65% held budgets steady. 23% actually increased spending. The companies that cut programs redirected 51% of the funds to general operations and 40% to AI and technology tools. The budget did not disappear. It migrated toward productivity framing.</p>
+    <div class="stat-row">
+      <div class="stat-card reveal">
+        <div class="num">20%</div>
+        <div class="label">Companies that fully eliminated DEI programs</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="num">65%</div>
+        <div class="label">Companies that held DEI budgets steady</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="num">23%</div>
+        <div class="label">Companies that increased DEI spending</div>
+      </div>
+    </div>
+    <div class="source reveal">Sources: <a href="https://allwork.space/2025/07/1-in-5-companies-cut-dei-programs-after-trumps-reelection/">allwork.space</a>, <a href="https://www.diversityresources.com/dei-budgets-2025-23-are-growing-most-are-holding-steady/">Diversity Resources</a>, <a href="https://www.resume.org/research/1-in-8-companies-are-scaling-back-dei-commitments-in-2025-many-cite-political-climate/">Resume.org</a></div>
+  </div>
+</section>
+
+<!-- Slide 3: The Legal Floor -->
+<section class="slide slide--dark" data-slide="2">
+  <div class="slide-inner">
+    <h2 class="reveal">Disability inclusion has a legal floor that race and gender DEI does not</h2>
+    <p class="reveal">The constitutional arguments used to dismantle race-conscious programs cannot be applied to disability. The ADA remains in force. Section 503 of the Rehabilitation Act still mandates affirmative action for federal contractors. And the enforcement environment is tightening, not loosening. Companies that dismantle disability programs face rising legal exposure. Companies that invest in them are building a compliance moat.</p>
+    <div class="stat-row">
+      <div class="stat-card reveal">
+        <div class="num">8,800</div>
+        <div class="label">ADA Title III federal lawsuits in 2024, up 7% YoY</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="num">+37%</div>
+        <div class="label">ADA website accessibility lawsuits, H1 2025 vs H1 2024</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="num">0</div>
+        <div class="label">Constitutional vulnerability of disability-based programs</div>
+      </div>
+    </div>
+    <div class="source reveal">Sources: <a href="https://www.adatitleiii.com/2025/03/ada-title-iii-federal-lawsuit-numbers-rebound-to-8800-in-2024/">ADA Title III</a>, <a href="https://www.audioeye.com/post/ada-lawsuits-continue-to-rise-in-2024/">AudioEye</a>, <a href="https://browngold.com/blog/dei-a-the-effect-of-donald-trumps-dei-executive-order-on-accessibility/">Brown Goldstein Levy</a></div>
+  </div>
+</section>
+
+<!-- Slide 4: The Financial Case -->
+<section class="slide slide--content" data-slide="3">
+  <div class="slide-inner">
+    <h2 class="reveal">The financial case survives a CFO review</h2>
+    <p class="reveal">Accenture's longitudinal study tracked 346 companies over seven years through the Disability Equality Index. The companies leading on disability inclusion criteria consistently outperformed their peers across every financial metric. And the cost objection collapses under the data: more than half of all workplace accommodations cost nothing at all.</p>
+    <div class="stat-row">
+      <div class="stat-card reveal">
+        <div class="num">1.6x</div>
+        <div class="label">More revenue for disability inclusion leaders vs peers</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="num">2.6x</div>
+        <div class="label">More net income for disability inclusion leaders</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="num">58%</div>
+        <div class="label">Of accommodations cost $0 to implement</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="num">$500</div>
+        <div class="label">Typical one-time cost for remaining accommodations</div>
+      </div>
+    </div>
+    <div class="source reveal">Sources: <a href="https://newsroom.accenture.com/news/2023/companies-that-lead-in-disability-inclusion-outperform-peers-financially-reveals-new-research-from-accenture">Accenture 2023</a>, <a href="https://askjan.org/topics/costs.cfm">Job Accommodation Network</a></div>
+  </div>
+</section>
+
+<!-- Slide 5: The Reframe -->
+<section class="slide slide--alt" data-slide="4">
+  <div class="slide-inner">
+    <h2 class="reveal">The companies that survived the backlash reframed early</h2>
+    <p class="reveal">Three patterns from organizations that separated disability hiring from the broader DEI conversation and positioned it as workforce strategy. Their programs were never on the chopping block because they were never framed as charity.</p>
+    <div class="case-study reveal">
+      <strong>JPMorgan Chase — BeST Program</strong>
+      <p>Renamed diversity to DOI (Diversity, Opportunity, Inclusion). The BeST program employing neurodivergent workers across seven US locations remained intact throughout restructuring. Disability was infrastructure, not an initiative.</p>
+    </div>
+    <div class="case-study reveal">
+      <strong>DXC Technology — Dandelion Program</strong>
+      <p>Positions neurodivergent employees in cybersecurity, QA, and AI training roles. Framed as a talent pipeline for technical skills, not inclusion. Won Disability:IN's Autism Inclusion Company of the Year 2024.</p>
+    </div>
+    <div class="case-study reveal">
+      <strong>SAP — Autism at Work Coalition</strong>
+      <p>Now includes EY, Ford, HPE, and Microsoft. Frames autistic employees as competitive workforce advantage in software testing and data analysis. Survived every round of corporate cost-cutting because it was never categorized as DEI spending.</p>
+    </div>
+    <div class="source reveal">Sources: <a href="https://www.jpmorganchase.com/newsroom/stories/best-program">JPMorgan Chase</a>, <a href="https://dxc.com/about-us/inclusion-and-belonging/dxc-dandelion-program">DXC</a>, <a href="https://www.autismatwork.org/united-states">Autism at Work</a></div>
+  </div>
+</section>
+
+<!-- Slide 6: What It Means -->
+<section class="slide slide--accent" data-slide="5">
+  <div class="slide-inner">
+    <h2 class="reveal">What this means for Making Space</h2>
+    <p class="pull-quote reveal">The companies cutting generic DEI are simultaneously facing rising ADA litigation, searching for talent pipeline solutions, and looking for language that lets them invest in inclusion without triggering political backlash.</p>
+    <p class="reveal">Enterprise procurement commitment to disability-owned businesses doubled from 27% to 56% between 2015 and 2024. 542 corporations participated in the Disability Equality Index last year, including 71 Fortune 100 companies. Disabled workforce participation has grown from 29% to 37% since 2018.</p>
+    <p class="reveal">A platform that frames disability hiring as workforce innovation, backs it with compliance data, and delivers measurable placement outcomes is not vulnerable to the DEI cycle. It is the thing that replaces the DEI cycle. The question is not whether the market exists. It is whether Making Space claims the positioning before someone else builds it from the other direction.</p>
+    <div class="source reveal">Sources: <a href="https://disabilityin.org/2024-di-report/">Disability:IN 2024</a>, <a href="https://newsroom.accenture.com/news/2023/companies-that-lead-in-disability-inclusion-outperform-peers-financially-reveals-new-research-from-accenture">Accenture</a></div>
+  </div>
+</section>
+
+<!-- Slide 7: Attribution -->
+<section class="slide slide--final" data-slide="6">
+  <div class="slide-inner">
+    <div class="logo reveal">Pathos Labs</div>
+    <div class="tagline reveal">High-stakes communications for founders and executives</div>
+    <div class="sam-info reveal">
+      <a href="https://www.linkedin.com/in/sammillunchick/">Sam Millunchick</a><br>
+      sam@pathoslabs.co
+    </div>
+  </div>
+</section>
+
+<script>
+  // Intersection Observer for staggered reveals
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Progress dots
+  const slides = document.querySelectorAll('.slide');
+  const progressNav = document.getElementById('progress');
+  slides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'dot';
+    dot.addEventListener('click', () => slides[i].scrollIntoView({ behavior: 'smooth' }));
+    progressNav.appendChild(dot);
+  });
+
+  const slideObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = parseInt(entry.target.dataset.slide);
+        document.querySelectorAll('.progress .dot').forEach((d, i) => {
+          d.classList.toggle('active', i === idx);
+        });
+      }
+    });
+  }, { threshold: 0.5 });
+
+  slides.forEach(s => slideObserver.observe(s));
+</script>
+
+</body>
+</html>
