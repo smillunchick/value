@@ -70,6 +70,7 @@
             overflow-x: hidden;
         }
         html {
+            overflow-y: scroll;
             scroll-snap-type: y mandatory;
             scroll-behavior: smooth;
         }
@@ -382,6 +383,54 @@
             color: var(--text-on-dark);
         }
 
+        /* ─── AUTHOR FOOTER ────────────────────────── */
+        .author-footer {
+            display: flex;
+            align-items: center;
+            gap: clamp(1rem, 2vw, 1.5rem);
+            margin-top: clamp(1.5rem, 3vw, 2.5rem);
+        }
+        .author-avatar {
+            width: clamp(56px, 6vw, 72px);
+            height: clamp(56px, 6vw, 72px);
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .author-info {
+            text-align: left;
+        }
+        .author-name {
+            font-family: var(--font-sans);
+            font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+            font-weight: 600;
+            color: var(--text-on-dark);
+            margin-bottom: clamp(0.15rem, 0.3vw, 0.25rem);
+        }
+        .author-role {
+            font-family: var(--font-sans);
+            font-size: var(--small-size);
+            font-weight: 300;
+            color: var(--text-on-dark-muted);
+            margin-bottom: clamp(0.3rem, 0.5vw, 0.5rem);
+        }
+        .author-links {
+            display: flex;
+            gap: clamp(0.75rem, 1.5vw, 1.25rem);
+            list-style: none;
+            padding: 0;
+        }
+        .author-links a {
+            font-family: var(--font-sans);
+            font-size: var(--small-size);
+            font-weight: 400;
+            color: var(--text-on-dark-muted);
+            text-decoration: none;
+            transition: color 0.18s ease;
+        }
+        .author-links a:hover {
+            color: var(--accent-on-dark);
+        }
+
         /* ─── SOURCE LINKS ─────────────────────────── */
         .sources {
             font-size: var(--small-size);
@@ -622,7 +671,18 @@
         <h1 class="reveal"><em>The question isn't whether the market exists.</em></h1>
         <div class="accent-rule reveal" style="margin-left: auto; margin-right: auto;"></div>
         <p class="subtitle reveal" style="max-width: 45ch;">It's whether Making Space claims the positioning before someone else builds it from the other direction.</p>
-        <a href="https://www.linkedin.com/in/sammillunchick/" class="cta-link reveal" target="_blank" rel="noopener">Connect with Sam</a>
+        <div class="author-footer reveal">
+            <img src="sam.webp" alt="Sam Millunchick" class="author-avatar">
+            <div class="author-info">
+                <div class="author-name">Sam Millunchick</div>
+                <div class="author-role">Executive Coach &middot; Pathos Labs</div>
+                <nav class="author-links">
+                    <a href="https://pathoslabs.co" target="_blank">pathoslabs.co</a>
+                    <a href="https://www.linkedin.com/in/sammillunchick/" target="_blank">LinkedIn</a>
+                    <a href="https://cal.com/pathos-labs/fit-match-30" target="_blank">Book a call</a>
+                </nav>
+            </div>
+        </div>
     </div>
     <span class="slide-number">07</span>
 </section>
