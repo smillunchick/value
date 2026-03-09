@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Enterprise Software CEOs Discover About the Physical Security Buyer — Pathos Labs</title>
+
+    <!-- Brand Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===========================================
+           CSS CUSTOM PROPERTIES — PATHOS LABS BRAND
+           =========================================== */
+        :root {
+            /* Backgrounds */
+            --bg-primary: oklch(97.5% 0.004 230);
+            --bg-surface: oklch(95% 0.008 230);
+            --bg-dark: oklch(10% 0.012 230);
+            --bg-dark-surface: oklch(14% 0.014 230);
+            --bg-dark-surface-2: oklch(18% 0.014 225);
+
+            /* Text */
+            --text-primary: oklch(14% 0.010 230);
+            --text-body: oklch(28% 0.008 230);
+            --text-muted: oklch(48% 0.005 230);
+            --text-on-dark: oklch(94% 0.005 230);
+            --text-on-dark-muted: oklch(60% 0.005 230);
+
+            /* Accent — deep teal-blue (security/control) */
+            --accent: oklch(52% 0.12 220);
+            --accent-light: oklch(60% 0.11 220);
+            --accent-on-dark: oklch(65% 0.11 220);
+            --accent-bg: oklch(52% 0.12 220 / 0.07);
+
+            /* Borders */
+            --border: oklch(88% 0.005 230);
+            --border-dark: oklch(20% 0.008 230);
+
+            /* Typography — clamp() for viewport fitting */
+            --font-serif: 'Instrument Serif', Georgia, serif;
+            --font-sans: 'Outfit', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+            --title-size: clamp(2.2rem, 5.5vw, 4.5rem);
+            --h2-size: clamp(1.6rem, 3.5vw, 2.8rem);
+            --h3-size: clamp(1.1rem, 2vw, 1.5rem);
+            --body-size: clamp(0.85rem, 1.4vw, 1.1rem);
+            --small-size: clamp(0.7rem, 1vw, 0.85rem);
+            --eyebrow-size: clamp(0.7rem, 0.9vw, 0.78rem);
+
+            /* Spacing */
+            --slide-padding: clamp(2rem, 5vw, 5rem);
+            --content-gap: clamp(0.75rem, 2vw, 2rem);
+            --element-gap: clamp(0.3rem, 1vw, 1rem);
+
+            /* Animation */
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --duration-normal: 0.6s;
+        }
+
+        /* ===========================================
+           VIEWPORT FITTING: MANDATORY BASE STYLES
+           =========================================== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body {
+            height: 100%;
+            overflow-x: hidden;
+        }
+        html {
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .slide-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-height: 100%;
+            overflow: hidden;
+            padding: var(--slide-padding);
+        }
+        .card, .container, .content-box {
+            max-width: min(90vw, 1000px);
+            max-height: min(80vh, 700px);
+        }
+        .feature-list, .bullet-list {
+            gap: clamp(0.4rem, 1vh, 1rem);
+        }
+        .feature-list li, .bullet-list li {
+            font-size: var(--body-size);
+            line-height: 1.4;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+            gap: clamp(0.5rem, 1.5vw, 1rem);
+        }
+        img, .image-container {
+            max-width: 100%;
+            max-height: min(50vh, 400px);
+            object-fit: contain;
+        }
+
+        /* Responsive breakpoints */
+        @media (max-height: 700px) {
+            :root {
+                --slide-padding: clamp(1rem, 3vw, 2.5rem);
+                --content-gap: clamp(0.5rem, 1.5vw, 1rem);
+                --title-size: clamp(1.8rem, 4.5vw, 3rem);
+                --h2-size: clamp(1.3rem, 3vw, 2rem);
+            }
+        }
+        @media (max-height: 600px) {
+            :root {
+                --slide-padding: clamp(0.75rem, 2.5vw, 1.5rem);
+                --content-gap: clamp(0.3rem, 1vw, 0.75rem);
+                --title-size: clamp(1.5rem, 4vw, 2.2rem);
+                --body-size: clamp(0.75rem, 1.2vw, 0.95rem);
+            }
+            .nav-dots, .keyboard-hint, .decorative { display: none; }
+        }
+        @media (max-height: 500px) {
+            :root {
+                --slide-padding: clamp(0.5rem, 2vw, 1rem);
+                --title-size: clamp(1.2rem, 3.5vw, 1.8rem);
+                --h2-size: clamp(1rem, 2.5vw, 1.4rem);
+                --body-size: clamp(0.7rem, 1vw, 0.85rem);
+            }
+        }
+        @media (max-width: 600px) {
+            :root { --title-size: clamp(1.5rem, 7vw, 2.8rem); }
+            .grid { grid-template-columns: 1fr; }
+            .two-col { grid-template-columns: 1fr !important; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.2s !important;
+            }
+            html { scroll-behavior: auto; }
+        }
+
+        /* ===========================================
+           PATHOS LABS BRAND STYLES
+           =========================================== */
+
+        body {
+            font-family: var(--font-sans);
+            font-weight: 300;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- WORDMARK --- */
+        .wordmark {
+            font-family: var(--font-sans);
+            font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            position: absolute;
+            top: var(--slide-padding);
+            left: var(--slide-padding);
+            z-index: 2;
+        }
+        .wordmark .dot { color: var(--accent); }
+        .wordmark .labs { font-weight: 400; }
+
+        /* --- SLIDE NUMBER --- */
+        .slide-number {
+            font-family: var(--font-sans);
+            font-size: var(--small-size);
+            font-weight: 300;
+            position: absolute;
+            bottom: var(--slide-padding);
+            right: var(--slide-padding);
+            z-index: 2;
+        }
+
+        /* --- EYEBROW --- */
+        .eyebrow {
+            font-family: var(--font-sans);
+            font-size: var(--eyebrow-size);
+            font-weight: 600;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: clamp(0.5rem, 1.5vw, 1rem);
+        }
+        .dark .eyebrow { color: var(--accent-on-dark); }
+
+        /* --- HEADINGS --- */
+        .slide h1 {
+            font-family: var(--font-serif);
+            font-size: var(--title-size);
+            font-weight: 400;
+            line-height: 1.05;
+            letter-spacing: -0.015em;
+        }
+        .slide h1 em { font-style: italic; }
+        .slide h2 {
+            font-family: var(--font-serif);
+            font-size: var(--h2-size);
+            font-weight: 400;
+            line-height: 1.15;
+            letter-spacing: -0.015em;
+        }
+        .slide h3 {
+            font-family: var(--font-sans);
+            font-size: var(--h3-size);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        /* --- BODY TEXT --- */
+        .slide p {
+            font-size: var(--body-size);
+            line-height: 1.7;
+            max-width: 65ch;
+        }
+        .subtitle {
+            font-size: clamp(1rem, 1.8vw, 1.25rem);
+            font-weight: 300;
+            line-height: 1.5;
+            max-width: 50ch;
+        }
+
+        /* --- ACCENT LINE --- */
+        .accent-rule {
+            width: 48px;
+            height: 3px;
+            background: var(--accent);
+            margin: clamp(0.75rem, 1.5vw, 1.25rem) 0;
+        }
+        .dark .accent-rule { background: var(--accent-on-dark); }
+
+        /* --- DARK SLIDES --- */
+        .dark {
+            background: var(--bg-dark);
+            color: var(--text-on-dark);
+        }
+        .dark h1, .dark h2, .dark h3 { color: var(--text-on-dark); }
+        .dark p { color: var(--text-on-dark); opacity: 0.85; }
+        .dark .subtitle { opacity: 0.7; }
+        .dark .slide-number { color: var(--text-on-dark-muted); }
+        .dark .wordmark { color: var(--text-on-dark); }
+
+        /* --- LIGHT SLIDES --- */
+        .light {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+        .light p { color: var(--text-body); }
+        .light .slide-number { color: var(--text-muted); }
+        .light .wordmark { color: var(--text-primary); }
+
+        /* --- BULLET POINTS --- */
+        .bullets {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: clamp(0.6rem, 1.2vh, 1rem);
+            margin-top: var(--content-gap);
+        }
+        .bullets li {
+            font-size: var(--body-size);
+            line-height: 1.6;
+            padding-left: clamp(1.2rem, 2vw, 1.8rem);
+            position: relative;
+            color: var(--text-body);
+        }
+        .bullets li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: clamp(0.5rem, 0.8vw, 0.6rem);
+            width: 5px;
+            height: 5px;
+            background: var(--accent);
+        }
+        .dark .bullets li { color: var(--text-on-dark); opacity: 0.85; }
+        .dark .bullets li::before { background: var(--accent-on-dark); }
+
+        /* --- STAT SLIDE --- */
+        .stat-number {
+            font-family: var(--font-serif);
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 400;
+            line-height: 1;
+            color: var(--accent);
+        }
+        .dark .stat-number { color: var(--accent-on-dark); }
+        .stat-context {
+            font-size: var(--body-size);
+            font-weight: 300;
+            max-width: 45ch;
+            margin-top: var(--element-gap);
+        }
+        .stat-source {
+            font-size: var(--small-size);
+            font-weight: 300;
+            color: var(--text-muted);
+            margin-top: clamp(0.5rem, 1vw, 0.75rem);
+        }
+        .stat-source a {
+            color: inherit;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+        .stat-source a:hover { color: var(--accent); }
+
+        /* --- CARD GRID --- */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, clamp(200px, 25vw, 280px)), 1fr));
+            gap: clamp(0.75rem, 1.5vw, 1.25rem);
+            margin-top: var(--content-gap);
+            max-width: min(90vw, 900px);
+        }
+        .card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            padding: clamp(1rem, 2vw, 1.75rem);
+        }
+        .card h3 {
+            font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+            margin-bottom: clamp(0.3rem, 0.5vw, 0.5rem);
+        }
+        .card p {
+            font-size: var(--small-size);
+            line-height: 1.5;
+            color: var(--text-muted);
+        }
+        .dark .card {
+            background: var(--bg-dark-surface);
+            border-color: var(--border-dark);
+        }
+        .dark .card p { color: var(--text-on-dark-muted); opacity: 1; }
+
+        /* --- TWO-COLUMN --- */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(2rem, 4vw, 4rem);
+            align-items: start;
+            max-width: min(90vw, 1000px);
+        }
+        @media (max-width: 700px) {
+            .two-col { grid-template-columns: 1fr; }
+        }
+
+        /* --- STAT PAIR --- */
+        .stat-pair {
+            display: flex;
+            gap: clamp(2rem, 4vw, 4rem);
+            align-items: baseline;
+            flex-wrap: wrap;
+        }
+        .stat-item { flex: 1; min-width: 140px; }
+        .stat-item .stat-number {
+            font-size: clamp(2.2rem, 6vw, 5rem);
+        }
+        .stat-item .stat-label {
+            font-size: var(--body-size);
+            font-weight: 300;
+            color: var(--text-body);
+            margin-top: clamp(0.2rem, 0.5vw, 0.4rem);
+            max-width: 22ch;
+        }
+
+        /* --- AUTHOR STRIP --- */
+        .author-strip {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
+            z-index: 2;
+        }
+        .author-name {
+            font-family: var(--font-sans);
+            font-size: var(--small-size);
+            font-weight: 500;
+            color: var(--text-on-dark);
+            margin-bottom: clamp(0.1rem, 0.2vw, 0.15rem);
+        }
+        .author-role {
+            font-family: var(--font-sans);
+            font-size: clamp(0.6rem, 0.85vw, 0.72rem);
+            font-weight: 300;
+            color: var(--text-on-dark-muted);
+            margin-bottom: clamp(0.5rem, 1vw, 0.75rem);
+        }
+        .author-links {
+            display: flex;
+            gap: clamp(0.4rem, 1vw, 0.75rem);
+            list-style: none;
+            padding: 0;
+        }
+        .author-links a {
+            font-family: var(--font-sans);
+            font-size: clamp(0.6rem, 0.85vw, 0.72rem);
+            font-weight: 400;
+            color: var(--text-on-dark-muted);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            transition: color 0.18s ease;
+        }
+        .author-links a:hover {
+            color: var(--accent-on-dark);
+        }
+        .author-links .sep {
+            color: oklch(25% 0.005 230);
+        }
+
+        /* --- SOURCE LINKS --- */
+        .sources {
+            font-size: var(--small-size);
+            font-weight: 300;
+            color: var(--text-muted);
+            margin-top: clamp(0.75rem, 1.5vw, 1.25rem);
+            line-height: 1.6;
+        }
+        .sources a {
+            color: var(--text-muted);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            transition: color 0.18s ease;
+        }
+        .sources a:hover { color: var(--accent); }
+        .dark .sources { color: var(--text-on-dark-muted); }
+        .dark .sources a { color: var(--text-on-dark-muted); }
+        .dark .sources a:hover { color: var(--accent-on-dark); }
+
+        /* --- COMPARISON TABLE --- */
+        .compare-table {
+            width: 100%;
+            max-width: min(90vw, 800px);
+            border-collapse: collapse;
+            margin-top: var(--content-gap);
+        }
+        .compare-table th,
+        .compare-table td {
+            font-size: var(--small-size);
+            line-height: 1.5;
+            padding: clamp(0.5rem, 1vw, 0.75rem) clamp(0.75rem, 1.5vw, 1.25rem);
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        .compare-table th {
+            font-weight: 600;
+            font-size: var(--eyebrow-size);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+        .compare-table td {
+            color: var(--text-body);
+        }
+        .compare-table td:first-child {
+            font-weight: 500;
+            color: var(--text-primary);
+            width: 30%;
+        }
+        .dark .compare-table th { color: var(--accent-on-dark); }
+        .dark .compare-table td { color: var(--text-on-dark); opacity: 0.85; border-color: var(--border-dark); }
+        .dark .compare-table td:first-child { color: var(--text-on-dark); opacity: 1; }
+
+        /* ===========================================
+           ANIMATIONS
+           =========================================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity var(--duration-normal) var(--ease-out-expo),
+                        transform var(--duration-normal) var(--ease-out-expo);
+        }
+        .slide.visible .reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal:nth-child(1) { transition-delay: 0.1s; }
+        .reveal:nth-child(2) { transition-delay: 0.2s; }
+        .reveal:nth-child(3) { transition-delay: 0.3s; }
+        .reveal:nth-child(4) { transition-delay: 0.4s; }
+        .reveal:nth-child(5) { transition-delay: 0.5s; }
+        .reveal:nth-child(6) { transition-delay: 0.6s; }
+        .reveal:nth-child(7) { transition-delay: 0.7s; }
+
+        /* ===========================================
+           PROGRESS BAR
+           =========================================== */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: var(--accent);
+            z-index: 1000;
+            width: 0%;
+            transition: width 0.2s ease;
+        }
+
+        /* ===========================================
+           NAV DOTS
+           =========================================== */
+        .nav-dots {
+            position: fixed;
+            right: clamp(1rem, 2vw, 1.5rem);
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: clamp(6px, 1vh, 10px);
+            z-index: 100;
+        }
+        .nav-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--text-muted);
+            opacity: 0.3;
+            cursor: pointer;
+            transition: opacity 0.18s ease, background 0.18s ease;
+            border: none;
+            padding: 0;
+        }
+        .nav-dot:hover { opacity: 0.6; }
+        .nav-dot.active {
+            opacity: 1;
+            background: var(--accent);
+        }
+    </style>
+</head>
+<body>
+
+<!-- Progress bar -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Navigation dots -->
+<nav class="nav-dots" id="navDots" aria-label="Slide navigation"></nav>
+
+<!-- ===============================================================
+     SLIDE 1: TITLE (dark)
+     =============================================================== -->
+<section class="slide dark" data-slide="0">
+    <span class="wordmark">PATHOS<span class="dot">.</span><span class="labs">LABS</span></span>
+    <div class="slide-content">
+        <div class="eyebrow reveal">Strategic Insight</div>
+        <h1 class="reveal"><em>What Enterprise Software CEOs Discover About the Physical Security Buyer</em></h1>
+        <div class="accent-rule reveal"></div>
+        <p class="subtitle reveal">The SaaS playbook built your career. Here is where the security industry will quietly break it.</p>
+        <p class="reveal" style="font-size: var(--small-size); color: var(--text-on-dark-muted); margin-top: clamp(1.5rem, 3vw, 2.5rem);">Prepared for Andy Bane &middot; March 2026</p>
+    </div>
+    <span class="slide-number">01</span>
+</section>
+
+<!-- ===============================================================
+     SLIDE 2: THE MARKET YOU WALKED INTO (light, stat pairs)
+     =============================================================== -->
+<section class="slide light" data-slide="1">
+    <div class="slide-content">
+        <div class="eyebrow reveal">The Landscape</div>
+        <h2 class="reveal">You joined a market in the middle of a tectonic shift</h2>
+        <div class="stat-pair" style="margin-top: var(--content-gap);">
+            <div class="stat-item reveal">
+                <div class="stat-number">$48B</div>
+                <p class="stat-label">projected U.S. physical security market by 2034, growing at 4.6% CAGR</p>
+            </div>
+            <div class="stat-item reveal">
+                <div class="stat-number">7.3%</div>
+                <p class="stat-label">CAGR for global access control through 2033, reaching $12.5 billion</p>
+            </div>
+        </div>
+        <p class="reveal" style="margin-top: var(--content-gap);">These numbers tell one story. The more interesting story is what is happening underneath them. Physical security is converging with IT, cloud platforms are replacing on-premise controllers, and AI-driven analytics are turning cameras and card readers into enterprise intelligence tools. The buyers who drove this market for decades are being joined, and sometimes replaced, by IT departments with very different expectations.</p>
+        <p class="sources reveal">Sources: <a href="https://www.marketdataforecast.com/market-reports/us-physical-security-market" target="_blank">Market Data Forecast</a>, <a href="https://www.prnewswire.com/news-releases/access-control-market-surges-to-usd-12-45-billion-by-2033--propelled-by-7-34-cagr---verified-market-reports-302689495.html" target="_blank">Verified Market Reports</a></p>
+    </div>
+    <span class="slide-number">02</span>
+</section>
+
+<!-- ===============================================================
+     SLIDE 3: HOW THE BUYER IS DIFFERENT (dark, comparison table)
+     =============================================================== -->
+<section class="slide dark" data-slide="2">
+    <div class="slide-content">
+        <div class="eyebrow reveal">The Core Difference</div>
+        <h2 class="reveal">Enterprise software and physical security sell to different brains</h2>
+        <table class="compare-table reveal">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Enterprise SaaS</th>
+                    <th>Physical Security</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Sales cycle</td>
+                    <td>3&ndash;6 months, often driven by inbound demand and product-led growth</td>
+                    <td>6&ndash;18 months, relationship-driven, sometimes years from first conversation to purchase order</td>
+                </tr>
+                <tr>
+                    <td>Who decides</td>
+                    <td>CTO, IT Director, procurement. Evaluation committees compare feature sets.</td>
+                    <td>Facilities director, security manager, or VP of operations &mdash; often a single trusted person. IT is increasingly involved, but rarely drives.</td>
+                </tr>
+                <tr>
+                    <td>Channel</td>
+                    <td>Direct sales, self-serve, inside sales. Partners are nice-to-have.</td>
+                    <td>Integrators are the business. 80%+ of revenue flows through channel partners who design, install, and maintain systems.</td>
+                </tr>
+                <tr>
+                    <td>Switching cost</td>
+                    <td>Painful but possible. Data migration, retraining, contract exit.</td>
+                    <td>Physical infrastructure. Ripping out card readers, rewiring doors, replacing panels. Switching costs are measured in construction crews, not data exports.</td>
+                </tr>
+                <tr>
+                    <td>Trust model</td>
+                    <td>Trust the product. Demos, trials, case studies.</td>
+                    <td>Trust the person. The integrator's recommendation carries more weight than any product demo.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="sources reveal">Sources: <a href="https://www.psasecurity.com/news/state-of-security-integrators-2026" target="_blank">PSA State of Security Integrators 2026</a>, <a href="https://www.sourcesecurity.com/news/round-table/how-does-it-affect-the-physical-security-buying-decision.html" target="_blank">SourceSecurity</a>, <a href="https://nextro.nz/wp-content/uploads/2025/03/state-of-physical-security-2025.pdf" target="_blank">Genetec State of Physical Security 2025</a></p>
+    </div>
+    <span class="slide-number">03</span>
+</section>
+
+<!-- ===============================================================
+     SLIDE 4: THE INTEGRATOR TRUTH (light, big stat)
+     =============================================================== -->
+<section class="slide light" data-slide="3">
+    <div class="slide-content">
+        <div class="eyebrow reveal">The Integrator Reality</div>
+        <div class="stat-number reveal">80%+</div>
+        <p class="stat-context reveal">of physical security revenue flows through integrator channel partners. They do not just resell your product. They design the system, pull the cable, mount the hardware, program the controllers, train the end user, and come back for service calls. Your integrator is your customer's first phone call when something goes wrong at 2 AM.</p>
+        <p class="reveal" style="margin-top: var(--content-gap); max-width: 55ch;">In enterprise software, you might route 30% of deals through partners and call it a mature channel program. In physical security, the channel is not a go-to-market strategy. It is the entire market. An integrator who stops recommending your product can silently redirect hundreds of projects to a competitor, and you will never know which deals you lost.</p>
+        <p class="stat-source reveal"><a href="https://www.psasecurity.com/news/state-of-security-integrators-2026" target="_blank">PSA Security Network</a> &middot; <a href="https://www.securitysales.com/insights/security-integrators-stay-ahead-rapidly-evolving-landscape/615138/" target="_blank">Security Sales & Integration</a></p>
+    </div>
+    <span class="slide-number">04</span>
+</section>
+
+<!-- ===============================================================
+     SLIDE 5: WHAT YOUR COMPETITORS KNOW (light, card grid)
+     =============================================================== -->
+<section class="slide light" data-slide="4">
+    <div class="slide-content">
+        <div class="eyebrow reveal">The Competitive Landscape</div>
+        <h2 class="reveal">What incumbents have that software companies don't</h2>
+        <div class="card-grid">
+            <div class="card reveal">
+                <h3>Gallagher</h3>
+                <p>Your closest comparison. Also from New Zealand, also unified access and perimeter. Recently named <a href="https://channellife.co.nz/story/gallagher-named-global-elite-partner-by-convergint" target="_blank" style="color: inherit; text-decoration: underline;">Global Elite Partner by Convergint</a>, the world's largest integrator. Just created a dedicated National Channel Partner Manager role. They are investing in channel relationships like a product company invests in R&D.</p>
+            </div>
+            <div class="card reveal">
+                <h3>Genetec</h3>
+                <p>Pioneered the unified security platform in software. Their <a href="https://www.securitysystemsnews.com/article/genetec-predicts-top-physical-security-trends-for-2026" target="_blank" style="color: inherit; text-decoration: underline;">2026 predictions</a> emphasize hybrid cloud deployment flexibility. They are winning the IT-minded buyer by speaking fluent enterprise software, while keeping integrators loyal through open architecture.</p>
+            </div>
+            <div class="card reveal">
+                <h3>ASSA ABLOY / HID</h3>
+                <p>The $14B parent company behind HID Global credentials. <a href="https://www.marketsandmarkets.com/ResearchInsight/access-control-market.asp" target="_blank" style="color: inherit; text-decoration: underline;">Market leader</a> in access control hardware. Their advantage is pure scale: when an integrator designs a system, HID credentials are the default because they are everywhere. Displacing defaults is the hardest thing in this industry.</p>
+            </div>
+        </div>
+        <p class="sources reveal">The pattern: every dominant player in physical security built their position through integrator trust, not feature superiority.</p>
+    </div>
+    <span class="slide-number">05</span>
+</section>
+
+<!-- ===============================================================
+     SLIDE 6: WHERE ICT'S ADVANTAGE LIVES (light, two-column)
+     =============================================================== -->
+<section class="slide light" data-slide="5">
+    <div class="slide-content">
+        <div class="eyebrow reveal">ICT's Position</div>
+        <h2 class="reveal">The convergence wave is the opening you were hired for</h2>
+        <div class="two-col" style="margin-top: var(--content-gap);">
+            <div>
+                <p class="reveal">The physical security industry is moving toward exactly what you spent your career building: unified platforms that merge previously siloed systems into a single pane of glass. <a href="https://securityjournaluk.com/top-5-physical-security-trends-define-2026/" target="_blank" style="color: inherit; text-decoration: underline;">Analysts call convergence</a> the defining trend of 2026. ICT's Protege platform already does this natively across access control, intrusion detection, and building automation.</p>
+                <p class="reveal" style="margin-top: var(--element-gap);">Your enterprise software instincts are right about the product direction. The question is how you bring that product to a market where the old rules still apply alongside the new ones.</p>
+            </div>
+            <div>
+                <ul class="bullets">
+                    <li class="reveal">IT departments are now involved in <strong>62%</strong> of physical security purchasing decisions, up from under 40% five years ago</li>
+                    <li class="reveal">Cloud-managed access control is the fastest-growing segment, but <strong>only 44%</strong> of organizations have adopted any cloud component in their security stack</li>
+                    <li class="reveal">End users increasingly want <strong>hybrid deployment</strong> flexibility &mdash; the ability to modernize without ripping out existing infrastructure</li>
+                    <li class="reveal">The integrators who survive the next decade will be those who can <strong>speak both languages</strong>: traditional security and enterprise IT</li>
+                </ul>
+            </div>
+        </div>
+        <p class="sources reveal">Sources: <a href="https://nextro.nz/wp-content/uploads/2025/03/state-of-physical-security-2025.pdf" target="_blank">Genetec State of Physical Security 2025</a>, <a href="https://securityjournaluk.com/top-5-physical-security-trends-define-2026/" target="_blank">Security Journal UK</a>, <a href="https://www.avigilon.com/blog/access-control-security-trend" target="_blank">Avigilon 2026 Access Control Trends</a></p>
+    </div>
+    <span class="slide-number">06</span>
+</section>
+
+<!-- ===============================================================
+     SLIDE 7: THE YEAR-ONE MAP (dark, bullets)
+     =============================================================== -->
+<section class="slide dark" data-slide="6">
+    <div class="slide-content">
+        <div class="eyebrow reveal">The Year-One Map</div>
+        <h2 class="reveal">Five things enterprise software CEOs wish they knew sooner</h2>
+        <ul class="bullets">
+            <li class="reveal"><strong>Your integrators are not your resellers.</strong> They are your co-engineers. The best physical security companies treat their top 50 integrators the way software companies treat their top 50 enterprise accounts &mdash; with dedicated resources, joint planning, and real influence on the product roadmap.</li>
+            <li class="reveal"><strong>Speed kills trust here.</strong> In SaaS, speed-to-market is a competitive advantage. In physical security, moving too fast on pricing changes, product transitions, or channel restructuring will cost you partners that took a decade to build. Every change needs an integrator transition plan.</li>
+            <li class="reveal"><strong>The IT buyer is your second customer, not your first.</strong> IT departments are gaining influence, but they rarely control the budget. Win the security director and the facilities manager first. When the IT team gets involved, your enterprise software pedigree becomes an accelerant, not a starting point.</li>
+            <li class="reveal"><strong>Recurring revenue is coming, but on their timeline.</strong> The industry is moving toward subscriptions and managed services. But integrators built their business on hardware margins and project labor. The transition to recurring revenue has to make them more money, not less, or they will resist it quietly and effectively.</li>
+            <li class="reveal"><strong>Your unified platform is the right bet &mdash; if you let the market discover it.</strong> Protege's native unification of access, intrusion, and automation is genuinely differentiated. But in this industry, that story gets told by your integrators in the field, not by your marketing team at trade shows. Arm them with the story and let them own it.</li>
+        </ul>
+    </div>
+    <span class="slide-number">07</span>
+</section>
+
+<!-- ===============================================================
+     SLIDE 8: CLOSING (dark)
+     =============================================================== -->
+<section class="slide dark" data-slide="7">
+    <span class="wordmark">PATHOS<span class="dot">.</span><span class="labs">LABS</span></span>
+    <div class="slide-content" style="align-items: center; text-align: center;">
+        <div class="eyebrow reveal">Pathos Labs</div>
+        <h1 class="reveal"><em>The playbook that built your career is the foundation. Not the blueprint.</em></h1>
+        <div class="accent-rule reveal" style="margin-left: auto; margin-right: auto;"></div>
+        <p class="subtitle reveal" style="max-width: 48ch;">The best enterprise software CEOs who cross into physical security don't abandon what they know. They learn which parts translate directly, which need adaptation, and which need to be set aside entirely.</p>
+    </div>
+    <div class="author-strip reveal">
+        <div class="author-name">Sam Millunchick</div>
+        <div class="author-role">Executive Coach &middot; Pathos Labs</div>
+        <nav class="author-links">
+            <a href="https://pathoslabs.co" target="_blank">pathoslabs.co</a>
+            <span class="sep">&middot;</span>
+            <a href="https://www.linkedin.com/in/smillunchick/" target="_blank">LinkedIn</a>
+        </nav>
+    </div>
+</section>
+
+<!-- ===========================================
+     SLIDE PRESENTATION CONTROLLER
+     =========================================== -->
+<script>
+    class SlidePresentation {
+        constructor() {
+            this.slides = document.querySelectorAll('.slide');
+            this.currentIndex = 0;
+            this.isScrolling = false;
+            this.scrollTimeout = null;
+
+            this.setupIntersectionObserver();
+            this.setupKeyboardNav();
+            this.setupTouchNav();
+            this.setupProgressBar();
+            this.setupNavDots();
+        }
+
+        setupIntersectionObserver() {
+            var self = this;
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        var index = Array.from(self.slides).indexOf(entry.target);
+                        if (index !== -1) {
+                            self.currentIndex = index;
+                            self.updateProgressBar();
+                            self.updateNavDots();
+                        }
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            this.slides.forEach(function (slide) { observer.observe(slide); });
+        }
+
+        setupKeyboardNav() {
+            var self = this;
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+                    e.preventDefault();
+                    self.goToSlide(Math.min(self.currentIndex + 1, self.slides.length - 1));
+                } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                    e.preventDefault();
+                    self.goToSlide(Math.max(self.currentIndex - 1, 0));
+                } else if (e.key === 'Home') {
+                    e.preventDefault();
+                    self.goToSlide(0);
+                } else if (e.key === 'End') {
+                    e.preventDefault();
+                    self.goToSlide(self.slides.length - 1);
+                }
+            });
+        }
+
+        setupTouchNav() {
+            var self = this;
+            var startY = 0;
+            document.addEventListener('touchstart', function (e) {
+                startY = e.touches[0].clientY;
+            }, { passive: true });
+
+            document.addEventListener('touchend', function (e) {
+                var diff = startY - e.changedTouches[0].clientY;
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0) {
+                        self.goToSlide(Math.min(self.currentIndex + 1, self.slides.length - 1));
+                    } else {
+                        self.goToSlide(Math.max(self.currentIndex - 1, 0));
+                    }
+                }
+            }, { passive: true });
+        }
+
+        setupProgressBar() {
+            this.progressBar = document.getElementById('progressBar');
+            this.updateProgressBar();
+        }
+
+        updateProgressBar() {
+            if (this.progressBar) {
+                var pct = ((this.currentIndex + 1) / this.slides.length) * 100;
+                this.progressBar.style.width = pct + '%';
+            }
+        }
+
+        setupNavDots() {
+            var self = this;
+            var container = document.getElementById('navDots');
+            if (!container) return;
+
+            this.slides.forEach(function (slide, i) {
+                var dot = document.createElement('button');
+                dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+                dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+                dot.addEventListener('click', function () { self.goToSlide(i); });
+                container.appendChild(dot);
+            });
+
+            this.dots = container.querySelectorAll('.nav-dot');
+        }
+
+        updateNavDots() {
+            if (!this.dots) return;
+            var self = this;
+            this.dots.forEach(function (dot, i) {
+                dot.classList.toggle('active', i === self.currentIndex);
+            });
+        }
+
+        goToSlide(index) {
+            this.currentIndex = index;
+            this.slides[index].scrollIntoView({ behavior: 'smooth' });
+            this.updateProgressBar();
+            this.updateNavDots();
+        }
+    }
+
+    new SlidePresentation();
+</script>
+</body>
+</html>

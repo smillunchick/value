@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Agentic Integration Narrative — Pathos Labs</title>
+
+    <!-- Brand Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===========================================
+           CSS CUSTOM PROPERTIES — PATHOS LABS BRAND
+           =========================================== */
+        :root {
+            /* Backgrounds */
+            --bg-primary: oklch(97.5% 0.004 270);
+            --bg-surface: oklch(95% 0.008 270);
+            --bg-dark: oklch(10% 0.012 270);
+            --bg-dark-surface: oklch(14% 0.014 270);
+            --bg-dark-surface-2: oklch(18% 0.012 268);
+
+            /* Text */
+            --text-primary: oklch(14% 0.010 260);
+            --text-body: oklch(28% 0.008 260);
+            --text-muted: oklch(48% 0.005 260);
+            --text-on-dark: oklch(94% 0.005 270);
+            --text-on-dark-muted: oklch(60% 0.005 260);
+
+            /* Accent — electric violet */
+            --accent: oklch(52% 0.200 285);
+            --accent-light: oklch(62% 0.175 285);
+            --accent-on-dark: oklch(68% 0.185 285);
+            --accent-bg: oklch(52% 0.200 285 / 0.07);
+
+            /* Borders */
+            --border: oklch(88% 0.005 270);
+            --border-dark: oklch(20% 0.010 270);
+
+            /* Typography */
+            --font-serif: 'Instrument Serif', Georgia, serif;
+            --font-sans: 'Outfit', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+            --title-size: clamp(2.2rem, 5.5vw, 4.5rem);
+            --h2-size: clamp(1.6rem, 3.5vw, 2.8rem);
+            --h3-size: clamp(1.1rem, 2vw, 1.5rem);
+            --body-size: clamp(0.85rem, 1.4vw, 1.1rem);
+            --small-size: clamp(0.7rem, 1vw, 0.85rem);
+            --eyebrow-size: clamp(0.7rem, 0.9vw, 0.78rem);
+
+            /* Spacing */
+            --slide-padding: clamp(2rem, 5vw, 5rem);
+            --content-gap: clamp(0.75rem, 2vw, 2rem);
+            --element-gap: clamp(0.3rem, 1vw, 1rem);
+
+            /* Animation */
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --duration-normal: 0.6s;
+        }
+
+        /* ===========================================
+           VIEWPORT FITTING
+           =========================================== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body { height: 100%; overflow-x: hidden; }
+        html {
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .slide-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-height: 100%;
+            overflow: hidden;
+            padding: var(--slide-padding);
+        }
+        .card, .container, .content-box {
+            max-width: min(90vw, 1000px);
+            max-height: min(80vh, 700px);
+        }
+        .feature-list, .bullet-list { gap: clamp(0.4rem, 1vh, 1rem); }
+        .feature-list li, .bullet-list li { font-size: var(--body-size); line-height: 1.4; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+            gap: clamp(0.5rem, 1.5vw, 1rem);
+        }
+
+        /* Responsive breakpoints */
+        @media (max-height: 700px) {
+            :root {
+                --slide-padding: clamp(1rem, 3vw, 2.5rem);
+                --content-gap: clamp(0.5rem, 1.5vw, 1rem);
+                --title-size: clamp(1.8rem, 4.5vw, 3rem);
+                --h2-size: clamp(1.3rem, 3vw, 2rem);
+            }
+        }
+        @media (max-height: 600px) {
+            :root {
+                --slide-padding: clamp(0.75rem, 2.5vw, 1.5rem);
+                --content-gap: clamp(0.3rem, 1vw, 0.75rem);
+                --title-size: clamp(1.5rem, 4vw, 2.2rem);
+                --body-size: clamp(0.75rem, 1.2vw, 0.95rem);
+            }
+            .nav-dots, .keyboard-hint, .decorative { display: none; }
+        }
+        @media (max-height: 500px) {
+            :root {
+                --slide-padding: clamp(0.5rem, 2vw, 1rem);
+                --title-size: clamp(1.2rem, 3.5vw, 1.8rem);
+                --h2-size: clamp(1rem, 2.5vw, 1.4rem);
+                --body-size: clamp(0.7rem, 1vw, 0.85rem);
+            }
+        }
+        @media (max-width: 600px) {
+            :root { --title-size: clamp(1.5rem, 7vw, 2.8rem); }
+            .grid { grid-template-columns: 1fr; }
+            .two-col { grid-template-columns: 1fr !important; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.2s !important;
+            }
+            html { scroll-behavior: auto; }
+        }
+
+        /* ===========================================
+           PATHOS LABS BRAND STYLES
+           =========================================== */
+        body {
+            font-family: var(--font-sans);
+            font-weight: 300;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .wordmark {
+            font-family: var(--font-sans);
+            font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            position: absolute;
+            top: var(--slide-padding);
+            left: var(--slide-padding);
+            z-index: 2;
+        }
+        .wordmark .dot { color: var(--accent); }
+        .wordmark .labs { font-weight: 400; }
+
+        .slide-number {
+            font-family: var(--font-sans);
+            font-size: var(--small-size);
+            font-weight: 300;
+            position: absolute;
+            bottom: var(--slide-padding);
+            right: var(--slide-padding);
+            z-index: 2;
+        }
+
+        .eyebrow {
+            font-family: var(--font-sans);
+            font-size: var(--eyebrow-size);
+            font-weight: 600;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: clamp(0.5rem, 1.5vw, 1rem);
+        }
+        .dark .eyebrow { color: var(--accent-on-dark); }
+
+        .slide h1 {
+            font-family: var(--font-serif);
+            font-size: var(--title-size);
+            font-weight: 400;
+            line-height: 1.05;
+            letter-spacing: -0.015em;
+        }
+        .slide h1 em { font-style: italic; }
+        .slide h2 {
+            font-family: var(--font-serif);
+            font-size: var(--h2-size);
+            font-weight: 400;
+            line-height: 1.15;
+            letter-spacing: -0.015em;
+        }
+        .slide h3 {
+            font-family: var(--font-sans);
+            font-size: var(--h3-size);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .slide p {
+            font-size: var(--body-size);
+            line-height: 1.7;
+            max-width: 65ch;
+        }
+        .subtitle {
+            font-size: clamp(1rem, 1.8vw, 1.25rem);
+            font-weight: 300;
+            line-height: 1.5;
+            max-width: 50ch;
+        }
+
+        .accent-rule {
+            width: 48px;
+            height: 3px;
+            background: var(--accent);
+            margin: clamp(0.75rem, 1.5vw, 1.25rem) 0;
+        }
+        .dark .accent-rule { background: var(--accent-on-dark); }
+
+        /* ─── DARK SLIDES ──────────────────────────── */
+        .dark {
+            background: var(--bg-dark);
+            color: var(--text-on-dark);
+        }
+        .dark h1, .dark h2, .dark h3 { color: var(--text-on-dark); }
+        .dark p { color: var(--text-on-dark); opacity: 0.85; }
+        .dark .subtitle { opacity: 0.7; }
+        .dark .slide-number { color: var(--text-on-dark-muted); }
+        .dark .wordmark { color: var(--text-on-dark); }
+
+        /* ─── LIGHT SLIDES ─────────────────────────── */
+        .light {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+        .light p { color: var(--text-body); }
+        .light .slide-number { color: var(--text-muted); }
+        .light .wordmark { color: var(--text-primary); }
+
+        /* ─── BULLETS ─────────────────────────────── */
+        .bullets {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: clamp(0.6rem, 1.2vh, 1rem);
+            margin-top: var(--content-gap);
+        }
+        .bullets li {
+            font-size: var(--body-size);
+            line-height: 1.6;
+            padding-left: clamp(1.2rem, 2vw, 1.8rem);
+            position: relative;
+            color: var(--text-body);
+        }
+        .bullets li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: clamp(0.5rem, 0.8vw, 0.6rem);
+            width: 5px;
+            height: 5px;
+            background: var(--accent);
+        }
+        .dark .bullets li { color: var(--text-on-dark); opacity: 0.85; }
+        .dark .bullets li::before { background: var(--accent-on-dark); }
+
+        /* ─── STAT SLIDE ──────────────────────────── */
+        .stat-number {
+            font-family: var(--font-serif);
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 400;
+            line-height: 1;
+            color: var(--accent);
+        }
+        .dark .stat-number { color: var(--accent-on-dark); }
+        .stat-context {
+            font-size: var(--body-size);
+            font-weight: 300;
+            max-width: 45ch;
+            margin-top: var(--element-gap);
+        }
+        .stat-source {
+            font-size: var(--small-size);
+            font-weight: 300;
+            color: var(--text-muted);
+            margin-top: clamp(0.5rem, 1vw, 0.75rem);
+        }
+        .stat-source a {
+            color: inherit;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+        .stat-source a:hover { color: var(--accent); }
+
+        /* ─── STAT PAIR ──────────────────────────── */
+        .stat-pair {
+            display: flex;
+            gap: clamp(2rem, 4vw, 4rem);
+            align-items: baseline;
+            flex-wrap: wrap;
+        }
+        .stat-item { flex: 1; min-width: 140px; }
+        .stat-item .stat-number { font-size: clamp(2.2rem, 6vw, 5rem); }
+        .stat-item .stat-label {
+            font-size: var(--body-size);
+            font-weight: 300;
+            color: var(--text-body);
+            margin-top: clamp(0.2rem, 0.5vw, 0.4rem);
+            max-width: 22ch;
+        }
+
+        /* ─── CARD GRID ──────────────────────────── */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, clamp(200px, 25vw, 280px)), 1fr));
+            gap: clamp(0.75rem, 1.5vw, 1.25rem);
+            margin-top: var(--content-gap);
+            max-width: min(90vw, 900px);
+        }
+        .card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            padding: clamp(1rem, 2vw, 1.75rem);
+        }
+        .card h3 {
+            font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+            margin-bottom: clamp(0.3rem, 0.5vw, 0.5rem);
+        }
+        .card p {
+            font-size: var(--small-size);
+            line-height: 1.5;
+            color: var(--text-muted);
+        }
+        .dark .card {
+            background: var(--bg-dark-surface);
+            border-color: var(--border-dark);
+        }
+        .dark .card p { color: var(--text-on-dark-muted); opacity: 1; }
+
+        /* ─── TWO-COLUMN ──────────────────────────── */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(2rem, 4vw, 4rem);
+            align-items: start;
+            max-width: min(90vw, 1000px);
+        }
+        @media (max-width: 700px) {
+            .two-col { grid-template-columns: 1fr; }
+        }
+
+        /* ─── COMPARISON TABLE ────────────────────── */
+        .compare-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, clamp(180px, 22vw, 220px)), 1fr));
+            gap: clamp(0.5rem, 1vw, 0.75rem);
+            margin-top: var(--content-gap);
+            max-width: min(92vw, 960px);
+        }
+        .compare-card {
+            padding: clamp(0.8rem, 1.5vw, 1.25rem);
+            border: 1px solid var(--border);
+            background: var(--bg-surface);
+        }
+        .compare-card h3 {
+            font-size: clamp(0.85rem, 1.3vw, 1rem);
+            margin-bottom: clamp(0.2rem, 0.4vw, 0.35rem);
+        }
+        .compare-card .tag {
+            font-family: var(--font-sans);
+            font-size: clamp(0.6rem, 0.8vw, 0.7rem);
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: clamp(0.3rem, 0.5vw, 0.5rem);
+            display: block;
+        }
+        .compare-card p {
+            font-size: clamp(0.72rem, 1vw, 0.82rem);
+            line-height: 1.5;
+            color: var(--text-muted);
+        }
+
+        /* ─── AUTHOR STRIP ────────────────────────── */
+        .author-strip {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
+            z-index: 2;
+        }
+        .author-name {
+            font-family: var(--font-sans);
+            font-size: var(--small-size);
+            font-weight: 500;
+            color: var(--text-on-dark);
+            margin-bottom: clamp(0.1rem, 0.2vw, 0.15rem);
+        }
+        .author-role {
+            font-family: var(--font-sans);
+            font-size: clamp(0.6rem, 0.85vw, 0.72rem);
+            font-weight: 300;
+            color: var(--text-on-dark-muted);
+            margin-bottom: clamp(0.5rem, 1vw, 0.75rem);
+        }
+        .author-links {
+            display: flex;
+            gap: clamp(0.4rem, 1vw, 0.75rem);
+            list-style: none;
+            padding: 0;
+        }
+        .author-links a {
+            font-family: var(--font-sans);
+            font-size: clamp(0.6rem, 0.85vw, 0.72rem);
+            font-weight: 400;
+            color: var(--text-on-dark-muted);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            transition: color 0.18s ease;
+        }
+        .author-links a:hover { color: var(--accent-on-dark); }
+        .author-links .sep { color: oklch(25% 0.005 260); }
+
+        /* ─── SOURCE LINKS ────────────────────────── */
+        .sources {
+            font-size: var(--small-size);
+            font-weight: 300;
+            color: var(--text-muted);
+            margin-top: clamp(0.75rem, 1.5vw, 1.25rem);
+            line-height: 1.6;
+        }
+        .sources a {
+            color: var(--text-muted);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            transition: color 0.18s ease;
+        }
+        .sources a:hover { color: var(--accent); }
+        .dark .sources { color: var(--text-on-dark-muted); }
+        .dark .sources a { color: var(--text-on-dark-muted); }
+        .dark .sources a:hover { color: var(--accent-on-dark); }
+
+        /* ===========================================
+           ANIMATIONS
+           =========================================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity var(--duration-normal) var(--ease-out-expo),
+                        transform var(--duration-normal) var(--ease-out-expo);
+        }
+        .slide.visible .reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal:nth-child(1) { transition-delay: 0.1s; }
+        .reveal:nth-child(2) { transition-delay: 0.2s; }
+        .reveal:nth-child(3) { transition-delay: 0.3s; }
+        .reveal:nth-child(4) { transition-delay: 0.4s; }
+        .reveal:nth-child(5) { transition-delay: 0.5s; }
+        .reveal:nth-child(6) { transition-delay: 0.6s; }
+        .reveal:nth-child(7) { transition-delay: 0.7s; }
+
+        /* ===========================================
+           PROGRESS BAR
+           =========================================== */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: var(--accent);
+            z-index: 1000;
+            width: 0%;
+            transition: width 0.2s ease;
+        }
+
+        /* ===========================================
+           NAV DOTS
+           =========================================== */
+        .nav-dots {
+            position: fixed;
+            right: clamp(1rem, 2vw, 1.5rem);
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: clamp(6px, 1vh, 10px);
+            z-index: 100;
+        }
+        .nav-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--text-muted);
+            opacity: 0.3;
+            cursor: pointer;
+            transition: opacity 0.18s ease, background 0.18s ease;
+            border: none;
+            padding: 0;
+        }
+        .nav-dot:hover { opacity: 0.6; }
+        .nav-dot.active {
+            opacity: 1;
+            background: var(--accent);
+        }
+    </style>
+</head>
+<body>
+
+<!-- Progress bar -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Navigation dots -->
+<nav class="nav-dots" id="navDots" aria-label="Slide navigation"></nav>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE 1: TITLE (dark)
+     ═══════════════════════════════════════════════════════════ -->
+<section class="slide dark" data-slide="0">
+    <span class="wordmark">PATHOS<span class="dot">.</span><span class="labs">LABS</span></span>
+    <div class="slide-content">
+        <div class="eyebrow reveal">Competitive Landscape</div>
+        <h1 class="reveal"><em>The Agentic Integration Narrative</em></h1>
+        <div class="accent-rule reveal"></div>
+        <p class="subtitle reveal">How enterprise platforms win (and lose) the AI positioning war — and where SnapLogic's story has room to sharpen.</p>
+        <p class="reveal" style="font-size: var(--small-size); color: var(--text-on-dark-muted); margin-top: clamp(1.5rem, 3vw, 2.5rem);">Prepared for Brad Stewart &middot; March 2026</p>
+    </div>
+    <span class="slide-number">01</span>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE 2: THE MARKET MOMENT (light, stat pairs)
+     ═══════════════════════════════════════════════════════════ -->
+<section class="slide light" data-slide="1">
+    <div class="slide-content">
+        <div class="eyebrow reveal">The Market Moment</div>
+        <h2 class="reveal">Every integration vendor just became an AI company overnight</h2>
+        <div class="stat-pair" style="margin-top: var(--content-gap);">
+            <div class="stat-item reveal">
+                <div class="stat-number">40%</div>
+                <p class="stat-label">of enterprise apps will have task-specific AI agents by end of 2026, up from under 5% in 2025</p>
+            </div>
+            <div class="stat-item reveal">
+                <div class="stat-number">1B</div>
+                <p class="stat-label">AI agents projected worldwide by 2029 — forty times the 2025 number</p>
+            </div>
+        </div>
+        <p class="reveal" style="margin-top: var(--content-gap);">The iPaaS market is racing toward $21 billion by 2035. But the real story isn't the dollar figure — it's that every incumbent platform is scrambling to rewrite its narrative around the word "agentic." The ones who tell the most coherent story will capture the next wave of enterprise budget. The ones who sound like everyone else will blend into the noise.</p>
+        <p class="sources reveal">Sources: <a href="https://www.gartner.com/en/newsroom/press-releases/2025-08-26-gartner-predicts-40-percent-of-enterprise-apps-will-feature-task-specific-ai-agents-by-2026-up-from-less-than-5-percent-in-2025" target="_blank">Gartner Aug 2025</a>, <a href="https://www.salesforce.com/news/stories/mulesoft-agent-fabric-automated-agent-discovery/" target="_blank">IDC via Salesforce Jan 2026</a>, <a href="https://www.appseconnect.com/post_articles/enterprise-integration-statistics-trends-you-need-to-know-in-2026/" target="_blank">APPSeCONNECT 2026</a></p>
+    </div>
+    <span class="slide-number">02</span>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE 3: THE POSITIONING LANDSCAPE (light, comparison grid)
+     ═══════════════════════════════════════════════════════════ -->
+<section class="slide light" data-slide="2">
+    <div class="slide-content">
+        <div class="eyebrow reveal">The Competitive Landscape</div>
+        <h2 class="reveal">Four positioning strategies, one word</h2>
+        <div class="compare-grid">
+            <div class="compare-card reveal">
+                <span class="tag">Platform Play</span>
+                <h3>MuleSoft / Salesforce</h3>
+                <p>"<a href="https://www.salesforce.com/news/stories/mulesoft-agent-fabric-automated-agent-discovery/" target="_blank" style="color: inherit;">Agent Fabric</a>" — positioning MCP as the governance layer for all agents, not just Salesforce ones. The story: you already have APIs, we make them agent-ready. Biggest advantage is distribution through the Salesforce install base.</p>
+            </div>
+            <div class="compare-card reveal">
+                <span class="tag">Protocol First</span>
+                <h3>Workato</h3>
+                <p>"<a href="https://www.workato.com/the-connector/enterprise-mcp-guide/" target="_blank" style="color: inherit;">Enterprise MCP</a>" is already production-grade, not on a roadmap. They're framing it as "the agentic enterprise" — agents embedded across every system, role, and process. Their pitch: governance, not just connectivity.</p>
+            </div>
+            <div class="compare-card reveal">
+                <span class="tag">Data Trust</span>
+                <h3>Informatica</h3>
+                <p>"<a href="https://www.informatica.com/platform/claire-ai.html" target="_blank" style="color: inherit;">CLAIRE Agents</a>" — not selling integration at all. They're selling trusted data as the prerequisite for agents. The angle: your AI is only as good as the metadata underneath it. Different lane entirely.</p>
+            </div>
+            <div class="compare-card reveal">
+                <span class="tag">Sprawl Control</span>
+                <h3>Boomi</h3>
+                <p>"<a href="https://boomi.com/blog/agent-control-tower-agentic-governance/" target="_blank" style="color: inherit;">Agent Control Tower</a>" — governing agent sprawl before it spirals. Their positioning: you're already deploying agents everywhere, and nobody has visibility. Boomi does. Pragmatic narrative aimed at ops teams.</p>
+            </div>
+        </div>
+        <p class="sources reveal">Every vendor says "agentic." The differentiation is in which problem they claim to own.</p>
+    </div>
+    <span class="slide-number">03</span>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE 4: THE MCP MOMENT (dark, stat + bullets)
+     ═══════════════════════════════════════════════════════════ -->
+<section class="slide dark" data-slide="3">
+    <div class="slide-content">
+        <div class="eyebrow reveal">The Protocol Shift</div>
+        <h2 class="reveal">MCP is quietly redrawing the competitive map</h2>
+        <div class="accent-rule reveal"></div>
+        <p class="reveal" style="margin-top: var(--element-gap);">The Model Context Protocol is becoming to AI agents what REST became to web APIs — the standard way agents discover and interact with enterprise tools. Gartner calls it a "<a href="https://konghq.com/blog/enterprise/gartners-context-mesh" target="_blank" style="color: inherit; text-decoration: underline;">real-time context mesh</a>," and warns that 40% of agentic AI initiatives risk cancellation without one.</p>
+        <ul class="bullets">
+            <li class="reveal">SnapLogic <a href="https://www.snaplogic.com/company/newsroom/press-releases/snaplogic-expands-mcp-support-agentic-ai" target="_blank" style="color: inherit; text-decoration: underline;">expanded MCP support in September 2025</a> — early, but not first. MuleSoft and Workato both have production MCP implementations now.</li>
+            <li class="reveal">The risk isn't being late to MCP. It's that MCP becomes the conversation, and whichever platform "owns" MCP in the enterprise buyer's mind gets the shortlist spot.</li>
+            <li class="reveal">Workato is currently the most aggressive at claiming MCP leadership, publishing head-to-head comparisons that position competitors as "on the roadmap" while they're "production-ready."</li>
+        </ul>
+        <p class="sources reveal">Sources: <a href="https://blogs.mulesoft.com/agentic-perspectives/enterprise-mcp-strategy/" target="_blank">MuleSoft Mar 2026</a>, <a href="https://www.workato.com/the-connector/workato-enterprise-mcp-vs-boomi/" target="_blank">Workato Oct 2025</a>, <a href="https://www.snaplogic.com/company/newsroom/press-releases/snaplogic-expands-mcp-support-agentic-ai" target="_blank">SnapLogic Sep 2025</a></p>
+    </div>
+    <span class="slide-number">04</span>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE 5: WHERE SNAPLOGIC'S NARRATIVE STANDS (light, two-col)
+     ═══════════════════════════════════════════════════════════ -->
+<section class="slide light" data-slide="4">
+    <div class="slide-content">
+        <div class="eyebrow reveal">SnapLogic's Position</div>
+        <h2 class="reveal">What's working and what's blending in</h2>
+        <div class="two-col" style="margin-top: var(--content-gap);">
+            <div>
+                <h3 class="reveal" style="color: var(--accent); font-size: var(--body-size); margin-bottom: clamp(0.4rem, 0.8vw, 0.6rem);">DISTINCTIVE</h3>
+                <ul class="bullets">
+                    <li class="reveal"><strong>"The Agentic Integration Company"</strong> as a tagline is bold — it plants a flag rather than hedging. None of the competitors have claimed "agentic integration" as a category noun this directly.</li>
+                    <li class="reveal"><strong>AgentCreator</strong> is a real product, not a rebrand. Letting non-developers build enterprise agents on top of existing integration pipelines is a concrete, sellable thing. <a href="https://www.snaplogic.com/blog/agentcreator-3-0-agentic-ai-evolution" target="_blank" style="color: inherit; text-decoration: underline;">Version 3.0</a> shipped April 2025.</li>
+                    <li class="reveal"><strong>Gartner Visionary</strong> placement in the 2025 Magic Quadrant for Data Integration Tools — external validation that matters in enterprise procurement.</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="reveal" style="color: var(--text-muted); font-size: var(--body-size); margin-bottom: clamp(0.4rem, 0.8vw, 0.6rem);">AT RISK OF BLENDING</h3>
+                <ul class="bullets">
+                    <li class="reveal"><strong>"Agentic Enterprise"</strong> language is used by Workato, Boomi, and Salesforce almost interchangeably. When everyone uses the same phrase, it stops meaning anything.</li>
+                    <li class="reveal"><strong>The SnapGPT + AgentCreator narrative</strong> currently reads as two separate products, not one story. Buyers need to hear a single arc: "your integration layer is your AI layer."</li>
+                    <li class="reveal"><strong>The Stanford partnership</strong> and academic positioning are strong signals that aren't yet threaded into the commercial narrative. They live on LinkedIn, not on the product pages.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <span class="slide-number">05</span>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE 6: NARRATIVE OBSERVATIONS (light, bullets)
+     ═══════════════════════════════════════════════════════════ -->
+<section class="slide light" data-slide="5">
+    <div class="slide-content">
+        <div class="eyebrow reveal">Observations</div>
+        <h2 class="reveal">Three things the winners will get right</h2>
+        <ul class="bullets">
+            <li class="reveal"><strong>Own a problem, not a product category.</strong> Workato owns "governance for agentic systems." MuleSoft owns "making your existing APIs agent-ready." Informatica owns "trusted data for AI." The positioning question for SnapLogic isn't "what do we do" — it's "what keeps the CIO up at night that only we solve?" AgentCreator gives you a real answer here: the bottleneck isn't building agents, it's giving business teams safe access to build agents on enterprise data without breaking things.</li>
+            <li class="reveal"><strong>The word "integration" might be holding the narrative back.</strong> Integration implies plumbing. It implies the thing you do before the interesting thing happens. The companies winning this positioning war are reframing integration as intelligence infrastructure — the nervous system, not the pipes. SnapLogic's "agentic integration" tagline is halfway there. The risk is that "integration" anchors buyers to the old mental model.</li>
+            <li class="reveal"><strong>The CEO transition story is a narrative asset nobody else has.</strong> Every other iPaaS vendor is led by a career integration or SaaS executive. A CEO who came from aviation, private equity, and fintech — who chose this company — can tell a story about why agentic integration matters to the business in a way that product people can't. That cross-industry credibility is underused.</li>
+        </ul>
+    </div>
+    <span class="slide-number">06</span>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE 7: CLOSING (dark)
+     ═══════════════════════════════════════════════════════════ -->
+<section class="slide dark" data-slide="6">
+    <span class="wordmark">PATHOS<span class="dot">.</span><span class="labs">LABS</span></span>
+    <div class="slide-content" style="align-items: center; text-align: center;">
+        <div class="eyebrow reveal">Pathos Labs</div>
+        <h1 class="reveal"><em>Every vendor says "agentic."</em></h1>
+        <div class="accent-rule reveal" style="margin-left: auto; margin-right: auto;"></div>
+        <p class="subtitle reveal" style="max-width: 48ch;">The companies that win the positioning war will be the ones whose story sounds like it could only come from them. SnapLogic has the ingredients. The question is which narrative thread becomes the through-line.</p>
+    </div>
+    <div class="author-strip reveal">
+        <div class="author-name">Sam Millunchick</div>
+        <div class="author-role">Executive Coach &middot; Pathos Labs</div>
+        <nav class="author-links">
+            <a href="https://pathoslabs.co" target="_blank">pathoslabs.co</a>
+            <span class="sep">&middot;</span>
+            <a href="https://www.linkedin.com/in/smillunchick/" target="_blank">LinkedIn</a>
+        </nav>
+    </div>
+    <span class="slide-number">07</span>
+</section>
+
+<!-- ===========================================
+     SLIDE PRESENTATION CONTROLLER
+     =========================================== -->
+<script>
+    class SlidePresentation {
+        constructor() {
+            this.slides = document.querySelectorAll('.slide');
+            this.currentIndex = 0;
+            this.isScrolling = false;
+            this.scrollTimeout = null;
+
+            this.setupIntersectionObserver();
+            this.setupKeyboardNav();
+            this.setupTouchNav();
+            this.setupProgressBar();
+            this.setupNavDots();
+        }
+
+        setupIntersectionObserver() {
+            var self = this;
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        var index = Array.from(self.slides).indexOf(entry.target);
+                        if (index !== -1) {
+                            self.currentIndex = index;
+                            self.updateProgressBar();
+                            self.updateNavDots();
+                        }
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            this.slides.forEach(function (slide) { observer.observe(slide); });
+        }
+
+        setupKeyboardNav() {
+            var self = this;
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+                    e.preventDefault();
+                    self.goToSlide(Math.min(self.currentIndex + 1, self.slides.length - 1));
+                } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                    e.preventDefault();
+                    self.goToSlide(Math.max(self.currentIndex - 1, 0));
+                } else if (e.key === 'Home') {
+                    e.preventDefault();
+                    self.goToSlide(0);
+                } else if (e.key === 'End') {
+                    e.preventDefault();
+                    self.goToSlide(self.slides.length - 1);
+                }
+            });
+        }
+
+        setupTouchNav() {
+            var self = this;
+            var startY = 0;
+            document.addEventListener('touchstart', function (e) {
+                startY = e.touches[0].clientY;
+            }, { passive: true });
+
+            document.addEventListener('touchend', function (e) {
+                var diff = startY - e.changedTouches[0].clientY;
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0) {
+                        self.goToSlide(Math.min(self.currentIndex + 1, self.slides.length - 1));
+                    } else {
+                        self.goToSlide(Math.max(self.currentIndex - 1, 0));
+                    }
+                }
+            }, { passive: true });
+        }
+
+        setupProgressBar() {
+            this.progressBar = document.getElementById('progressBar');
+            this.updateProgressBar();
+        }
+
+        updateProgressBar() {
+            if (this.progressBar) {
+                var pct = ((this.currentIndex + 1) / this.slides.length) * 100;
+                this.progressBar.style.width = pct + '%';
+            }
+        }
+
+        setupNavDots() {
+            var self = this;
+            var container = document.getElementById('navDots');
+            if (!container) return;
+
+            this.slides.forEach(function (slide, i) {
+                var dot = document.createElement('button');
+                dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+                dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+                dot.addEventListener('click', function () { self.goToSlide(i); });
+                container.appendChild(dot);
+            });
+
+            this.dots = container.querySelectorAll('.nav-dot');
+        }
+
+        updateNavDots() {
+            if (!this.dots) return;
+            var self = this;
+            this.dots.forEach(function (dot, i) {
+                dot.classList.toggle('active', i === self.currentIndex);
+            });
+        }
+
+        goToSlide(index) {
+            this.currentIndex = index;
+            this.slides[index].scrollIntoView({ behavior: 'smooth' });
+            this.updateProgressBar();
+            this.updateNavDots();
+        }
+    }
+
+    new SlidePresentation();
+</script>
+</body>
+</html>

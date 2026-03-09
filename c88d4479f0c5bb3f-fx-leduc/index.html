@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trust Architecture — Pathos Labs</title>
+
+    <!-- Brand Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===========================================
+           CSS CUSTOM PROPERTIES — PATHOS LABS BRAND
+           =========================================== */
+        :root {
+            /* Backgrounds */
+            --bg-primary: oklch(97.5% 0.003 255);
+            --bg-surface: oklch(95% 0.004 255);
+            --bg-dark: oklch(10% 0.012 255);
+            --bg-dark-surface: oklch(14% 0.014 255);
+            --bg-dark-surface-2: oklch(18% 0.012 250);
+
+            /* Text */
+            --text-primary: oklch(14% 0.010 255);
+            --text-body: oklch(28% 0.008 255);
+            --text-muted: oklch(48% 0.005 255);
+            --text-on-dark: oklch(94% 0.005 255);
+            --text-on-dark-muted: oklch(60% 0.005 255);
+
+            /* Accent — deep indigo-slate */
+            --accent: oklch(42% 0.12 265);
+            --accent-light: oklch(52% 0.10 265);
+            --accent-on-dark: oklch(62% 0.11 265);
+            --accent-bg: oklch(42% 0.12 265 / 0.07);
+
+            /* Borders */
+            --border: oklch(88% 0.004 255);
+            --border-dark: oklch(20% 0.010 255);
+
+            /* Typography */
+            --font-serif: 'Instrument Serif', Georgia, serif;
+            --font-sans: 'Outfit', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+            --title-size: clamp(2.2rem, 5.5vw, 4.5rem);
+            --h2-size: clamp(1.6rem, 3.5vw, 2.8rem);
+            --h3-size: clamp(1.1rem, 2vw, 1.5rem);
+            --body-size: clamp(0.85rem, 1.4vw, 1.1rem);
+            --small-size: clamp(0.7rem, 1vw, 0.85rem);
+            --eyebrow-size: clamp(0.7rem, 0.9vw, 0.78rem);
+
+            /* Spacing */
+            --slide-padding: clamp(2rem, 5vw, 5rem);
+            --content-gap: clamp(0.75rem, 2vw, 2rem);
+            --element-gap: clamp(0.3rem, 1vw, 1rem);
+
+            /* Animation */
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --duration-normal: 0.6s;
+        }
+
+        /* ===========================================
+           VIEWPORT FITTING
+           =========================================== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body { height: 100%; overflow-x: hidden; }
+        html {
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .slide-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-height: 100%;
+            overflow: hidden;
+            padding: var(--slide-padding);
+        }
+        .card, .container, .content-box {
+            max-width: min(90vw, 1000px);
+            max-height: min(80vh, 700px);
+        }
+        .feature-list, .bullet-list { gap: clamp(0.4rem, 1vh, 1rem); }
+        .feature-list li, .bullet-list li {
+            font-size: var(--body-size);
+            line-height: 1.4;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+            gap: clamp(0.5rem, 1.5vw, 1rem);
+        }
+
+        /* Responsive */
+        @media (max-height: 700px) {
+            :root {
+                --slide-padding: clamp(1rem, 3vw, 2.5rem);
+                --content-gap: clamp(0.5rem, 1.5vw, 1rem);
+                --title-size: clamp(1.8rem, 4.5vw, 3rem);
+                --h2-size: clamp(1.3rem, 3vw, 2rem);
+            }
+        }
+        @media (max-height: 600px) {
+            :root {
+                --slide-padding: clamp(0.75rem, 2.5vw, 1.5rem);
+                --content-gap: clamp(0.3rem, 1vw, 0.75rem);
+                --title-size: clamp(1.5rem, 4vw, 2.2rem);
+                --body-size: clamp(0.75rem, 1.2vw, 0.95rem);
+            }
+            .nav-dots, .keyboard-hint, .decorative { display: none; }
+        }
+        @media (max-height: 500px) {
+            :root {
+                --slide-padding: clamp(0.5rem, 2vw, 1rem);
+                --title-size: clamp(1.2rem, 3.5vw, 1.8rem);
+                --h2-size: clamp(1rem, 2.5vw, 1.4rem);
+                --body-size: clamp(0.7rem, 1vw, 0.85rem);
+            }
+        }
+        @media (max-width: 600px) {
+            :root { --title-size: clamp(1.5rem, 7vw, 2.8rem); }
+            .grid { grid-template-columns: 1fr; }
+            .two-col { grid-template-columns: 1fr !important; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.2s !important;
+            }
+            html { scroll-behavior: auto; }
+        }
+
+        /* ===========================================
+           BRAND STYLES
+           =========================================== */
+        body {
+            font-family: var(--font-sans);
+            font-weight: 300;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .wordmark {
+            font-family: var(--font-sans);
+            font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            position: absolute;
+            top: var(--slide-padding);
+            left: var(--slide-padding);
+            z-index: 2;
+        }
+        .wordmark .dot { color: var(--accent); }
+        .wordmark .labs { font-weight: 400; }
+
+        .slide-number {
+            font-family: var(--font-sans);
+            font-size: var(--small-size);
+            font-weight: 300;
+            position: absolute;
+            bottom: var(--slide-padding);
+            right: var(--slide-padding);
+            z-index: 2;
+        }
+
+        .eyebrow {
+            font-family: var(--font-sans);
+            font-size: var(--eyebrow-size);
+            font-weight: 600;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: clamp(0.5rem, 1.5vw, 1rem);
+        }
+        .dark .eyebrow { color: var(--accent-on-dark); }
+
+        .slide h1 {
+            font-family: var(--font-serif);
+            font-size: var(--title-size);
+            font-weight: 400;
+            line-height: 1.05;
+            letter-spacing: -0.015em;
+        }
+        .slide h1 em { font-style: italic; }
+        .slide h2 {
+            font-family: var(--font-serif);
+            font-size: var(--h2-size);
+            font-weight: 400;
+            line-height: 1.15;
+            letter-spacing: -0.015em;
+        }
+        .slide h3 {
+            font-family: var(--font-sans);
+            font-size: var(--h3-size);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .slide p {
+            font-size: var(--body-size);
+            line-height: 1.7;
+            max-width: 65ch;
+        }
+        .subtitle {
+            font-size: clamp(1rem, 1.8vw, 1.25rem);
+            font-weight: 300;
+            line-height: 1.5;
+            max-width: 50ch;
+        }
+
+        .accent-rule {
+            width: 48px;
+            height: 3px;
+            background: var(--accent);
+            margin: clamp(0.75rem, 1.5vw, 1.25rem) 0;
+        }
+        .dark .accent-rule { background: var(--accent-on-dark); }
+
+        /* Dark slides */
+        .dark {
+            background: var(--bg-dark);
+            color: var(--text-on-dark);
+        }
+        .dark h1, .dark h2, .dark h3 { color: var(--text-on-dark); }
+        .dark p { color: var(--text-on-dark); opacity: 0.85; }
+        .dark .subtitle { opacity: 0.7; }
+        .dark .slide-number { color: var(--text-on-dark-muted); }
+        .dark .wordmark { color: var(--text-on-dark); }
+
+        /* Light slides */
+        .light {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+        .light p { color: var(--text-body); }
+        .light .slide-number { color: var(--text-muted); }
+        .light .wordmark { color: var(--text-primary); }
+
+        /* Bullets */
+        .bullets {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: clamp(0.6rem, 1.2vh, 1rem);
+            margin-top: var(--content-gap);
+        }
+        .bullets li {
+            font-size: var(--body-size);
+            line-height: 1.6;
+            padding-left: clamp(1.2rem, 2vw, 1.8rem);
+            position: relative;
+            color: var(--text-body);
+        }
+        .bullets li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: clamp(0.5rem, 0.8vw, 0.6rem);
+            width: 5px;
+            height: 5px;
+            background: var(--accent);
+        }
+        .dark .bullets li { color: var(--text-on-dark); opacity: 0.85; }
+        .dark .bullets li::before { background: var(--accent-on-dark); }
+
+        /* Stats */
+        .stat-number {
+            font-family: var(--font-serif);
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 400;
+            line-height: 1;
+            color: var(--accent);
+        }
+        .dark .stat-number { color: var(--accent-on-dark); }
+        .stat-context {
+            font-size: var(--body-size);
+            font-weight: 300;
+            max-width: 45ch;
+            margin-top: var(--element-gap);
+        }
+        .stat-source {
+            font-size: var(--small-size);
+            font-weight: 300;
+            color: var(--text-muted);
+            margin-top: clamp(0.5rem, 1vw, 0.75rem);
+        }
+        .stat-source a {
+            color: inherit;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+        .stat-source a:hover { color: var(--accent); }
+
+        /* Stat pair */
+        .stat-pair {
+            display: flex;
+            gap: clamp(2rem, 4vw, 4rem);
+            align-items: baseline;
+            flex-wrap: wrap;
+        }
+        .stat-item { flex: 1; min-width: 140px; }
+        .stat-item .stat-number { font-size: clamp(2.2rem, 6vw, 5rem); }
+        .stat-item .stat-label {
+            font-size: var(--body-size);
+            font-weight: 300;
+            color: var(--text-body);
+            margin-top: clamp(0.2rem, 0.5vw, 0.4rem);
+            max-width: 22ch;
+        }
+
+        /* Card grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, clamp(200px, 25vw, 280px)), 1fr));
+            gap: clamp(0.75rem, 1.5vw, 1.25rem);
+            margin-top: var(--content-gap);
+            max-width: min(90vw, 900px);
+        }
+        .card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            padding: clamp(1rem, 2vw, 1.75rem);
+        }
+        .card h3 {
+            font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+            margin-bottom: clamp(0.3rem, 0.5vw, 0.5rem);
+        }
+        .card p {
+            font-size: var(--small-size);
+            line-height: 1.5;
+            color: var(--text-muted);
+        }
+        .dark .card {
+            background: var(--bg-dark-surface);
+            border-color: var(--border-dark);
+        }
+        .dark .card p { color: var(--text-on-dark-muted); opacity: 1; }
+
+        /* Two-column */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(2rem, 4vw, 4rem);
+            align-items: start;
+            max-width: min(90vw, 1000px);
+        }
+        @media (max-width: 700px) {
+            .two-col { grid-template-columns: 1fr; }
+        }
+
+        /* Author strip */
+        .author-strip {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
+            z-index: 2;
+        }
+        .author-name {
+            font-family: var(--font-sans);
+            font-size: var(--small-size);
+            font-weight: 500;
+            color: var(--text-on-dark);
+            margin-bottom: clamp(0.1rem, 0.2vw, 0.15rem);
+        }
+        .author-role {
+            font-family: var(--font-sans);
+            font-size: clamp(0.6rem, 0.85vw, 0.72rem);
+            font-weight: 300;
+            color: var(--text-on-dark-muted);
+            margin-bottom: clamp(0.5rem, 1vw, 0.75rem);
+        }
+        .author-links {
+            display: flex;
+            gap: clamp(0.4rem, 1vw, 0.75rem);
+            list-style: none;
+            padding: 0;
+        }
+        .author-links a {
+            font-family: var(--font-sans);
+            font-size: clamp(0.6rem, 0.85vw, 0.72rem);
+            font-weight: 400;
+            color: var(--text-on-dark-muted);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            transition: color 0.18s ease;
+        }
+        .author-links a:hover { color: var(--accent-on-dark); }
+        .author-links .sep { color: oklch(25% 0.005 255); }
+
+        /* Sources */
+        .sources {
+            font-size: var(--small-size);
+            font-weight: 300;
+            color: var(--text-muted);
+            margin-top: clamp(0.75rem, 1.5vw, 1.25rem);
+            line-height: 1.6;
+        }
+        .sources a {
+            color: var(--text-muted);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            transition: color 0.18s ease;
+        }
+        .sources a:hover { color: var(--accent); }
+        .dark .sources { color: var(--text-on-dark-muted); }
+        .dark .sources a { color: var(--text-on-dark-muted); }
+        .dark .sources a:hover { color: var(--accent-on-dark); }
+
+        /* Pullquote */
+        .pullquote {
+            font-family: var(--font-serif);
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            font-style: italic;
+            line-height: 1.4;
+            max-width: 50ch;
+            margin: var(--content-gap) 0;
+            padding-left: clamp(1rem, 2vw, 1.5rem);
+            border-left: 3px solid var(--accent);
+        }
+        .dark .pullquote { border-left-color: var(--accent-on-dark); }
+        .pullquote-attr {
+            font-family: var(--font-sans);
+            font-size: var(--small-size);
+            font-style: normal;
+            font-weight: 400;
+            color: var(--text-muted);
+            margin-top: clamp(0.3rem, 0.5vw, 0.5rem);
+        }
+        .dark .pullquote-attr { color: var(--text-on-dark-muted); }
+
+        /* ===========================================
+           ANIMATIONS
+           =========================================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity var(--duration-normal) var(--ease-out-expo),
+                        transform var(--duration-normal) var(--ease-out-expo);
+        }
+        .slide.visible .reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal:nth-child(1) { transition-delay: 0.1s; }
+        .reveal:nth-child(2) { transition-delay: 0.2s; }
+        .reveal:nth-child(3) { transition-delay: 0.3s; }
+        .reveal:nth-child(4) { transition-delay: 0.4s; }
+        .reveal:nth-child(5) { transition-delay: 0.5s; }
+        .reveal:nth-child(6) { transition-delay: 0.6s; }
+        .reveal:nth-child(7) { transition-delay: 0.7s; }
+
+        /* Progress bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: var(--accent);
+            z-index: 1000;
+            width: 0%;
+            transition: width 0.2s ease;
+        }
+
+        /* Nav dots */
+        .nav-dots {
+            position: fixed;
+            right: clamp(1rem, 2vw, 1.5rem);
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: clamp(6px, 1vh, 10px);
+            z-index: 100;
+        }
+        .nav-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--text-muted);
+            opacity: 0.3;
+            cursor: pointer;
+            transition: opacity 0.18s ease, background 0.18s ease;
+            border: none;
+            padding: 0;
+        }
+        .nav-dot:hover { opacity: 0.6; }
+        .nav-dot.active {
+            opacity: 1;
+            background: var(--accent);
+        }
+    </style>
+</head>
+<body>
+
+<!-- Progress bar -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Navigation dots -->
+<nav class="nav-dots" id="navDots" aria-label="Slide navigation"></nav>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE 1: TITLE (dark)
+     ═══════════════════════════════════════════════════════════ -->
+<section class="slide dark" data-slide="0">
+    <span class="wordmark">PATHOS<span class="dot">.</span><span class="labs">LABS</span></span>
+    <div class="slide-content">
+        <div class="eyebrow reveal">Strategic Insight</div>
+        <h1 class="reveal"><em>Trust Architecture</em></h1>
+        <div class="accent-rule reveal"></div>
+        <p class="subtitle reveal">How AI platforms earn "system of record" status with patent professionals — and what that means for DeepIP's next chapter.</p>
+        <p class="reveal" style="font-size: var(--small-size); color: var(--text-on-dark-muted); margin-top: clamp(1.5rem, 3vw, 2.5rem);">Prepared for FX Leduc &middot; March 2026</p>
+    </div>
+    <span class="slide-number">01</span>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE 2: THE PARADOX (light, stat + context)
+     ═══════════════════════════════════════════════════════════ -->
+<section class="slide light" data-slide="1">
+    <div class="slide-content">
+        <div class="eyebrow reveal">The Paradox</div>
+        <h2 class="reveal">Patent professionals are using AI they don't fully trust</h2>
+        <div class="stat-pair" style="margin-top: var(--content-gap);">
+            <div class="stat-item reveal">
+                <div class="stat-number">67%</div>
+                <p class="stat-label">of legal professionals have had to override or correct AI-generated output</p>
+            </div>
+            <div class="stat-item reveal">
+                <div class="stat-number">58%</div>
+                <p class="stat-label">would not submit AI-drafted work to a regulator or court without heavy review</p>
+            </div>
+        </div>
+        <p class="reveal" style="margin-top: var(--content-gap);">Nearly seven in ten legal professionals now use generative AI for work — that number doubled in a single year. But most firms still lack formal AI policies or training programs. The adoption is outrunning the trust. Patent work amplifies this tension because every claim, every citation, every prior art reference carries legal and commercial consequences that compound over years.</p>
+        <p class="sources reveal">Sources: <a href="https://www.legalcheek.com/2026/02/lawyers-are-using-ai-despite-lacking-trust-in-it-research-finds/" target="_blank">Paragon Legal / Legal Cheek, Feb 2026</a> &middot; <a href="https://www.lawnext.com/2026/03/ai-adoption-among-legal-professionals-has-more-than-doubled-in-a-year-new-8am-report-finds-but-firms-lag-far-behind-individual-practitioners.html" target="_blank">8am Legal Industry Report, Mar 2026</a></p>
+    </div>
+    <span class="slide-number">02</span>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE 3: FIVE BARRIERS (light, two-column)
+     ═══════════════════════════════════════════════════════════ -->
+<section class="slide light" data-slide="2">
+    <div class="slide-content">
+        <div class="eyebrow reveal">The Trust Gap</div>
+        <h2 class="reveal">Five barriers keep AI tools from becoming systems of record in legal</h2>
+        <div class="two-col" style="margin-top: var(--content-gap);">
+            <div>
+                <ul class="bullets">
+                    <li class="reveal"><strong>Expertise gap.</strong> 32% of law firms say they lack the internal knowledge to evaluate AI tools properly, let alone rely on them for cumulative work product.</li>
+                    <li class="reveal"><strong>Strategy vacuum.</strong> Only 22% of firms have a clear AI strategy. The rest are running disconnected pilots that generate signal but never reach firm-wide adoption.</li>
+                    <li class="reveal"><strong>Data dilemma.</strong> 41% cite data privacy as their primary concern. Patent data is especially sensitive — invention disclosures, competitive filings, prosecution history.</li>
+                </ul>
+            </div>
+            <div>
+                <ul class="bullets">
+                    <li class="reveal"><strong>Accuracy anxiety.</strong> High-profile cases of AI-generated fictitious citations created what firms call an "AI tax" — the added burden of auditing every output before it goes anywhere official.</li>
+                    <li class="reveal"><strong>Cultural caution.</strong> Legal professionals are trained to manage risk. What looks like resistance is usually hesitation — they want to move forward, but not without guardrails and clear accountability.</li>
+                </ul>
+                <p class="sources reveal" style="margin-top: var(--content-gap);">Sources: <a href="https://forge-technologies.com/news-and-views/the-five-things-holding-back-ai-adoption-in-legal/" target="_blank">Forge Technologies, Feb 2026</a> &middot; <a href="https://discoverlex.com/blog/legal-ai-adoption-2026" target="_blank">DiscoverLex, Feb 2026</a></p>
+            </div>
+        </div>
+    </div>
+    <span class="slide-number">03</span>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE 4: HARVEY CASE STUDY (light, card grid)
+     ═══════════════════════════════════════════════════════════ -->
+<section class="slide light" data-slide="3">
+    <div class="slide-content">
+        <div class="eyebrow reveal">What Worked</div>
+        <h2 class="reveal">Harvey's playbook: three pillars that built $100M ARR in legal AI</h2>
+        <div class="card-grid">
+            <div class="card reveal">
+                <h3>Trust Stack</h3>
+                <p>Custom legal models trained on all U.S. case law. A <a href="https://medium.com/@takafumi.endo/how-harvey-built-trust-in-legal-ai-a-case-study-for-builders-786cc23c3b6d" target="_blank" style="color: inherit; text-decoration: underline;">multi-layered verification system</a> that decomposes responses into individual claims, cross-references each against authoritative sources, and flags inconsistencies before they reach users. Hallucination rate: 0.2%.</p>
+            </div>
+            <div class="card reveal">
+                <h3>Beachhead Flywheel</h3>
+                <p>Won Allen & Overy first — 4,000 lawyers across 43 jurisdictions. Targeted high-effort, low-risk use cases (first drafts, summaries). Positioned as assistant, not replacement. <a href="https://www.mmntm.net/articles/harvey-deep-dive" target="_blank" style="color: inherit; text-decoration: underline;">Success created FOMO</a> that pulled the rest of the Am Law 100 inbound.</p>
+            </div>
+            <div class="card reveal">
+                <h3>Ecosystem Moat</h3>
+                <p>Integrated with LexisNexis for <a href="https://dynamicbusiness.com/ai-tools/harvey-ai-revolutionizes-legal-ai-with-trust-stack.html" target="_blank" style="color: inherit; text-decoration: underline;">Shepard's citation validation</a> — the industry's century-old standard. Embedded in Microsoft 365 so lawyers never leave their existing tools. Became ambient infrastructure, not a destination app.</p>
+            </div>
+        </div>
+        <p class="sources reveal">The pattern: trust wasn't marketed. It was architected into every layer of the product, then proven through a single high-profile customer who made the risk feel manageable for everyone else.</p>
+    </div>
+    <span class="slide-number">04</span>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE 5: SYSTEM OF RECORD vs SYSTEM OF INTELLIGENCE (dark, pullquote + context)
+     ═══════════════════════════════════════════════════════════ -->
+<section class="slide dark" data-slide="4">
+    <span class="wordmark">PATHOS<span class="dot">.</span><span class="labs">LABS</span></span>
+    <div class="slide-content">
+        <div class="eyebrow reveal">The Deeper Pattern</div>
+        <h2 class="reveal">The shift from "system of record" to "system of intelligence"</h2>
+        <div class="pullquote reveal">
+            "For decades, enterprise value accrued to Systems of Record — rigid databases wrapped in workflow. Now it's shifting to Systems of Intelligence that layer reasoning on top of where truth already lives."
+            <div class="pullquote-attr">— <a href="https://systemsofintelligence.ai/" target="_blank" style="color: var(--text-on-dark-muted); text-decoration: underline;">Activant Capital, "Systems of Intelligence," Jun 2025</a></div>
+        </div>
+        <p class="reveal" style="margin-top: var(--content-gap);">This is the real strategic question for any AI platform in a conservative profession. A system of record earns its position by being the place where canonical truth lives — where decisions are traceable, where history is preserved, where accountability is clear. A system of intelligence earns its position by making the people who use it meaningfully better at their jobs. The platforms that win are the ones that do both — that embed intelligence into the record itself, so professionals never have to choose between speed and traceability.</p>
+    </div>
+    <span class="slide-number">05</span>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE 6: DEEPIP'S POSITION (light, bullets)
+     ═══════════════════════════════════════════════════════════ -->
+<section class="slide light" data-slide="5">
+    <div class="slide-content">
+        <div class="eyebrow reveal">What This Means for DeepIP</div>
+        <h2 class="reveal">You're building in exactly the right gap</h2>
+        <p class="reveal" style="margin-top: var(--content-gap);">Most AI patent tools solve one step well — a better draft, a faster search, a cleaner office action response. DeepIP's bet is that patent work is cumulative. It spans years, teams, decisions. The platform that holds the full lifecycle holds the relationship.</p>
+        <ul class="bullets">
+            <li class="reveal"><strong>Embedding inside Word and existing IP management systems</strong> was the right instinct. Harvey's Microsoft 365 integration proved that ambient presence beats destination apps. DeepIP's <a href="https://ventureburn.com/deepip-25m-series-b-ai-patent/" target="_blank">reported 20% higher adoption and 40% more usage</a> when embedded in existing tools confirms the pattern.</li>
+            <li class="reveal"><strong>The leap from 400 to 4,000 firms</strong> is where the trust architecture matters most. At 400, your sales team can personally vouch for every deployment. At 4,000, trust has to be structural — built into the product, the audit trail, the way the system explains its reasoning.</li>
+            <li class="reveal"><strong>Having a registered patent attorney on the customer support team</strong> is the kind of detail that compounds. It signals that DeepIP respects the domain, not just the technology. That signal travels through a profession that talks to itself constantly.</li>
+            <li class="reveal"><strong>The dual-market reality</strong> of serving both law firms and corporate IP teams means building trust with two different buyer psychology profiles at once. Law firms care about precision and defensibility. Corporate teams care about speed and portfolio visibility. The product has to speak both languages.</li>
+        </ul>
+    </div>
+    <span class="slide-number">06</span>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SLIDE 7: CLOSING (dark)
+     ═══════════════════════════════════════════════════════════ -->
+<section class="slide dark" data-slide="6">
+    <span class="wordmark">PATHOS<span class="dot">.</span><span class="labs">LABS</span></span>
+    <div class="slide-content" style="align-items: center; text-align: center;">
+        <div class="eyebrow reveal">Pathos Labs</div>
+        <h1 class="reveal"><em>The hard part isn't the AI. It's earning the right to hold the record.</em></h1>
+        <div class="accent-rule reveal" style="margin-left: auto; margin-right: auto;"></div>
+        <p class="subtitle reveal" style="max-width: 50ch;">Every company in the patent AI space can draft faster. Very few are positioned to become the system where a decade of prosecution history lives. That's DeepIP's real race.</p>
+    </div>
+    <div class="author-strip reveal">
+        <div class="author-name">Sam Millunchick</div>
+        <div class="author-role">Executive Coach &middot; Pathos Labs</div>
+        <nav class="author-links">
+            <a href="https://pathoslabs.co" target="_blank">pathoslabs.co</a>
+            <span class="sep">&middot;</span>
+            <a href="https://www.linkedin.com/in/smillunchick/" target="_blank">LinkedIn</a>
+        </nav>
+    </div>
+</section>
+
+<!-- ===========================================
+     SLIDE PRESENTATION CONTROLLER
+     =========================================== -->
+<script>
+    class SlidePresentation {
+        constructor() {
+            this.slides = document.querySelectorAll('.slide');
+            this.currentIndex = 0;
+            this.isScrolling = false;
+            this.scrollTimeout = null;
+
+            this.setupIntersectionObserver();
+            this.setupKeyboardNav();
+            this.setupTouchNav();
+            this.setupProgressBar();
+            this.setupNavDots();
+        }
+
+        setupIntersectionObserver() {
+            var self = this;
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        var index = Array.from(self.slides).indexOf(entry.target);
+                        if (index !== -1) {
+                            self.currentIndex = index;
+                            self.updateProgressBar();
+                            self.updateNavDots();
+                        }
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            this.slides.forEach(function (slide) { observer.observe(slide); });
+        }
+
+        setupKeyboardNav() {
+            var self = this;
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+                    e.preventDefault();
+                    self.goToSlide(Math.min(self.currentIndex + 1, self.slides.length - 1));
+                } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                    e.preventDefault();
+                    self.goToSlide(Math.max(self.currentIndex - 1, 0));
+                } else if (e.key === 'Home') {
+                    e.preventDefault();
+                    self.goToSlide(0);
+                } else if (e.key === 'End') {
+                    e.preventDefault();
+                    self.goToSlide(self.slides.length - 1);
+                }
+            });
+        }
+
+        setupTouchNav() {
+            var self = this;
+            var startY = 0;
+            document.addEventListener('touchstart', function (e) {
+                startY = e.touches[0].clientY;
+            }, { passive: true });
+
+            document.addEventListener('touchend', function (e) {
+                var diff = startY - e.changedTouches[0].clientY;
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0) {
+                        self.goToSlide(Math.min(self.currentIndex + 1, self.slides.length - 1));
+                    } else {
+                        self.goToSlide(Math.max(self.currentIndex - 1, 0));
+                    }
+                }
+            }, { passive: true });
+        }
+
+        setupProgressBar() {
+            this.progressBar = document.getElementById('progressBar');
+            this.updateProgressBar();
+        }
+
+        updateProgressBar() {
+            if (this.progressBar) {
+                var pct = ((this.currentIndex + 1) / this.slides.length) * 100;
+                this.progressBar.style.width = pct + '%';
+            }
+        }
+
+        setupNavDots() {
+            var self = this;
+            var container = document.getElementById('navDots');
+            if (!container) return;
+
+            this.slides.forEach(function (slide, i) {
+                var dot = document.createElement('button');
+                dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+                dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+                dot.addEventListener('click', function () { self.goToSlide(i); });
+                container.appendChild(dot);
+            });
+
+            this.dots = container.querySelectorAll('.nav-dot');
+        }
+
+        updateNavDots() {
+            if (!this.dots) return;
+            var self = this;
+            this.dots.forEach(function (dot, i) {
+                dot.classList.toggle('active', i === self.currentIndex);
+            });
+        }
+
+        goToSlide(index) {
+            this.currentIndex = index;
+            this.slides[index].scrollIntoView({ behavior: 'smooth' });
+            this.updateProgressBar();
+            this.updateNavDots();
+        }
+    }
+
+    new SlidePresentation();
+</script>
+</body>
+</html>
