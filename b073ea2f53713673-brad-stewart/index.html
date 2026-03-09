@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Agentic Integration Narrative — Pathos Labs</title>
+    <title>The Agentic Integration Narrative | Pathos Labs</title>
 
     <!-- Brand Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +12,7 @@
 
     <style>
         /* ===========================================
-           CSS CUSTOM PROPERTIES — PATHOS LABS BRAND
+           CSS CUSTOM PROPERTIES - PATHOS LABS BRAND
            =========================================== */
         :root {
             /* Backgrounds */
@@ -29,7 +29,7 @@
             --text-on-dark: oklch(94% 0.005 270);
             --text-on-dark-muted: oklch(60% 0.005 260);
 
-            /* Accent — electric violet */
+            /* Accent - electric violet */
             --accent: oklch(52% 0.200 285);
             --accent-light: oklch(62% 0.175 285);
             --accent-on-dark: oklch(68% 0.185 285);
@@ -456,6 +456,17 @@
         .dark .sources a { color: var(--text-on-dark-muted); }
         .dark .sources a:hover { color: var(--accent-on-dark); }
 
+        /* ─── NARRATIVE BRIDGE ────────────────────── */
+        .bridge {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: var(--body-size);
+            color: var(--accent);
+            margin-top: clamp(0.75rem, 1.5vw, 1.25rem);
+            max-width: 60ch;
+        }
+        .dark .bridge { color: var(--accent-on-dark); }
+
         /* ===========================================
            ANIMATIONS
            =========================================== */
@@ -476,6 +487,7 @@
         .reveal:nth-child(5) { transition-delay: 0.5s; }
         .reveal:nth-child(6) { transition-delay: 0.6s; }
         .reveal:nth-child(7) { transition-delay: 0.7s; }
+        .reveal:nth-child(8) { transition-delay: 0.8s; }
 
         /* ===========================================
            PROGRESS BAR
@@ -538,8 +550,9 @@
         <div class="eyebrow reveal">Competitive Landscape</div>
         <h1 class="reveal"><em>The Agentic Integration Narrative</em></h1>
         <div class="accent-rule reveal"></div>
-        <p class="subtitle reveal">How enterprise platforms win (and lose) the AI positioning war — and where SnapLogic's story has room to sharpen.</p>
+        <p class="subtitle reveal">How enterprise platforms win (and lose) the AI positioning war, and where SnapLogic's story has room to sharpen.</p>
         <p class="reveal" style="font-size: var(--small-size); color: var(--text-on-dark-muted); margin-top: clamp(1.5rem, 3vw, 2.5rem);">Prepared for Brad Stewart &middot; March 2026</p>
+        <p class="bridge reveal">Seven slides. Five vendors. One question: whose narrative survives contact with the buyer.</p>
     </div>
     <span class="slide-number">01</span>
 </section>
@@ -558,11 +571,12 @@
             </div>
             <div class="stat-item reveal">
                 <div class="stat-number">1B</div>
-                <p class="stat-label">AI agents projected worldwide by 2029 — forty times the 2025 number</p>
+                <p class="stat-label">AI agents projected worldwide by 2029, forty times the 2025 number</p>
             </div>
         </div>
-        <p class="reveal" style="margin-top: var(--content-gap);">The iPaaS market is racing toward $21 billion by 2035. But the real story isn't the dollar figure — it's that every incumbent platform is scrambling to rewrite its narrative around the word "agentic." The ones who tell the most coherent story will capture the next wave of enterprise budget. The ones who sound like everyone else will blend into the noise.</p>
+        <p class="reveal" style="margin-top: var(--content-gap);">The iPaaS market is racing toward $21 billion by 2035. But the real story is not the dollar figure. It is that every incumbent platform is scrambling to rewrite its narrative around the word "agentic." The velocity is staggering: eighteen months ago, none of these vendors had an agent strategy. Now every one of them has a product launch, a protocol position, and a thought leadership campaign. The ones who tell the most coherent story will capture the next wave of enterprise budget. The ones who sound like everyone else will blend into the noise.</p>
         <p class="sources reveal">Sources: <a href="https://www.gartner.com/en/newsroom/press-releases/2025-08-26-gartner-predicts-40-percent-of-enterprise-apps-will-feature-task-specific-ai-agents-by-2026-up-from-less-than-5-percent-in-2025" target="_blank">Gartner Aug 2025</a>, <a href="https://www.salesforce.com/news/stories/mulesoft-agent-fabric-automated-agent-discovery/" target="_blank">IDC via Salesforce Jan 2026</a>, <a href="https://www.appseconnect.com/post_articles/enterprise-integration-statistics-trends-you-need-to-know-in-2026/" target="_blank">APPSeCONNECT 2026</a></p>
+        <p class="bridge reveal">But "agentic" means something different to every vendor. Here is who is claiming what.</p>
     </div>
     <span class="slide-number">02</span>
 </section>
@@ -578,25 +592,26 @@
             <div class="compare-card reveal">
                 <span class="tag">Platform Play</span>
                 <h3>MuleSoft / Salesforce</h3>
-                <p>"<a href="https://www.salesforce.com/news/stories/mulesoft-agent-fabric-automated-agent-discovery/" target="_blank" style="color: inherit;">Agent Fabric</a>" — positioning MCP as the governance layer for all agents, not just Salesforce ones. The story: you already have APIs, we make them agent-ready. Biggest advantage is distribution through the Salesforce install base.</p>
+                <p>"<a href="https://www.salesforce.com/news/stories/mulesoft-agent-fabric-automated-agent-discovery/" target="_blank" style="color: inherit;">Agent Fabric</a>" positions MCP as the governance layer for all agents, not just Salesforce ones. The story: you already have APIs, we make them agent-ready. Their biggest advantage is distribution through the Salesforce install base, which gives them a captive audience of 150,000+ enterprise customers who already pay for the ecosystem.</p>
             </div>
             <div class="compare-card reveal">
                 <span class="tag">Protocol First</span>
                 <h3>Workato</h3>
-                <p>"<a href="https://www.workato.com/the-connector/enterprise-mcp-guide/" target="_blank" style="color: inherit;">Enterprise MCP</a>" is already production-grade, not on a roadmap. They're framing it as "the agentic enterprise" — agents embedded across every system, role, and process. Their pitch: governance, not just connectivity.</p>
+                <p>"<a href="https://www.workato.com/the-connector/enterprise-mcp-guide/" target="_blank" style="color: inherit;">Enterprise MCP</a>" is already production-grade, not on a roadmap. They are framing it as "the agentic enterprise," with agents embedded across every system, role, and process. Their pitch: governance, not just connectivity. Workato is also the most aggressive at publishing competitive teardowns, positioning themselves as the benchmark everyone else is measured against.</p>
             </div>
             <div class="compare-card reveal">
                 <span class="tag">Data Trust</span>
                 <h3>Informatica</h3>
-                <p>"<a href="https://www.informatica.com/platform/claire-ai.html" target="_blank" style="color: inherit;">CLAIRE Agents</a>" — not selling integration at all. They're selling trusted data as the prerequisite for agents. The angle: your AI is only as good as the metadata underneath it. Different lane entirely.</p>
+                <p>"<a href="https://www.informatica.com/platform/claire-ai.html" target="_blank" style="color: inherit;">CLAIRE Agents</a>" is not selling integration at all. They are selling trusted data as the prerequisite for agents. The angle: your AI is only as good as the metadata underneath it. Different lane entirely, and it lets them sidestep the direct comparison game the other vendors are playing.</p>
             </div>
             <div class="compare-card reveal">
                 <span class="tag">Sprawl Control</span>
                 <h3>Boomi</h3>
-                <p>"<a href="https://boomi.com/blog/agent-control-tower-agentic-governance/" target="_blank" style="color: inherit;">Agent Control Tower</a>" — governing agent sprawl before it spirals. Their positioning: you're already deploying agents everywhere, and nobody has visibility. Boomi does. Pragmatic narrative aimed at ops teams.</p>
+                <p>"<a href="https://boomi.com/blog/agent-control-tower-agentic-governance/" target="_blank" style="color: inherit;">Agent Control Tower</a>" governs agent sprawl before it spirals. Their positioning: you are already deploying agents everywhere, and nobody has visibility. Boomi does. A pragmatic narrative aimed at ops teams who are feeling the chaos before the strategy teams have caught up.</p>
             </div>
         </div>
         <p class="sources reveal">Every vendor says "agentic." The differentiation is in which problem they claim to own.</p>
+        <p class="bridge reveal">One protocol shift is quietly redrawing this map while everyone focuses on messaging.</p>
     </div>
     <span class="slide-number">03</span>
 </section>
@@ -609,13 +624,14 @@
         <div class="eyebrow reveal">The Protocol Shift</div>
         <h2 class="reveal">MCP is quietly redrawing the competitive map</h2>
         <div class="accent-rule reveal"></div>
-        <p class="reveal" style="margin-top: var(--element-gap);">The Model Context Protocol is becoming to AI agents what REST became to web APIs — the standard way agents discover and interact with enterprise tools. Gartner calls it a "<a href="https://konghq.com/blog/enterprise/gartners-context-mesh" target="_blank" style="color: inherit; text-decoration: underline;">real-time context mesh</a>," and warns that 40% of agentic AI initiatives risk cancellation without one.</p>
+        <p class="reveal" style="margin-top: var(--element-gap);">The Model Context Protocol is becoming to AI agents what REST became to web APIs: the standard way agents discover and interact with enterprise tools. Gartner calls it a "<a href="https://konghq.com/blog/enterprise/gartners-context-mesh" target="_blank" style="color: inherit; text-decoration: underline;">real-time context mesh</a>," and warns that 40% of agentic AI initiatives risk cancellation without one. What makes MCP different from previous protocol wars is speed. REST took a decade to become the default. MCP is reaching critical mass in under two years, driven by Anthropic, OpenAI, and Google all converging on the same standard.</p>
         <ul class="bullets">
-            <li class="reveal">SnapLogic <a href="https://www.snaplogic.com/company/newsroom/press-releases/snaplogic-expands-mcp-support-agentic-ai" target="_blank" style="color: inherit; text-decoration: underline;">expanded MCP support in September 2025</a> — early, but not first. MuleSoft and Workato both have production MCP implementations now.</li>
-            <li class="reveal">The risk isn't being late to MCP. It's that MCP becomes the conversation, and whichever platform "owns" MCP in the enterprise buyer's mind gets the shortlist spot.</li>
-            <li class="reveal">Workato is currently the most aggressive at claiming MCP leadership, publishing head-to-head comparisons that position competitors as "on the roadmap" while they're "production-ready."</li>
+            <li class="reveal">SnapLogic <a href="https://www.snaplogic.com/company/newsroom/press-releases/snaplogic-expands-mcp-support-agentic-ai" target="_blank" style="color: inherit; text-decoration: underline;">expanded MCP support in September 2025</a>, early but not first. MuleSoft and Workato both have production MCP implementations now, and Workato is actively using their head start as a competitive weapon in sales cycles.</li>
+            <li class="reveal">The risk is not being late to MCP. It is that MCP becomes the conversation, and whichever platform "owns" MCP in the enterprise buyer's mind gets the shortlist spot. Protocol leadership translates directly into perceived technical authority.</li>
+            <li class="reveal">Workato is currently the most aggressive at claiming MCP leadership, publishing head-to-head comparisons that position competitors as "on the roadmap" while they are "production-ready." This is a deliberate narrative strategy, not just marketing. It is designed to set the terms of every RFP conversation.</li>
         </ul>
         <p class="sources reveal">Sources: <a href="https://blogs.mulesoft.com/agentic-perspectives/enterprise-mcp-strategy/" target="_blank">MuleSoft Mar 2026</a>, <a href="https://www.workato.com/the-connector/workato-enterprise-mcp-vs-boomi/" target="_blank">Workato Oct 2025</a>, <a href="https://www.snaplogic.com/company/newsroom/press-releases/snaplogic-expands-mcp-support-agentic-ai" target="_blank">SnapLogic Sep 2025</a></p>
+        <p class="bridge reveal">So where does SnapLogic's story actually stand in all of this?</p>
     </div>
     <span class="slide-number">04</span>
 </section>
@@ -626,25 +642,26 @@
 <section class="slide light" data-slide="4">
     <div class="slide-content">
         <div class="eyebrow reveal">SnapLogic's Position</div>
-        <h2 class="reveal">What's working and what's blending in</h2>
+        <h2 class="reveal">What is working and what is blending in</h2>
         <div class="two-col" style="margin-top: var(--content-gap);">
             <div>
                 <h3 class="reveal" style="color: var(--accent); font-size: var(--body-size); margin-bottom: clamp(0.4rem, 0.8vw, 0.6rem);">DISTINCTIVE</h3>
                 <ul class="bullets">
-                    <li class="reveal"><strong>"The Agentic Integration Company"</strong> as a tagline is bold — it plants a flag rather than hedging. None of the competitors have claimed "agentic integration" as a category noun this directly.</li>
-                    <li class="reveal"><strong>AgentCreator</strong> is a real product, not a rebrand. Letting non-developers build enterprise agents on top of existing integration pipelines is a concrete, sellable thing. <a href="https://www.snaplogic.com/blog/agentcreator-3-0-agentic-ai-evolution" target="_blank" style="color: inherit; text-decoration: underline;">Version 3.0</a> shipped April 2025.</li>
-                    <li class="reveal"><strong>Gartner Visionary</strong> placement in the 2025 Magic Quadrant for Data Integration Tools — external validation that matters in enterprise procurement.</li>
+                    <li class="reveal"><strong>"The Agentic Integration Company"</strong> as a tagline is bold. It plants a flag rather than hedging. None of the competitors have claimed "agentic integration" as a category noun this directly, which means SnapLogic has a brief window to own the phrase before others co-opt it.</li>
+                    <li class="reveal"><strong>AgentCreator</strong> is a real product, not a rebrand. Letting non-developers build enterprise agents on top of existing integration pipelines is a concrete, sellable thing. <a href="https://www.snaplogic.com/blog/agentcreator-3-0-agentic-ai-evolution" target="_blank" style="color: inherit; text-decoration: underline;">Version 3.0</a> shipped April 2025, and the low-code angle gives SnapLogic a story about democratizing agent creation that none of the protocol-first vendors can match.</li>
+                    <li class="reveal"><strong>Gartner Visionary</strong> placement in the 2025 Magic Quadrant for Data Integration Tools provides external validation that matters in enterprise procurement. This is not just a logo for the website. In competitive deals, analyst positioning often determines who makes the shortlist.</li>
                 </ul>
             </div>
             <div>
                 <h3 class="reveal" style="color: var(--text-muted); font-size: var(--body-size); margin-bottom: clamp(0.4rem, 0.8vw, 0.6rem);">AT RISK OF BLENDING</h3>
                 <ul class="bullets">
-                    <li class="reveal"><strong>"Agentic Enterprise"</strong> language is used by Workato, Boomi, and Salesforce almost interchangeably. When everyone uses the same phrase, it stops meaning anything.</li>
-                    <li class="reveal"><strong>The SnapGPT + AgentCreator narrative</strong> currently reads as two separate products, not one story. Buyers need to hear a single arc: "your integration layer is your AI layer."</li>
-                    <li class="reveal"><strong>The Stanford partnership</strong> and academic positioning are strong signals that aren't yet threaded into the commercial narrative. They live on LinkedIn, not on the product pages.</li>
+                    <li class="reveal"><strong>"Agentic Enterprise"</strong> language is used by Workato, Boomi, and Salesforce almost interchangeably. When everyone uses the same phrase, it stops meaning anything. The more SnapLogic leans on this shared vocabulary instead of its own, the more it sounds like a chorus member instead of a soloist.</li>
+                    <li class="reveal"><strong>The SnapGPT + AgentCreator narrative</strong> currently reads as two separate products, not one story. Buyers need to hear a single arc: "your integration layer is your AI layer." Right now there is a naming gap that forces the buyer to connect the dots themselves, and most will not bother.</li>
+                    <li class="reveal"><strong>The Stanford partnership</strong> and academic positioning are strong signals that are not yet threaded into the commercial narrative. They live on LinkedIn, not on the product pages. This is an undervalued asset, since in a market full of self-declared AI leaders, peer-reviewed credibility is a genuine differentiator.</li>
                 </ul>
             </div>
         </div>
+        <p class="bridge reveal">The patterns are clear. Three things will separate the winners.</p>
     </div>
     <span class="slide-number">05</span>
 </section>
@@ -657,10 +674,11 @@
         <div class="eyebrow reveal">Observations</div>
         <h2 class="reveal">Three things the winners will get right</h2>
         <ul class="bullets">
-            <li class="reveal"><strong>Own a problem, not a product category.</strong> Workato owns "governance for agentic systems." MuleSoft owns "making your existing APIs agent-ready." Informatica owns "trusted data for AI." The positioning question for SnapLogic isn't "what do we do" — it's "what keeps the CIO up at night that only we solve?" AgentCreator gives you a real answer here: the bottleneck isn't building agents, it's giving business teams safe access to build agents on enterprise data without breaking things.</li>
-            <li class="reveal"><strong>The word "integration" might be holding the narrative back.</strong> Integration implies plumbing. It implies the thing you do before the interesting thing happens. The companies winning this positioning war are reframing integration as intelligence infrastructure — the nervous system, not the pipes. SnapLogic's "agentic integration" tagline is halfway there. The risk is that "integration" anchors buyers to the old mental model.</li>
-            <li class="reveal"><strong>The CEO transition story is a narrative asset nobody else has.</strong> Every other iPaaS vendor is led by a career integration or SaaS executive. A CEO who came from aviation, private equity, and fintech — who chose this company — can tell a story about why agentic integration matters to the business in a way that product people can't. That cross-industry credibility is underused.</li>
+            <li class="reveal"><strong>Own a problem, not a product category.</strong> Workato owns "governance for agentic systems." MuleSoft owns "making your existing APIs agent-ready." Informatica owns "trusted data for AI." The positioning question for SnapLogic is not "what do we do," it is "what keeps the CIO up at night that only we solve?" AgentCreator gives you a real answer here: the bottleneck is not building agents. It is giving business teams safe access to build agents on enterprise data without breaking things. That is a distinct, defensible problem to own.</li>
+            <li class="reveal"><strong>The word "integration" might be holding the narrative back.</strong> Integration implies plumbing. It implies the thing you do before the interesting thing happens. The companies winning this positioning war are reframing integration as intelligence infrastructure, the nervous system rather than the pipes. SnapLogic's "agentic integration" tagline is halfway there. The risk is that "integration" anchors buyers to the old mental model before "agentic" can pull them forward.</li>
+            <li class="reveal"><strong>The CEO transition story is a narrative asset nobody else has.</strong> Every other iPaaS vendor is led by a career integration or SaaS executive. A CEO who came from aviation, private equity, and fintech, who chose this company, can tell a story about why agentic integration matters to the business in a way that product people cannot. That cross-industry credibility is underused. In a market where every vendor sounds like an engineer explaining architecture, the executive who speaks the buyer's language wins.</li>
         </ul>
+        <p class="bridge reveal">Which leads to the real question this landscape raises.</p>
     </div>
     <span class="slide-number">06</span>
 </section>

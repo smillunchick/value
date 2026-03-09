@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>What Enterprise Software CEOs Discover About the Physical Security Buyer — Pathos Labs</title>
+    <title>What Enterprise Software CEOs Discover About the Physical Security Buyer | Pathos Labs</title>
 
     <!-- Brand Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -483,6 +483,16 @@
         .dark .compare-table td { color: var(--text-on-dark); opacity: 0.85; border-color: var(--border-dark); }
         .dark .compare-table td:first-child { color: var(--text-on-dark); opacity: 1; }
 
+        /* --- NARRATIVE BRIDGE --- */
+        .bridge {
+            font-style: italic;
+            font-size: var(--small-size);
+            color: var(--accent);
+            margin-top: clamp(0.75rem, 1.5vw, 1.25rem);
+            max-width: 65ch;
+        }
+        .dark .bridge { color: var(--accent-on-dark); }
+
         /* ===========================================
            ANIMATIONS
            =========================================== */
@@ -503,6 +513,7 @@
         .reveal:nth-child(5) { transition-delay: 0.5s; }
         .reveal:nth-child(6) { transition-delay: 0.6s; }
         .reveal:nth-child(7) { transition-delay: 0.7s; }
+        .reveal:nth-child(8) { transition-delay: 0.8s; }
 
         /* ===========================================
            PROGRESS BAR
@@ -567,6 +578,7 @@
         <div class="accent-rule reveal"></div>
         <p class="subtitle reveal">The SaaS playbook built your career. Here is where the security industry will quietly break it.</p>
         <p class="reveal" style="font-size: var(--small-size); color: var(--text-on-dark-muted); margin-top: clamp(1.5rem, 3vw, 2.5rem);">Prepared for Andy Bane &middot; March 2026</p>
+        <p class="bridge reveal">The market looks familiar from the outside. The numbers will confirm that. What they won't tell you is where the ground shifts.</p>
     </div>
     <span class="slide-number">01</span>
 </section>
@@ -588,8 +600,9 @@
                 <p class="stat-label">CAGR for global access control through 2033, reaching $12.5 billion</p>
             </div>
         </div>
-        <p class="reveal" style="margin-top: var(--content-gap);">These numbers tell one story. The more interesting story is what is happening underneath them. Physical security is converging with IT, cloud platforms are replacing on-premise controllers, and AI-driven analytics are turning cameras and card readers into enterprise intelligence tools. The buyers who drove this market for decades are being joined, and sometimes replaced, by IT departments with very different expectations.</p>
+        <p class="reveal" style="margin-top: var(--content-gap);">These numbers tell one story. The more interesting story is what is happening underneath them. Physical security is converging with IT, cloud platforms are replacing on-premise controllers, and AI-driven analytics are turning cameras and card readers into enterprise intelligence tools. The buyers who drove this market for decades are being joined, and sometimes replaced, by IT departments with very different expectations. This is not a gradual migration. Companies like Verkada and Rhombus raised hundreds of millions selling cloud-native security directly to IT buyers, proving the demand exists. The question is not whether the shift is real. It is how fast the installed base of legacy systems, and the integrators who maintain them, can absorb it.</p>
         <p class="sources reveal">Sources: <a href="https://www.marketdataforecast.com/market-reports/us-physical-security-market" target="_blank">Market Data Forecast</a>, <a href="https://www.prnewswire.com/news-releases/access-control-market-surges-to-usd-12-45-billion-by-2033--propelled-by-7-34-cagr---verified-market-reports-302689495.html" target="_blank">Verified Market Reports</a></p>
+        <p class="bridge reveal">But growth rates don't tell you who is actually writing the checks, or how they decide. That is where it gets interesting.</p>
     </div>
     <span class="slide-number">02</span>
 </section>
@@ -618,7 +631,7 @@
                 <tr>
                     <td>Who decides</td>
                     <td>CTO, IT Director, procurement. Evaluation committees compare feature sets.</td>
-                    <td>Facilities director, security manager, or VP of operations &mdash; often a single trusted person. IT is increasingly involved, but rarely drives.</td>
+                    <td>Facilities director, security manager, or VP of operations, often a single trusted person. IT is increasingly involved, but rarely drives.</td>
                 </tr>
                 <tr>
                     <td>Channel</td>
@@ -638,6 +651,7 @@
             </tbody>
         </table>
         <p class="sources reveal">Sources: <a href="https://www.psasecurity.com/news/state-of-security-integrators-2026" target="_blank">PSA State of Security Integrators 2026</a>, <a href="https://www.sourcesecurity.com/news/round-table/how-does-it-affect-the-physical-security-buying-decision.html" target="_blank">SourceSecurity</a>, <a href="https://nextro.nz/wp-content/uploads/2025/03/state-of-physical-security-2025.pdf" target="_blank">Genetec State of Physical Security 2025</a></p>
+        <p class="bridge reveal">One row in that table matters more than all the others combined. The channel row. Here is why.</p>
     </div>
     <span class="slide-number">03</span>
 </section>
@@ -649,9 +663,10 @@
     <div class="slide-content">
         <div class="eyebrow reveal">The Integrator Reality</div>
         <div class="stat-number reveal">80%+</div>
-        <p class="stat-context reveal">of physical security revenue flows through integrator channel partners. They do not just resell your product. They design the system, pull the cable, mount the hardware, program the controllers, train the end user, and come back for service calls. Your integrator is your customer's first phone call when something goes wrong at 2 AM.</p>
-        <p class="reveal" style="margin-top: var(--content-gap); max-width: 55ch;">In enterprise software, you might route 30% of deals through partners and call it a mature channel program. In physical security, the channel is not a go-to-market strategy. It is the entire market. An integrator who stops recommending your product can silently redirect hundreds of projects to a competitor, and you will never know which deals you lost.</p>
+        <p class="stat-context reveal">of physical security revenue flows through integrator channel partners. They do not just resell your product. They design the system, pull the cable, mount the hardware, program the controllers, train the end user, and come back for service calls. Your integrator is your customer's first phone call when something goes wrong at 2 AM. They are also the person who decides, in a room you are never in, whether to recommend your platform or a competitor's.</p>
+        <p class="reveal" style="margin-top: var(--content-gap); max-width: 55ch;">In enterprise software, you might route 30% of deals through partners and call it a mature channel program. In physical security, the channel is not a go-to-market strategy. It is the entire market. An integrator who stops recommending your product can silently redirect hundreds of projects to a competitor, and you will never know which deals you lost. The consolidation trend makes this even more acute. The top 20 integrators now control a growing share of national accounts. Losing one relationship does not cost you a region. It can cost you a vertical.</p>
         <p class="stat-source reveal"><a href="https://www.psasecurity.com/news/state-of-security-integrators-2026" target="_blank">PSA Security Network</a> &middot; <a href="https://www.securitysales.com/insights/security-integrators-stay-ahead-rapidly-evolving-landscape/615138/" target="_blank">Security Sales & Integration</a></p>
+        <p class="bridge reveal">So who has already figured this out, and what did they build that you have not?</p>
     </div>
     <span class="slide-number">04</span>
 </section>
@@ -666,18 +681,19 @@
         <div class="card-grid">
             <div class="card reveal">
                 <h3>Gallagher</h3>
-                <p>Your closest comparison. Also from New Zealand, also unified access and perimeter. Recently named <a href="https://channellife.co.nz/story/gallagher-named-global-elite-partner-by-convergint" target="_blank" style="color: inherit; text-decoration: underline;">Global Elite Partner by Convergint</a>, the world's largest integrator. Just created a dedicated National Channel Partner Manager role. They are investing in channel relationships like a product company invests in R&D.</p>
+                <p>Your closest comparison. Also from New Zealand, also unified access and perimeter. Recently named <a href="https://channellife.co.nz/story/gallagher-named-global-elite-partner-by-convergint" target="_blank" style="color: inherit; text-decoration: underline;">Global Elite Partner by Convergint</a>, the world's largest integrator. Just created a dedicated National Channel Partner Manager role. They are investing in channel relationships like a product company invests in R&D. That Convergint designation took years to earn and gives them preferred status on thousands of national rollouts.</p>
             </div>
             <div class="card reveal">
                 <h3>Genetec</h3>
-                <p>Pioneered the unified security platform in software. Their <a href="https://www.securitysystemsnews.com/article/genetec-predicts-top-physical-security-trends-for-2026" target="_blank" style="color: inherit; text-decoration: underline;">2026 predictions</a> emphasize hybrid cloud deployment flexibility. They are winning the IT-minded buyer by speaking fluent enterprise software, while keeping integrators loyal through open architecture.</p>
+                <p>Pioneered the unified security platform in software. Their <a href="https://www.securitysystemsnews.com/article/genetec-predicts-top-physical-security-trends-for-2026" target="_blank" style="color: inherit; text-decoration: underline;">2026 predictions</a> emphasize hybrid cloud deployment flexibility. They are winning the IT-minded buyer by speaking fluent enterprise software, while keeping integrators loyal through open architecture. Their Technology Partner Program has over 900 integrations, making Genetec the safe bet for any integrator who wants to say yes to every customer request.</p>
             </div>
             <div class="card reveal">
                 <h3>ASSA ABLOY / HID</h3>
-                <p>The $14B parent company behind HID Global credentials. <a href="https://www.marketsandmarkets.com/ResearchInsight/access-control-market.asp" target="_blank" style="color: inherit; text-decoration: underline;">Market leader</a> in access control hardware. Their advantage is pure scale: when an integrator designs a system, HID credentials are the default because they are everywhere. Displacing defaults is the hardest thing in this industry.</p>
+                <p>The $14B parent company behind HID Global credentials. <a href="https://www.marketsandmarkets.com/ResearchInsight/access-control-market.asp" target="_blank" style="color: inherit; text-decoration: underline;">Market leader</a> in access control hardware. Their advantage is pure scale: when an integrator designs a system, HID credentials are the default because they are everywhere. Displacing defaults is the hardest thing in this industry. Their mobile credential push is locking in the next generation of access before competitors can establish alternatives.</p>
             </div>
         </div>
         <p class="sources reveal">The pattern: every dominant player in physical security built their position through integrator trust, not feature superiority.</p>
+        <p class="bridge reveal">The convergence wave is rewriting some of these rules. The question is whether it rewrites them fast enough for ICT to exploit.</p>
     </div>
     <span class="slide-number">05</span>
 </section>
@@ -691,19 +707,20 @@
         <h2 class="reveal">The convergence wave is the opening you were hired for</h2>
         <div class="two-col" style="margin-top: var(--content-gap);">
             <div>
-                <p class="reveal">The physical security industry is moving toward exactly what you spent your career building: unified platforms that merge previously siloed systems into a single pane of glass. <a href="https://securityjournaluk.com/top-5-physical-security-trends-define-2026/" target="_blank" style="color: inherit; text-decoration: underline;">Analysts call convergence</a> the defining trend of 2026. ICT's Protege platform already does this natively across access control, intrusion detection, and building automation.</p>
-                <p class="reveal" style="margin-top: var(--element-gap);">Your enterprise software instincts are right about the product direction. The question is how you bring that product to a market where the old rules still apply alongside the new ones.</p>
+                <p class="reveal">The physical security industry is moving toward exactly what you spent your career building: unified platforms that merge previously siloed systems into a single pane of glass. <a href="https://securityjournaluk.com/top-5-physical-security-trends-define-2026/" target="_blank" style="color: inherit; text-decoration: underline;">Analysts call convergence</a> the defining trend of 2026. ICT's Protege platform already does this natively across access control, intrusion detection, and building automation. That native integration is rare. Most competitors achieve it through bolt-on acquisitions or API partnerships, which means their "unified" experience still has seams that integrators and end users feel daily.</p>
+                <p class="reveal" style="margin-top: var(--element-gap);">Your enterprise software instincts are right about the product direction. The question is how you bring that product to a market where the old rules still apply alongside the new ones. Getting the technology right is necessary. Getting the go-to-market wrong in this industry is something you only do once.</p>
             </div>
             <div>
                 <ul class="bullets">
                     <li class="reveal">IT departments are now involved in <strong>62%</strong> of physical security purchasing decisions, up from under 40% five years ago</li>
                     <li class="reveal">Cloud-managed access control is the fastest-growing segment, but <strong>only 44%</strong> of organizations have adopted any cloud component in their security stack</li>
-                    <li class="reveal">End users increasingly want <strong>hybrid deployment</strong> flexibility &mdash; the ability to modernize without ripping out existing infrastructure</li>
+                    <li class="reveal">End users increasingly want <strong>hybrid deployment</strong> flexibility, the ability to modernize without ripping out existing infrastructure</li>
                     <li class="reveal">The integrators who survive the next decade will be those who can <strong>speak both languages</strong>: traditional security and enterprise IT</li>
                 </ul>
             </div>
         </div>
         <p class="sources reveal">Sources: <a href="https://nextro.nz/wp-content/uploads/2025/03/state-of-physical-security-2025.pdf" target="_blank">Genetec State of Physical Security 2025</a>, <a href="https://securityjournaluk.com/top-5-physical-security-trends-define-2026/" target="_blank">Security Journal UK</a>, <a href="https://www.avigilon.com/blog/access-control-security-trend" target="_blank">Avigilon 2026 Access Control Trends</a></p>
+        <p class="bridge reveal">Here is what the CEOs who successfully made this kind of transition wish someone had told them on day one.</p>
     </div>
     <span class="slide-number">06</span>
 </section>
@@ -716,12 +733,13 @@
         <div class="eyebrow reveal">The Year-One Map</div>
         <h2 class="reveal">Five things enterprise software CEOs wish they knew sooner</h2>
         <ul class="bullets">
-            <li class="reveal"><strong>Your integrators are not your resellers.</strong> They are your co-engineers. The best physical security companies treat their top 50 integrators the way software companies treat their top 50 enterprise accounts &mdash; with dedicated resources, joint planning, and real influence on the product roadmap.</li>
+            <li class="reveal"><strong>Your integrators are not your resellers.</strong> They are your co-engineers. The best physical security companies treat their top 50 integrators the way software companies treat their top 50 enterprise accounts, with dedicated resources, joint planning, and real influence on the product roadmap.</li>
             <li class="reveal"><strong>Speed kills trust here.</strong> In SaaS, speed-to-market is a competitive advantage. In physical security, moving too fast on pricing changes, product transitions, or channel restructuring will cost you partners that took a decade to build. Every change needs an integrator transition plan.</li>
             <li class="reveal"><strong>The IT buyer is your second customer, not your first.</strong> IT departments are gaining influence, but they rarely control the budget. Win the security director and the facilities manager first. When the IT team gets involved, your enterprise software pedigree becomes an accelerant, not a starting point.</li>
             <li class="reveal"><strong>Recurring revenue is coming, but on their timeline.</strong> The industry is moving toward subscriptions and managed services. But integrators built their business on hardware margins and project labor. The transition to recurring revenue has to make them more money, not less, or they will resist it quietly and effectively.</li>
-            <li class="reveal"><strong>Your unified platform is the right bet &mdash; if you let the market discover it.</strong> Protege's native unification of access, intrusion, and automation is genuinely differentiated. But in this industry, that story gets told by your integrators in the field, not by your marketing team at trade shows. Arm them with the story and let them own it.</li>
+            <li class="reveal"><strong>Your unified platform is the right bet, if you let the market discover it.</strong> Protege's native unification of access, intrusion, and automation is genuinely differentiated. But in this industry, that story gets told by your integrators in the field, not by your marketing team at trade shows. Arm them with the story and let them own it.</li>
         </ul>
+        <p class="bridge reveal">The playbook that built your career is the foundation. Not the blueprint.</p>
     </div>
     <span class="slide-number">07</span>
 </section>

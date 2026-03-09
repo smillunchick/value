@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trust Architecture — Pathos Labs</title>
+    <title>Trust Architecture - Pathos Labs</title>
 
     <!-- Brand Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +12,7 @@
 
     <style>
         /* ===========================================
-           CSS CUSTOM PROPERTIES — PATHOS LABS BRAND
+           CSS CUSTOM PROPERTIES - PATHOS LABS BRAND
            =========================================== */
         :root {
             /* Backgrounds */
@@ -29,7 +29,7 @@
             --text-on-dark: oklch(94% 0.005 255);
             --text-on-dark-muted: oklch(60% 0.005 255);
 
-            /* Accent — deep indigo-slate */
+            /* Accent - deep indigo-slate */
             --accent: oklch(42% 0.12 265);
             --accent-light: oklch(52% 0.10 265);
             --accent-on-dark: oklch(62% 0.11 265);
@@ -448,6 +448,17 @@
         }
         .dark .pullquote-attr { color: var(--text-on-dark-muted); }
 
+        /* Narrative bridge */
+        .bridge {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: clamp(0.85rem, 1.3vw, 1.05rem);
+            color: var(--accent);
+            margin-top: clamp(0.75rem, 1.5vw, 1.25rem);
+            max-width: 55ch;
+        }
+        .dark .bridge { color: var(--accent-on-dark); }
+
         /* ===========================================
            ANIMATIONS
            =========================================== */
@@ -468,6 +479,7 @@
         .reveal:nth-child(5) { transition-delay: 0.5s; }
         .reveal:nth-child(6) { transition-delay: 0.6s; }
         .reveal:nth-child(7) { transition-delay: 0.7s; }
+        .reveal:nth-child(8) { transition-delay: 0.8s; }
 
         /* Progress bar */
         .progress-bar {
@@ -526,8 +538,9 @@
         <div class="eyebrow reveal">Strategic Insight</div>
         <h1 class="reveal"><em>Trust Architecture</em></h1>
         <div class="accent-rule reveal"></div>
-        <p class="subtitle reveal">How AI platforms earn "system of record" status with patent professionals — and what that means for DeepIP's next chapter.</p>
+        <p class="subtitle reveal">How AI platforms earn "system of record" status with patent professionals, and what that means for DeepIP's next chapter.</p>
         <p class="reveal" style="font-size: var(--small-size); color: var(--text-on-dark-muted); margin-top: clamp(1.5rem, 3vw, 2.5rem);">Prepared for FX Leduc &middot; March 2026</p>
+        <p class="bridge reveal">Patent professionals are adopting AI faster than they trust it. That tension is the whole story.</p>
     </div>
     <span class="slide-number">01</span>
 </section>
@@ -549,8 +562,9 @@
                 <p class="stat-label">would not submit AI-drafted work to a regulator or court without heavy review</p>
             </div>
         </div>
-        <p class="reveal" style="margin-top: var(--content-gap);">Nearly seven in ten legal professionals now use generative AI for work — that number doubled in a single year. But most firms still lack formal AI policies or training programs. The adoption is outrunning the trust. Patent work amplifies this tension because every claim, every citation, every prior art reference carries legal and commercial consequences that compound over years.</p>
+        <p class="reveal" style="margin-top: var(--content-gap);">Nearly seven in ten legal professionals now use generative AI for work. That number doubled in a single year. But most firms still lack formal AI policies or training programs, which means the adoption is outrunning the trust. Patent work amplifies this tension because every claim, every citation, every prior art reference carries legal and commercial consequences that compound over years. A hallucinated citation in a patent prosecution isn't just embarrassing. It can invalidate an entire filing, expose malpractice liability, and cost a client millions in lost IP protection.</p>
         <p class="sources reveal">Sources: <a href="https://www.legalcheek.com/2026/02/lawyers-are-using-ai-despite-lacking-trust-in-it-research-finds/" target="_blank">Paragon Legal / Legal Cheek, Feb 2026</a> &middot; <a href="https://www.lawnext.com/2026/03/ai-adoption-among-legal-professionals-has-more-than-doubled-in-a-year-new-8am-report-finds-but-firms-lag-far-behind-individual-practitioners.html" target="_blank">8am Legal Industry Report, Mar 2026</a></p>
+        <p class="bridge reveal">Five specific barriers explain why, and they're not the ones most AI companies think about.</p>
     </div>
     <span class="slide-number">02</span>
 </section>
@@ -565,19 +579,20 @@
         <div class="two-col" style="margin-top: var(--content-gap);">
             <div>
                 <ul class="bullets">
-                    <li class="reveal"><strong>Expertise gap.</strong> 32% of law firms say they lack the internal knowledge to evaluate AI tools properly, let alone rely on them for cumulative work product.</li>
-                    <li class="reveal"><strong>Strategy vacuum.</strong> Only 22% of firms have a clear AI strategy. The rest are running disconnected pilots that generate signal but never reach firm-wide adoption.</li>
-                    <li class="reveal"><strong>Data dilemma.</strong> 41% cite data privacy as their primary concern. Patent data is especially sensitive — invention disclosures, competitive filings, prosecution history.</li>
+                    <li class="reveal"><strong>Expertise gap.</strong> 32% of law firms say they lack the internal knowledge to evaluate AI tools properly, let alone rely on them for cumulative work product. Most firms have no one whose job it is to vet these tools, so adoption happens informally and inconsistently.</li>
+                    <li class="reveal"><strong>Strategy vacuum.</strong> Only 22% of firms have a clear AI strategy. The rest are running disconnected pilots that generate signal but never reach firm-wide adoption. Without a strategy, each practice group picks its own tools, creating fragmentation that makes enterprise trust impossible.</li>
+                    <li class="reveal"><strong>Data dilemma.</strong> 41% cite data privacy as their primary concern. Patent data is especially sensitive: invention disclosures, competitive filings, prosecution history. Sending that data to a third-party model feels like handing a competitor your playbook.</li>
                 </ul>
             </div>
             <div>
                 <ul class="bullets">
-                    <li class="reveal"><strong>Accuracy anxiety.</strong> High-profile cases of AI-generated fictitious citations created what firms call an "AI tax" — the added burden of auditing every output before it goes anywhere official.</li>
-                    <li class="reveal"><strong>Cultural caution.</strong> Legal professionals are trained to manage risk. What looks like resistance is usually hesitation — they want to move forward, but not without guardrails and clear accountability.</li>
+                    <li class="reveal"><strong>Accuracy anxiety.</strong> High-profile cases of AI-generated fictitious citations created what firms call an "AI tax," the added burden of auditing every output before it goes anywhere official. In patent work, where a single missed reference can torpedo a prosecution, that tax is especially high.</li>
+                    <li class="reveal"><strong>Cultural caution.</strong> Legal professionals are trained to manage risk. What looks like resistance is usually hesitation. They want to move forward, but not without guardrails and clear accountability. The profession's entire incentive structure rewards thoroughness over speed.</li>
                 </ul>
                 <p class="sources reveal" style="margin-top: var(--content-gap);">Sources: <a href="https://forge-technologies.com/news-and-views/the-five-things-holding-back-ai-adoption-in-legal/" target="_blank">Forge Technologies, Feb 2026</a> &middot; <a href="https://discoverlex.com/blog/legal-ai-adoption-2026" target="_blank">DiscoverLex, Feb 2026</a></p>
             </div>
         </div>
+        <p class="bridge reveal">One company cracked this. Here's exactly how they did it.</p>
     </div>
     <span class="slide-number">03</span>
 </section>
@@ -592,18 +607,19 @@
         <div class="card-grid">
             <div class="card reveal">
                 <h3>Trust Stack</h3>
-                <p>Custom legal models trained on all U.S. case law. A <a href="https://medium.com/@takafumi.endo/how-harvey-built-trust-in-legal-ai-a-case-study-for-builders-786cc23c3b6d" target="_blank" style="color: inherit; text-decoration: underline;">multi-layered verification system</a> that decomposes responses into individual claims, cross-references each against authoritative sources, and flags inconsistencies before they reach users. Hallucination rate: 0.2%.</p>
+                <p>Custom legal models trained on all U.S. case law. A <a href="https://medium.com/@takafumi.endo/how-harvey-built-trust-in-legal-ai-a-case-study-for-builders-786cc23c3b6d" target="_blank" style="color: inherit; text-decoration: underline;">multi-layered verification system</a> that decomposes responses into individual claims, cross-references each against authoritative sources, and flags inconsistencies before they reach users. Hallucination rate: 0.2%. That number matters because it's low enough to change behavior. Lawyers stopped double-checking everything and started trusting the output by default.</p>
             </div>
             <div class="card reveal">
                 <h3>Beachhead Flywheel</h3>
-                <p>Won Allen & Overy first — 4,000 lawyers across 43 jurisdictions. Targeted high-effort, low-risk use cases (first drafts, summaries). Positioned as assistant, not replacement. <a href="https://www.mmntm.net/articles/harvey-deep-dive" target="_blank" style="color: inherit; text-decoration: underline;">Success created FOMO</a> that pulled the rest of the Am Law 100 inbound.</p>
+                <p>Won Allen &amp; Overy first, 4,000 lawyers across 43 jurisdictions. Targeted high-effort, low-risk use cases (first drafts, summaries). Positioned as assistant, not replacement. <a href="https://www.mmntm.net/articles/harvey-deep-dive" target="_blank" style="color: inherit; text-decoration: underline;">Success created FOMO</a> that pulled the rest of the Am Law 100 inbound. The key insight: they didn't try to sell trust. They let one firm prove it, then let the market do the selling.</p>
             </div>
             <div class="card reveal">
                 <h3>Ecosystem Moat</h3>
-                <p>Integrated with LexisNexis for <a href="https://dynamicbusiness.com/ai-tools/harvey-ai-revolutionizes-legal-ai-with-trust-stack.html" target="_blank" style="color: inherit; text-decoration: underline;">Shepard's citation validation</a> — the industry's century-old standard. Embedded in Microsoft 365 so lawyers never leave their existing tools. Became ambient infrastructure, not a destination app.</p>
+                <p>Integrated with LexisNexis for <a href="https://dynamicbusiness.com/ai-tools/harvey-ai-revolutionizes-legal-ai-with-trust-stack.html" target="_blank" style="color: inherit; text-decoration: underline;">Shepard's citation validation</a>, the industry's century-old standard. Embedded in Microsoft 365 so lawyers never leave their existing tools. Became ambient infrastructure, not a destination app. This is the move that made Harvey sticky: by the time a firm considers switching, Harvey is woven into every workflow.</p>
             </div>
         </div>
         <p class="sources reveal">The pattern: trust wasn't marketed. It was architected into every layer of the product, then proven through a single high-profile customer who made the risk feel manageable for everyone else.</p>
+        <p class="bridge reveal">But Harvey solved this for general practice law. Patent work is a different animal entirely.</p>
     </div>
     <span class="slide-number">04</span>
 </section>
@@ -617,10 +633,11 @@
         <div class="eyebrow reveal">The Deeper Pattern</div>
         <h2 class="reveal">The shift from "system of record" to "system of intelligence"</h2>
         <div class="pullquote reveal">
-            "For decades, enterprise value accrued to Systems of Record — rigid databases wrapped in workflow. Now it's shifting to Systems of Intelligence that layer reasoning on top of where truth already lives."
-            <div class="pullquote-attr">— <a href="https://systemsofintelligence.ai/" target="_blank" style="color: var(--text-on-dark-muted); text-decoration: underline;">Activant Capital, "Systems of Intelligence," Jun 2025</a></div>
+            "For decades, enterprise value accrued to Systems of Record, rigid databases wrapped in workflow. Now it's shifting to Systems of Intelligence that layer reasoning on top of where truth already lives."
+            <div class="pullquote-attr"><a href="https://systemsofintelligence.ai/" target="_blank" style="color: var(--text-on-dark-muted); text-decoration: underline;">Activant Capital, "Systems of Intelligence," Jun 2025</a></div>
         </div>
-        <p class="reveal" style="margin-top: var(--content-gap);">This is the real strategic question for any AI platform in a conservative profession. A system of record earns its position by being the place where canonical truth lives — where decisions are traceable, where history is preserved, where accountability is clear. A system of intelligence earns its position by making the people who use it meaningfully better at their jobs. The platforms that win are the ones that do both — that embed intelligence into the record itself, so professionals never have to choose between speed and traceability.</p>
+        <p class="reveal" style="margin-top: var(--content-gap);">This is the real strategic question for any AI platform in a conservative profession. A system of record earns its position by being the place where canonical truth lives, where decisions are traceable, where history is preserved, where accountability is clear. A system of intelligence earns its position by making the people who use it meaningfully better at their jobs. The platforms that win are the ones that do both, embedding intelligence into the record itself so professionals never have to choose between speed and traceability. In patent work, this convergence is especially powerful because a single patent family can span 15 years of prosecution history across multiple jurisdictions. Whoever holds that history holds the relationship.</p>
+        <p class="bridge reveal">This is where DeepIP's bet gets interesting.</p>
     </div>
     <span class="slide-number">05</span>
 </section>
@@ -632,13 +649,14 @@
     <div class="slide-content">
         <div class="eyebrow reveal">What This Means for DeepIP</div>
         <h2 class="reveal">You're building in exactly the right gap</h2>
-        <p class="reveal" style="margin-top: var(--content-gap);">Most AI patent tools solve one step well — a better draft, a faster search, a cleaner office action response. DeepIP's bet is that patent work is cumulative. It spans years, teams, decisions. The platform that holds the full lifecycle holds the relationship.</p>
+        <p class="reveal" style="margin-top: var(--content-gap);">Most AI patent tools solve one step well: a better draft, a faster search, a cleaner office action response. DeepIP's bet is that patent work is cumulative. It spans years, teams, decisions. The platform that holds the full lifecycle holds the relationship. That's a fundamentally different product than a point solution, and it requires a fundamentally different kind of trust.</p>
         <ul class="bullets">
-            <li class="reveal"><strong>Embedding inside Word and existing IP management systems</strong> was the right instinct. Harvey's Microsoft 365 integration proved that ambient presence beats destination apps. DeepIP's <a href="https://ventureburn.com/deepip-25m-series-b-ai-patent/" target="_blank">reported 20% higher adoption and 40% more usage</a> when embedded in existing tools confirms the pattern.</li>
-            <li class="reveal"><strong>The leap from 400 to 4,000 firms</strong> is where the trust architecture matters most. At 400, your sales team can personally vouch for every deployment. At 4,000, trust has to be structural — built into the product, the audit trail, the way the system explains its reasoning.</li>
+            <li class="reveal"><strong>Embedding inside Word and existing IP management systems</strong> was the right instinct. Harvey's Microsoft 365 integration proved that ambient presence beats destination apps. DeepIP's <a href="https://ventureburn.com/deepip-25m-series-b-ai-patent/" target="_blank">reported 20% higher adoption and 40% more usage</a> when embedded in existing tools confirms the pattern. The question now is whether that embedding goes deep enough to become the default workspace, not just a convenient sidebar.</li>
+            <li class="reveal"><strong>The leap from 400 to 4,000 firms</strong> is where the trust architecture matters most. At 400, your sales team can personally vouch for every deployment. At 4,000, trust has to be structural, built into the product, the audit trail, the way the system explains its reasoning. This is the transition where most legal AI companies stall.</li>
             <li class="reveal"><strong>Having a registered patent attorney on the customer support team</strong> is the kind of detail that compounds. It signals that DeepIP respects the domain, not just the technology. That signal travels through a profession that talks to itself constantly.</li>
-            <li class="reveal"><strong>The dual-market reality</strong> of serving both law firms and corporate IP teams means building trust with two different buyer psychology profiles at once. Law firms care about precision and defensibility. Corporate teams care about speed and portfolio visibility. The product has to speak both languages.</li>
+            <li class="reveal"><strong>The dual-market reality</strong> of serving both law firms and corporate IP teams means building trust with two different buyer psychology profiles at once. Law firms care about precision and defensibility. Corporate teams care about speed and portfolio visibility. The product has to speak both languages without diluting either one.</li>
         </ul>
+        <p class="bridge reveal">Which brings us to the question that matters most right now.</p>
     </div>
     <span class="slide-number">06</span>
 </section>
@@ -652,7 +670,7 @@
         <div class="eyebrow reveal">Pathos Labs</div>
         <h1 class="reveal"><em>The hard part isn't the AI. It's earning the right to hold the record.</em></h1>
         <div class="accent-rule reveal" style="margin-left: auto; margin-right: auto;"></div>
-        <p class="subtitle reveal" style="max-width: 50ch;">Every company in the patent AI space can draft faster. Very few are positioned to become the system where a decade of prosecution history lives. That's DeepIP's real race.</p>
+        <p class="subtitle reveal" style="max-width: 50ch;">Every company in the patent AI space can draft faster. Very few are positioned to become the system where a decade of prosecution history lives. That's DeepIP's real race, and the decisions you make in the next twelve months will determine whether you win it.</p>
     </div>
     <div class="author-strip reveal">
         <div class="author-name">Sam Millunchick</div>
